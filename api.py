@@ -169,7 +169,22 @@ def _site_data_fresh(sid):
     cur = (cj.stat().st_mtime, ej.stat().st_mtime)
     if STATE["mtimes"].get(sid) == cur:
         return                                  # unchanged — the hot path
+
+    # NEVER reload while an indexer holds this site's lock. Mid-write files
+    # (chunks.json saved, embeddings.npy stale) would fail the length check in
+    # load_site and trigger a SECOND concurrent embed_site() alongside the
+    # in-flight one — two ONNX passes racing on a 512MB container, i.e. the
+    # OOM-kill behind the mystery 502s. If the lock is busy, skip silently;
+    # a later request will re-stat and pick the files up once writing is done.
+    lock = _get_site_lock(sid)
+    if not lock.acquire(blocking=False):
+        return
     try:
+        # Re-stat AFTER acquiring: the writer may have finished (and touched
+        # the files again) during the gap between our first stat and the lock.
+        cur = (cj.stat().st_mtime, ej.stat().st_mtime)
+        if STATE["mtimes"].get(sid) == cur:
+            return
         STATE["sites"][sid] = load_site(sid)
         STATE["mtimes"][sid] = cur
         print(f"[hot-reload] {sid}: index refreshed from disk")
@@ -177,6 +192,8 @@ def _site_data_fresh(sid):
         # Keep the in-memory copy rather than 500-ing: stale-but-working beats
         # down just because one on-disk file is mid-write or corrupt.
         print(f"[hot-reload] {sid} failed, keeping memory copy: {e}")
+    finally:
+        lock.release()
 
 # ---- concurrency control ----------------------------------------------------
 # THE PROBLEM: /auto-register kicks off a crawl that can take 30+ seconds. If
@@ -801,13 +818,12 @@ def auto_register(body: AutoRegisterIn):
                 "message": f"Successfully indexed {len(chunks)} sections.{js_note}"}
     finally:
         lock.release()
-
-        # Remove the lock object from the dict so it does not accumulate one
-        # entry per site forever (a slow memory leak on a server that sees many
-        # domains). `.pop(sid, None)` is the "delete if present, do not raise if
-        # absent" form.
-        with _lock_guard:
-            _indexing_locks.pop(sid, None)
+        # NOTE: deliberately do NOT remove the lock from _indexing_locks.
+        # Popping it let a third thread create a FRESH Lock object while a
+        # second thread still held a reference to the old one — two threads
+        # then "excluded" each other with different locks and ran concurrent
+        # embeds. The dict grows one entry per distinct site ever seen, which
+        # is negligible memory; correctness beats tidiness here.
 
 
 # =============================================================================
@@ -880,8 +896,8 @@ def _refresh_sites_background(sids):
                 print(f"[refresh] {sid} failed: {type(e).__name__}: {e}")
             finally:
                 lock.release()
-                with _lock_guard:
-                    _indexing_locks.pop(sid, None)
+                # keep the lock cached — see the note in auto_register's
+                # finally block for why popping it caused a race.
     threading.Thread(target=worker, daemon=True).start()
 
 
