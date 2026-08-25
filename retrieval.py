@@ -56,6 +56,7 @@ Usage from api.py:
 """
 
 import json
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -100,6 +101,32 @@ EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"   # 384-dim, ONNX
 # These were tuned by hand against real queries on openlake.in.
 W_SEMANTIC = 0.65
 W_LEXICAL = 0.35
+
+# ---- the content-IDF signal --------------------------------------------------
+# A third retrieval signal: verbatim query tokens found inside chunk CONTENT,
+# weighted by token rarity (a miniature IDF over the site's own corpus).
+#
+# WHY IT EXISTS — this is the fix for the Readme's known issue "individual
+# person names on team pages aren't retrievable yet". The lexical half above
+# deliberately ignores content (fuzzy-matching long bodies is noise), but a
+# person's name lives ONLY in body text. Semantic embeddings barely know rare
+# personal names either, so such queries used to score ~0.25 and die at
+# answer.py's confidence floor even when the person was plainly on the site.
+#
+# THE IDF TWIST is what keeps it from wrecking everything else: a surname
+# appearing in 1 of 136 chunks gets weight ~0.78 (rare = informative), while
+# "projects" — present in half the site — gets ~0.24, and words present in
+# every chunk or in none get exactly zero. Common navigation words therefore
+# cannot buy their way past the floor; genuinely distinctive tokens can.
+#
+# Weight 0.40 rather than a smaller nudge: for a single-token name query the
+# semantic half contributes little (~0.13), so the content signal must be
+# strong enough to carry a correct match over CONFIDENCE_FLOOR on its own.
+# False positives that sneak past are still caught by GATE 2 (the LLM), and
+# cost only one cached-then-done API call.
+import math
+
+W_CONTENT = 0.40
 
 # ---- the heading-rank bonus -------------------------------------------------
 # A small additive nudge based on how important a heading is in the document.
@@ -482,16 +509,55 @@ def search(query, chunks, vecs, k=3, debug=False):
         for c in chunks
     ])
 
-    # ---- SIGNAL 3: the structural rank bonus -----------------------------
+    # ---- SIGNAL 3: rare-token hits inside CONTENT (see W_CONTENT above) ---
+    # Tokenise the filler-stripped query, then for each DISTINCT token compute
+    # its document frequency across this site's chunk contents. The idf-style
+    # weight log((N+1)/(df+1)) / log(N+1) lands in (0, 1]: near 1 for tokens
+    # almost nowhere on the site, near 0 for tokens everywhere. A token found
+    # in NO chunk gets no weight either — absence of evidence is not evidence.
+    #
+    # NORMALISATION MATTERS: we take the MEAN over tokens that exist somewhere
+    # on the site (df > 0), not the sum. Summing let a long query whose words
+    # all appear in some rich blog post rack up cnt > 1.4 and steamroll the
+    # ranking — a real bug that sent "game development resources" to a blog
+    # post instead of the closest genuine destination. With the mean, the
+    # signal's maximum contribution stays W_CONTENT x ~1.0 no matter how many
+    # tokens the query has. Tokens that appear NOWHERE are excluded from the
+    # denominator so an unknown word doesn't dilute a well-covered query.
+    #
+    # Cost: one lowercase pass over every content string per distinct query
+    # token. At a few hundred chunks that is well under a millisecond of
+    # Python; if sites ever grow to tens of thousands of chunks, precompute
+    # lowered contents once at load time instead.
+    q_tokens = set(re.findall(r"[a-z0-9]{3,}", lean))
+    cnt = np.zeros(len(chunks), dtype=np.float32)
+    if q_tokens and chunks:
+        n = len(chunks)
+        idf_denom = math.log(n + 1)
+        lowered = [c["content"].lower() for c in chunks]
+        present = np.zeros(n, dtype=np.float32)
+        matched = 0
+        for tok in q_tokens:
+            df = sum(1 for txt in lowered if tok in txt)
+            if df == 0 or df == n:      # unknown word / everywhere-word: no signal
+                continue
+            w = math.log((n + 1) / (df + 1)) / idf_denom
+            present += np.fromiter((w if tok in txt else 0.0 for txt in lowered),
+                                   dtype=np.float32, count=n)
+            matched += 1
+        if matched:
+            cnt = present / matched
+
+    # ---- SIGNAL 4: the structural rank bonus -----------------------------
     # `.get(key, 0.0)` rather than `[key]` so that an unexpected level value
     # (e.g. the "p" used by indexer.py's text-window fallback chunks) yields a
     # neutral 0.0 instead of raising KeyError.
     bonus = np.array([LEVEL_BONUS.get(c["level"], 0.0) for c in chunks])
 
     # ---- the blend -------------------------------------------------------
-    # All three are NumPy arrays of length N, so this single line does N
+    # All four are NumPy arrays of length N, so this single line does N
     # multiply-adds elementwise in C. No loop.
-    combined = W_SEMANTIC * sem + W_LEXICAL * lex + bonus
+    combined = W_SEMANTIC * sem + W_LEXICAL * lex + W_CONTENT * cnt + bonus
 
     # ---- pick the winners ------------------------------------------------
     # np.argsort returns the INDICES that would sort the array ascending. NumPy
@@ -513,10 +579,11 @@ def search(query, chunks, vecs, k=3, debug=False):
         out.append((chunks[i], float(combined[i])))
 
         # The debug branch prints the individual signals side by side. This is
-        # the single most useful tool for tuning W_SEMANTIC / W_LEXICAL: when a
-        # query returns something wrong, this shows you immediately WHICH signal
+        # the single most useful tool for tuning the weights: when a query
+        # returns something wrong, this shows you immediately WHICH signal
         # misfired and therefore which knob to turn.
         if debug:
-            print(f"    [{combined[i]:.3f}] sem={sem[i]:.3f} lex={lex[i]:.3f}  "
+            print(f"    [{combined[i]:.3f}] sem={sem[i]:.3f} lex={lex[i]:.3f} "
+                  f"cnt={cnt[i]:.2f}  "
                   f"{chunks[i]['heading'][:40]}  ({chunks[i]['url']})")
     return out

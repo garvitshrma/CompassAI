@@ -65,6 +65,7 @@ import hashlib      # SHA-256, used to detect whether a page's HTML changed
 import os           # environment variables
 import json         # reading/writing chunks.json and meta.json
 import threading    # locks, to stop two visitors triggering the same crawl twice
+import time         # sleeping in the periodic re-index loop
 
 # asynccontextmanager turns a generator function into an async context manager.
 # FastAPI's `lifespan` uses it: everything before `yield` runs at startup,
@@ -76,9 +77,12 @@ from pathlib import Path
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from groq import Groq
+# OpenRouter is OpenAI-compatible: the chat.completions.create(...) call in
+# answer.py works against it unchanged. We only swap the client + base_url.
+# read more: https://openrouter.ai/docs
+from openai import OpenAI  # type: ignore[import-not-found]
 
-from retrieval import load_all_sites, embed_site, site_dir, SITES_DIR, model
+from retrieval import load_all_sites, embed_site, site_dir, SITES_DIR, model, load_site
 from answer import answer
 from indexer import index_site
 
@@ -96,7 +100,7 @@ from indexer import chunk_rendered
 #  STATE — the entire in-memory database of the running server.
 #
 #    STATE["sites"] = { "openlake.in": (chunks_list, vectors_matrix), ... }
-#    STATE["llm"]   = the shared Groq client
+#    STATE["llm"]   = the shared OpenRouter-backed OpenAI client
 #
 #  WHY A MODULE-LEVEL DICT RATHER THAN GLOBALS?
 #  A dict can be MUTATED from inside a function without needing the `global`
@@ -110,6 +114,69 @@ from indexer import chunk_rendered
 #  database. That is exactly what "Supabase + pgvector" on the roadmap means.
 # ============================================================================
 STATE = {"sites": {}, "llm": None}
+
+# ---- the /query answer cache ------------------------------------------------
+# WHY THIS EXISTS
+# Real visitor traffic is extremely repetitive: on a college-club site, "fees",
+# "projects", "events" and "how to join" account for most of what anyone ever
+# asks. Without a cache, every one of those visitors triggers an identical
+# retrieval + LLM round trip. With it, the FIRST visitor pays the ~1s and the
+# quota; everyone after gets an instant reply from RAM.
+#
+# This matters doubly on free LLM tiers (OpenRouter 50 req/day, Groq ~1k+/day):
+# caching typically removes 70-90% of LLM calls from real traffic, which is
+# often the difference between "works all month" and "dead by lunch".
+#
+# CACHE KEY includes len(chunks) so a re-index naturally invalidates every
+# cached answer for that site — no explicit clearing logic anywhere. If the
+# index changed size, old answers cannot be trusted; if it did not change,
+# answers are still valid.
+#
+# THE CAP is a memory guard, not a correctness device. A few thousand entries
+# of small dicts is nothing; an unbounded dict on a long-lived process is a
+# slow leak. On overflow we drop everything rather than evicting "oldest" —
+# there is no timestamp tracking, and a cold cache self-warms in seconds.
+MAX_QUERY_CACHE = 2000
+_query_cache = {}
+
+# ---- hot-reload: serve fresh indexes without a restart ----------------------
+# THE PROBLEM THIS SOLVES
+# load_all_sites() runs ONCE at boot. Anything that changes sites/<id>/ on disk
+# afterwards — rebuild_site.py, register_site.py, a hand-edited chunks.json,
+# another process re-indexing — is invisible to the running server until a
+# human remembers to restart it. That "invisible staleness" produced a real,
+# confusing bug here: the corrected index sat on disk while the process kept
+# answering from its startup snapshot, and every test of the fix passed while
+# the live server stayed wrong.
+#
+# THE FIX: before serving a query, stat() the site's two data files and compare
+# against the mtimes we loaded. Two stat calls cost ~microseconds; a mismatch
+# triggers one reload (chunks + .npy straight off disk). Restarting for DATA
+# changes becomes unnecessary. CODE (.py) changes still need --reload or a
+# restart, which is normal Python behaviour.
+#
+# CONCURRENCY: worst case two threads reload simultaneously and assign the
+# same freshly-read tuple twice — idempotent, no lock needed.
+STATE["mtimes"] = {}
+
+
+def _site_data_fresh(sid):
+    """Reload one site's index from disk if its files changed since load."""
+    d = site_dir(sid)
+    cj, ej = d / "chunks.json", d / "embeddings.npy"
+    if not (cj.exists() and ej.exists()):
+        return                                  # unknown/partial site; leave as-is
+    cur = (cj.stat().st_mtime, ej.stat().st_mtime)
+    if STATE["mtimes"].get(sid) == cur:
+        return                                  # unchanged — the hot path
+    try:
+        STATE["sites"][sid] = load_site(sid)
+        STATE["mtimes"][sid] = cur
+        print(f"[hot-reload] {sid}: index refreshed from disk")
+    except Exception as e:
+        # Keep the in-memory copy rather than 500-ing: stale-but-working beats
+        # down just because one on-disk file is mid-write or corrupt.
+        print(f"[hot-reload] {sid} failed, keeping memory copy: {e}")
 
 # ---- concurrency control ----------------------------------------------------
 # THE PROBLEM: /auto-register kicks off a crawl that can take 30+ seconds. If
@@ -191,13 +258,35 @@ async def lifespan(app: FastAPI):
     for the same resource sit next to each other in one function.
     read more: https://fastapi.tiangolo.com/advanced/events/#lifespan
     """
-    key = os.environ.get("GROQ_API_KEY")
-    if not key:
+    # Any OpenAI-compatible provider works here. The default is OpenRouter;
+    # set LLM_BASE_URL in .env to switch providers without touching code:
+    #   OpenRouter ... https://openrouter.ai/api/v1
+    #   Groq ......... https://api.groq.com/openai/v1
+    #   Gemini ....... https://generativelanguage.googleapis.com/v1beta/openai
+    #   Ollama ....... http://localhost:11434/v1          (local, no key needed)
+    #
+    # KEY SELECTION — the subtle part. A custom LLM_BASE_URL means a custom
+    # provider, so the key MUST come from LLM_API_KEY; falling back to an
+    # OPENROUTER_API_KEY that happens to still be in .env would silently send
+    # the wrong credential to Google/Groq and produce a baffling 401. The
+    # OPENROUTER_API_KEY fallback is only honoured when we are actually
+    # pointed at openrouter.ai.
+    base_url = os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
+    is_local = "11434" in base_url          # Ollama: no auth at all
+    if is_local:
+        key = None
+    elif "openrouter.ai" in base_url:
+        key = os.environ.get("LLM_API_KEY") or os.environ.get("OPENROUTER_API_KEY")
+    else:
+        key = os.environ.get("LLM_API_KEY")
+
+    if not key and not is_local:
         # FAIL FAST, AND LOUDLY. Raising here prevents the server from starting
         # at all. The alternative — booting fine and then 500-ing on the first
         # real query — is far worse: it turns a config mistake you would catch
         # in ten seconds at deploy time into a mystery outage in production.
-        raise RuntimeError("Set GROQ_API_KEY before starting the server.")
+        raise RuntimeError("No LLM API key found. Set LLM_API_KEY in .env "
+                           "(or OPENROUTER_API_KEY when using OpenRouter).")
 
     print("warming embedder + loading sites...")
 
@@ -208,12 +297,97 @@ async def lifespan(app: FastAPI):
 
     STATE["sites"] = load_all_sites()
 
-    # Build the Groq HTTP client once. It maintains a connection pool
-    # internally, so reusing it across requests avoids re-doing TCP and TLS
-    # handshakes on every single query.
-    STATE["llm"] = Groq(api_key=key)
+    # Record the mtimes we just loaded so hot-reload only fires on real changes.
+    for sid in STATE["sites"]:
+        d = site_dir(sid)
+        cj, ej = d / "chunks.json", d / "embeddings.npy"
+        if cj.exists() and ej.exists():
+            STATE["mtimes"][sid] = (cj.stat().st_mtime, ej.stat().st_mtime)
+
+    # Build the provider-backed OpenAI client once. base_url is the only
+    # meaningful difference between providers; answer.py's
+    # `llm.chat.completions.create(...)` works unchanged because the wire
+    # format is identical.
+    #
+    # The two custom headers are recommended by OpenRouter for app attribution;
+    # every other provider simply ignores unknown headers.
+    primary = OpenAI(
+        api_key=key or "not-needed-for-local",
+        base_url=base_url,
+        default_headers={
+            "HTTP-Referer": "https://compassai.example.com",
+            "X-Title": "CompassAI",
+        },
+    )
+
+    # ---- provider fallback chain -------------------------------------------
+    # Free tiers die at the worst moment (a demo, a spike in traffic). If a
+    # second OpenAI-compatible key is present we wrap both clients so answer.py
+    # transparently fails over: same call, next provider. Today that means
+    # Gemini (primary) -> OpenRouter free pool (backup) when the daily quota
+    # runs dry; with different .env values it works for any pair.
+    #
+    # _ResilientLLM duck-types the ONE surface answer.py uses:
+    # llm.chat.completions.create(**kw). Only rate/quota-style failures fail
+    # over — auth errors and bad requests are your configuration's fault and
+    # would fail identically on the next provider, so they raise immediately.
+    class _ResilientLLM:
+        def __init__(self, *clients):
+            self._clients = clients
+            self.chat = self._Chat(self._clients)
+
+        class _Chat:
+            def __init__(self, clients):
+                self.completions = self._Completions(clients)
+
+            class _Completions:
+                def __init__(self, clients):
+                    self._clients = clients
+
+                def create(self, **kw):
+                    last_exc = None
+                    for i, client in enumerate(self._clients):
+                        try:
+                            return client.chat.completions.create(**kw)
+                        except Exception as e:
+                            last_exc = e
+                            msg = str(e).lower()
+                            transient = ("rate" in msg or "quota" in msg
+                                         or "429" in msg or "capacity" in msg)
+                            if not transient or i == len(self._clients) - 1:
+                                raise
+                            print(f"[llm] provider {i} failed "
+                                  f"({type(e).__name__}), failing over...")
+                    raise last_exc
+
+    fallbacks = []
+    fb_key = os.environ.get("OPENROUTER_API_KEY")
+    if fb_key and "openrouter.ai" not in base_url:
+        # Only add the backup when it is genuinely a DIFFERENT provider than
+        # the primary; pointing both at openrouter would just double the 429s.
+        fallbacks.append(OpenAI(
+            api_key=fb_key,
+            base_url="https://openrouter.ai/api/v1",
+            default_headers={"HTTP-Referer": "https://compassai.example.com",
+                             "X-Title": "CompassAI"},
+        ))
+    STATE["llm"] = _ResilientLLM(primary, *fallbacks)
+    print(f"[llm] primary={base_url}, fallbacks={len(fallbacks)}")
 
     print(f"ready. {len(STATE['sites'])} site(s): {list(STATE['sites'])}")
+
+    # ---- periodic re-indexing ("the index re-trains itself") ---------------
+    # REFRESH_HOURS in .env, default 24. Set 0 to disable. The thread is a
+    # daemon: it dies automatically when the main process exits, so no cleanup
+    # is needed after `yield`.
+    try:
+        refresh_hours = float(os.environ.get("REFRESH_HOURS", "24"))
+    except ValueError:
+        refresh_hours = 24.0
+    if refresh_hours > 0:
+        _start_refresher(refresh_hours)
+    else:
+        print("[refresher] disabled (REFRESH_HOURS=0)")
 
     # `yield` hands control to FastAPI, which now serves requests. Execution
     # resumes on the line below only when the server is shutting down.
@@ -387,8 +561,32 @@ def query(body: QueryIn):
 
     # Unpack the stored 2-tuple and hand this site's data — and only this site's
     # data — to the answer pipeline. This is where tenant isolation happens.
+    # _site_data_fresh first: if someone re-indexed this site on disk since
+    # boot (rebuild_site.py, /refresh from another process, hand edit), we
+    # pick up the new index here without a restart.
+    _site_data_fresh(sid)
     chunks, vecs = site
-    return answer(body.query, chunks, vecs, STATE["llm"])
+
+    # ---- cache lookup -----------------------------------------------------
+    # Normalised the same way as the site id: case and stray whitespace do not
+    # produce separate entries ("Fees" == "fees " == "fees"). len(chunks) in
+    # the key makes any re-index invalidate this site's entries automatically.
+    key = (sid, body.query.strip().lower(), len(chunks))
+    if key in _query_cache:
+        return _query_cache[key]
+
+    result = answer(body.query, chunks, vecs, STATE["llm"])
+
+    # Only cache answers that used the full pipeline. A refusal caused by a
+    # provider outage (RateLimitError etc.) must NOT be cached, or the site
+    # would keep refusing after the quota resets until restart. Refusals that
+    # are genuinely about retrieval (score below floor) are cheap to recompute,
+    # so skipping them costs nothing and avoids edge cases.
+    if result.get("found") or "temporarily unavailable" not in (result.get("reason") or ""):
+        if len(_query_cache) >= MAX_QUERY_CACHE:
+            _query_cache.clear()
+        _query_cache[key] = result
+    return result
 
 
 @app.post("/register", response_model=RegisterOut)
@@ -613,6 +811,124 @@ def auto_register(body: AutoRegisterIn):
 
 
 # =============================================================================
+#  /refresh — PERIODIC RE-INDEXING ("the index re-trains itself")
+# =============================================================================
+#
+#  THE PROBLEM THIS SOLVES
+#  -----------------------
+#  A crawled snapshot goes stale the moment the customer edits their site: a
+#  new team member (a real bug we hit — a mentor existed on the live page but
+#  not in our index), a changed fee, a renamed section. Until now the ONLY
+#  fixes were a manual re-crawl or waiting for visitors to trigger /ingest.
+#
+#  Two mechanisms now exist:
+#    1. POST /refresh   — admin-triggered re-crawl of one site or all sites.
+#    2. The refresher thread — started in lifespan when REFRESH_HOURS > 0,
+#       it calls the same core on a schedule. Default every 24h; set
+#       REFRESH_HOURS=0 in .env to disable entirely.
+#
+#  WHY A BACKGROUND THREAD AND NOT A SYNCHRONOUS ENDPOINT: a crawl takes
+#  30-120s; Render kills HTTP responses around 100s and a visitor is never
+#  waiting on this. The endpoint returns "started" immediately and the work
+#  happens off-thread, guarded by the same per-site locks as auto-register —
+#  so a refresh can never collide with an /ingest or an auto-register for the
+#  same domain.
+#
+#  CACHE COHERENCE FOR FREE: query-cache keys include len(chunks), so once a
+#  refresh publishes a new index under the same site id, every cached answer
+#  computed against the old chunk count becomes unreachable instantly. No
+#  explicit invalidation needed.
+
+def _refresh_site(sid):
+    """Re-crawl + re-embed ONE site in place. Returns (status, n_chunks).
+
+    MUST be called while holding that site's per-site lock. The publish step
+    is a single dict assignment, identical to register/auto-register/ingest,
+    so no reader can observe a half-updated index.
+    """
+    # HTTPS first, then HTTP fallback — same protocol fallback as
+    # auto-register, since we store bare hostnames.
+    raw = index_site(f"https://{sid}") or index_site(f"http://{sid}")
+    if not raw:
+        return "crawl_failed", 0
+
+    d = site_dir(sid)
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "chunks.json").write_text(
+        json.dumps(raw, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    chunks, vecs = embed_site(sid)
+    STATE["sites"][sid] = (chunks, vecs)     # atomic publish
+    return "refreshed", len(chunks)
+
+
+def _refresh_sites_background(sids):
+    """Spawn one daemon thread that refreshes the given sites sequentially."""
+    def worker():
+        for sid in sids:
+            lock = _get_site_lock(sid)
+            if not lock.acquire(blocking=True, timeout=300):
+                print(f"[refresh] {sid}: busy (indexing in progress), skipped")
+                continue
+            try:
+                status, n = _refresh_site(sid)
+                print(f"[refresh] {sid}: {status} ({n} chunks)")
+            except Exception as e:
+                # One broken customer site must never stop the refresh loop
+                # from reaching the others — same blast-radius reasoning as
+                # load_all_sites().
+                print(f"[refresh] {sid} failed: {type(e).__name__}: {e}")
+            finally:
+                lock.release()
+                with _lock_guard:
+                    _indexing_locks.pop(sid, None)
+    threading.Thread(target=worker, daemon=True).start()
+
+
+class RefreshIn(BaseModel):
+    # Optional: omit to refresh EVERY registered site.
+    site_id: str | None = None
+
+
+@app.post("/refresh")
+def refresh(body: RefreshIn, x_admin_token: str = Header(default="")):
+    """Admin-only: re-crawl + re-embed one site (or all) in the background."""
+    expected = os.environ.get("ADMIN_TOKEN")
+    if not expected or x_admin_token != expected:
+        raise HTTPException(status_code=401, detail="invalid admin token")
+
+    if body.site_id:
+        sid = normalize_site_id(body.site_id)
+        if sid not in STATE["sites"]:
+            raise HTTPException(status_code=404,
+                                detail=f"site '{sid}' is not registered")
+        targets = [sid]
+    else:
+        targets = sorted(STATE["sites"].keys())
+        if not targets:
+            raise HTTPException(status_code=400, detail="no sites registered")
+
+    _refresh_sites_background(targets)
+    return {"status": "started", "sites": targets,
+            "message": f"Re-indexing {len(targets)} site(s) in the background."}
+
+
+def _start_refresher(hours):
+    """Start the daemon loop that periodically refreshes every known site."""
+    def loop():
+        while True:
+            time.sleep(hours * 3600)
+            # Snapshot the key list: STATE may mutate while we work, and
+            # iterating a dict while another thread inserts raises RuntimeError.
+            targets = sorted(STATE["sites"].keys())
+            if targets:
+                print(f"[refresher] scheduled refresh of {len(targets)} site(s)")
+                _refresh_sites_background(targets)
+    threading.Thread(target=loop, daemon=True).start()
+    print(f"[refresher] will re-index all sites every {hours}h")
+
+
+# =============================================================================
 #  /ingest — THE CLEVEREST ENDPOINT IN THE PROJECT. Read this section carefully.
 # =============================================================================
 #
@@ -720,7 +1036,16 @@ def _origin_ok(origin: str, sid: str) -> bool:
     # Development allowances. "null" is what browsers send as the Origin for a
     # page opened directly from disk via file:// — that is how you would test
     # the widget against a saved HTML file locally.
-    if o in ("localhost", "127.0.0.1", "null", ""):
+    #
+    # LOCALHOST POISONING GUARD: a localhost origin may only write to a
+    # localhost site. Without this, the widget running on a developer's test
+    # page (data-site="openlake.in" served from localhost) would happily POST
+    # "I am Garvit"-style dev HTML into the REAL openlake.in production index
+    # — which is exactly how a stray 'Document' chunk got in there once. The
+    # reverse (localhost sid from any origin) stays allowed for local testing.
+    if o in ("localhost", "127.0.0.1"):
+        return sid in ("localhost", "127.0.0.1")
+    if o in ("null", ""):
         return True
 
     # Exact match, or a subdomain. The "." in `"." + sid` is essential: without

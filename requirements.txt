@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-groq
+openai
 rapidfuzz
 numpy
 python-dotenv

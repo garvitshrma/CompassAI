@@ -4,8 +4,32 @@ services:
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    # KEEP-ALIVE NOTE: Render's free tier sleeps after ~15 min without traffic,
+    # making the first visitor wait ~50s on cold start. Point a free
+    # UptimeRobot HTTP monitor at <this-url>/health every 5 min to stay warm.
+    # This consumes most of the 750 free instance-hours/month (fine for ONE
+    # service) and does NOT burn LLM quota — /health touches nothing.
     envVars:
-      - key: GROQ_API_KEY
+      # ---- primary LLM provider (Google Gemini free tier) -----------------
+      # Get the key at https://aistudio.google.com/apikey
+      - key: LLM_API_KEY
         sync: false
-      - key: VOYAGE_API_KEY
+      - key: LLM_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta/openai
+      - key: LLM_MODEL
+        value: gemini-3.6-flash
+
+      # ---- automatic failover provider ------------------------------------
+      # Used transparently when the primary hits rate/quota limits.
+      # Get the key at https://openrouter.ai/keys
+      - key: OPENROUTER_API_KEY
+        sync: false
+
+      # ---- background re-indexing ("the index re-trains itself") ----------
+      # Hours between automatic re-crawls of every registered site. 0 = off.
+      - key: REFRESH_HOURS
+        value: "24"
+
+      # ---- admin token for POST /register and POST /refresh ---------------
+      - key: ADMIN_TOKEN
         sync: false

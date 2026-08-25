@@ -548,4 +548,53 @@
     //   https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
     setTimeout(() => highlight(pending), 600);
   }
+
+  // ======================================================================
+  //  INGEST — the widget's half of index self-healing
+  // ======================================================================
+  //  Every page a visitor opens is a freshly rendered snapshot of the site.
+  //  We POST that HTML to /ingest, where the server hashes it, skips it if
+  //  unchanged, and otherwise re-chunks + re-embeds just this page and merges
+  //  it into the site's index. Result: as real people browse, the index
+  //  quietly repairs itself — new team members (a mentor added after our last
+  //  crawl), new fees, new sections all appear without anyone re-crawling.
+  //
+  //  Fire-and-forget by design: this must NEVER delay or break the host page,
+  //  so no await, no .then chains that matter, everything inside try/catch.
+  //  The server's SHA-256 check makes repeat views of an unchanged page cost
+  //  ~nothing (one hash compare, zero embedding work).
+  //
+  //  The delay lets SPA frameworks finish hydrating, so we capture rendered
+  //  content rather than an empty <div id="root">. Same trade-off as WAIT_MS
+  //  in crawler_js.py: dumb but universal.
+  setTimeout(() => {
+    try {
+      // ONLY INGEST WHEN THE PAGE REALLY BELONGS TO THIS SITE.
+      // SITE defaults to location.hostname, so on a genuine deployment they
+      // always match. But in local testing (data-site="openlake.in" served
+      // from localhost) they differ — and posting dev pages into a real
+      // customer's index is poisoning, not self-healing. Skip on mismatch.
+      const norm = (s) => String(s || "").toLowerCase().trim()
+        .split("//").pop().split("/")[0].split(":")[0].replace(/^www\./, "");
+      if (norm(location.hostname) !== norm(SITE)) return;
+
+      const html = document.documentElement.outerHTML;
+      // Client-side mirror of the server's size cap — saves everyone the
+      // bandwidth when a pathological page somehow exceeds it.
+      if (!html || html.length > 3_000_000) return;
+      fetch(API + "/ingest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          site_id: SITE,
+          url: location.href.split("#")[0],
+          title: document.title || "",
+          html: html,
+        }),
+        // keepalive lets the request complete even if the visitor navigates
+        // away mid-send — exactly the case on fast cross-page browsing.
+        keepalive: true,
+      }).catch(() => {});   // network errors are none of the visitor's business
+    } catch (e) { /* never let indexing break the host page */ }
+  }, 2500);
 })();
