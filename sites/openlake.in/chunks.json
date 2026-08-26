@@ -18,931 +18,13 @@
     "id": 1
   },
   {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Projects @ OpenLake",
-    "level": "h1",
-    "selector": "#main > div:nth-of-type(3) > h1",
-    "content": "Projects @ OpenLake. We always strive towards the benefit of society with our projects. Website for OpenLake - Open Source Club of IIT Bhilai :ocean: View on GitHub See site Source code of OpenLake's official Website View on GitHub See site A centralized platform for managing student data and Positions of Responsibility (PORs) within CoSA. Built with React, Node.js, and MongoDB, it provides secure role-based access, streamlined data management, and a modern interface for efficient administration. View on GitHub See site The ultimate Codeforces companion platform. Features a built-in IDE, real-time 1v1 DSA battles, a comparison dashboard, and full submission/stat synchronization with Codeforces, all wrapped in a gamified experience View on GitHub See site 🛍️ A student-centric campus marketplace platform to buy, sell, and exchange items within the college community. View on GitHub See site FOSSI (Free open-source silicon) : Groups focus on learning, getting exposure onto EDA tools, fun projects in verticals of algorithms to transistor gates View on GitHub AI Voice Agent that adapts dynamically and provides user friendly, personalized experience View on GitHub A community-driven platform to review and rate courses and instructors at IIT Bhilai. Built with Next.js, TypeScript, and Supabase, it helps students make informed course selections through detailed reviews, grading insights, and instructor ratings. View on GitHub See site This repository serves as an archive for the proposals for  GSoC - Goog",
-    "id": 2
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "openlake-website",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(1) > div > h2",
-    "content": "openlake-website. Website for OpenLake - Open Source Club of IIT Bhilai :ocean: View on GitHub See site",
-    "id": 3
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "OpenLake--Website",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(2) > div > h2",
-    "content": "OpenLake--Website. Source code of OpenLake's official Website View on GitHub See site",
-    "id": 4
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Student_Database_COSA",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(3) > div > h2",
-    "content": "Student_Database_COSA. A centralized platform for managing student data and Positions of Responsibility (PORs) within CoSA. Built with React, Node.js, and MongoDB, it provides secure role-based access, streamlined data management, and a modern interface for efficient administration. View on GitHub See site",
-    "id": 5
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "canonforces",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(4) > div > h2",
-    "content": "canonforces. The ultimate Codeforces companion platform. Features a built-in IDE, real-time 1v1 DSA battles, a comparison dashboard, and full submission/stat synchronization with Codeforces, all wrapped in a gamified experience View on GitHub See site",
-    "id": 6
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Campus-Marketplace",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(5) > div > h2",
-    "content": "Campus-Marketplace. 🛍️ A student-centric campus marketplace platform to buy, sell, and exchange items within the college community. View on GitHub See site",
-    "id": 7
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "FOSSI",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(6) > div > h2",
-    "content": "FOSSI. FOSSI (Free open-source silicon) : Groups focus on learning, getting exposure onto EDA tools, fun projects in verticals of algorithms to transistor gates View on GitHub",
-    "id": 8
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "AI-Voice-Agent",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(7) > div > h2",
-    "content": "AI-Voice-Agent. AI Voice Agent that adapts dynamically and provides user friendly, personalized experience View on GitHub",
-    "id": 9
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "RateMyCourse",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(8) > div > h2",
-    "content": "RateMyCourse. A community-driven platform to review and rate courses and instructors at IIT Bhilai. Built with Next.js, TypeScript, and Supabase, it helps students make informed course selections through detailed reviews, grading insights, and instructor ratings. View on GitHub See site",
-    "id": 10
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "GSoC_Proposals",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(9) > div > h2",
-    "content": "GSoC_Proposals. This repository serves as an archive for the proposals for  GSoC - Google Summer of Code and other Great Open-Source Programs of IIT Bhilai students. View on GitHub",
-    "id": 11
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "iitbh-cgpa",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(10) > div > h2",
-    "content": "iitbh-cgpa. A browser extension that calculates CGPA directly from IIT Bhilai's AIMS Portal View on GitHub",
-    "id": 12
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Homework-Scheduler",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(11) > div > h2",
-    "content": "Homework-Scheduler. Helps teachers decide homework deadlines by keeping a track of other commitments and assignments of the students. 🧑‍🏫🧑‍🎓 View on GitHub See site",
-    "id": 13
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "bhilaee-labs",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(12) > div > h2",
-    "content": "bhilaee-labs. A structured, interactive virtual laboratory platform designed for Electrical & Electronics Engineering students at IIT Bhilai. The platform provides comprehensive, digitized experiment guides complete with theory, observations, circuit diagrams, mathematical equations, and seamless, one-click access to an interactive circuit simulator. View on GitHub See site",
-    "id": 14
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "SmartTriage",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(13) > div > h2",
-    "content": "SmartTriage. SmartTriage is an ML bot that keeps OpenLake maintainers focused on shipping, not clutter. It uses semantic search to catch duplicate issues even when phrased differently, and scans commit history to auto‑assign the right reviewer. By automating triage, it speeds collaboration and showcases a real‑world NLP pipeline. View on GitHub",
-    "id": 15
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Centre-for-Career-Planning-and-Services-Portal",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(14) > div > h2",
-    "content": "Centre-for-Career-Planning-and-Services-Portal. A specialized job posting platform designed for IIT Bhilai students. The platform aims to bridge the gap between students and the placement cell. View on GitHub See site",
-    "id": 16
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "bhilaee-simulator",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(15) > div > h2",
-    "content": "bhilaee-simulator. A browser-based circuit simulator for electrical engineering lab experiments. Built with zero dependencies — pure HTML, CSS, and JavaScript using ES6 modules. Supports DC, AC, and transient analysis with real-time oscilloscope visualization and pre-built experiment templates across three labs: Basic EE, Devices & Circuits, and Sensor Lab. View on GitHub See site",
-    "id": 17
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Leaderboard-Pro",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(16) > div > h2",
-    "content": "Leaderboard-Pro. Leaderboard that scrapes data from other programming platforms 🥇 View on GitHub See site",
-    "id": 18
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "File-Sharing-App",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(17) > div > h2",
-    "content": "File-Sharing-App. File Sharing Application between different devices ( with p2p technology ) View on GitHub",
-    "id": 19
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Smart-Insti-App",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(18) > div > h2",
-    "content": "Smart-Insti-App. A one-stop App for all institute related information and updates 📱🏫 View on GitHub",
-    "id": 20
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "GetWelPlus",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(19) > div > h2",
-    "content": "GetWelPlus. An open-source project by OpenLake. View on GitHub",
-    "id": 21
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Hub",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(20) > div > h2",
-    "content": "Hub. OpenLake Hub is the central integration and synchronization layer for the OpenLake ecosystem. It connects independent apps, maintains global entity mappings, aggregates data, and powers unified feeds and APIs for cross-platform services. View on GitHub See site",
-    "id": 22
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Bit",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(21) > div > h2",
-    "content": "Bit. Git and git server made from scratch for IIT Bhilai. View on GitHub",
-    "id": 23
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Quiz-App",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(22) > div > h2",
-    "content": "Quiz-App. A real-time quizzing, polling, and survey platform built for IIT Bhilai. Designed for interactive sessions, data collection, and academic engagement — especially useful for data science students and campus communities. Features include time-bound quizzes, live leaderboards, and survey analytics. View on GitHub",
-    "id": 24
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Bhilaipedia",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(23) > div > h2",
-    "content": "Bhilaipedia. Bhilaipedia (IIT Bhilai's only Wikipedia) is a collaborative knowledge platform powered by MediaWiki and MySQL, containerized using Docker. This project includes an initial SQL backup, allowing you to restore and continue development instantly. View on GitHub See site",
-    "id": 25
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Smart-Cams",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(24) > div > h2",
-    "content": "Smart-Cams. Give superpowers to your CCTV/Mobile cameras with Computer vision 📷🤖 View on GitHub",
-    "id": 26
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "WatchParty",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(25) > div > h2",
-    "content": "WatchParty. Watch movies with your friends remotely. Interact with them using the chat. 🎥🥳 View on GitHub See site",
-    "id": 27
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "PixOss",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(26) > div > h2",
-    "content": "PixOss. Deployment of our Canvas View on GitHub See site",
-    "id": 28
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Knowledge-Sharing-Platform",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(27) > div > h2",
-    "content": "Knowledge-Sharing-Platform. A college level application to share study notes and reviews for professors and courses 📝 View on GitHub See site",
-    "id": 29
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Photo-Sharing-App",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(28) > div > h2",
-    "content": "Photo-Sharing-App. Upload group photos, arrange them by faces using ML and share them with ease. 🤳🤖 View on GitHub",
-    "id": 30
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "iitbh-calendar",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(29) > div > h2",
-    "content": "iitbh-calendar. Generate your calendar for courses at IIT Bhilai View on GitHub See site",
-    "id": 31
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Projectory",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(30) > div > h2",
-    "content": "Projectory. An open-source project by OpenLake. View on GitHub",
-    "id": 32
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "auth-kit",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(31) > div > h2",
-    "content": "auth-kit. Auth Kit is the centralized authentication and identity provider for the OpenLake ecosystem. It offers secure SSO, JWT-based access control, role management, and unified login services for all connected applications. View on GitHub",
-    "id": 33
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "SciTech_council_website",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(32) > div > h2",
-    "content": "SciTech_council_website. Sci-tech Council of IIT BHILAI View on GitHub See site",
-    "id": 34
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "FOSS-Overflow",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(33) > div > h2",
-    "content": "FOSS-Overflow. Annual Open Source Program of IIT Bhilai View on GitHub See site",
-    "id": 35
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Infra",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(34) > div > h2",
-    "content": "Infra. This repository contains all the automation tools, bots, scripts, and configurations that help keep OpenLake running efficiently. View on GitHub",
-    "id": 36
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": ".github",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(35) > div > h2",
-    "content": ".github. An open-source project by OpenLake. View on GitHub",
-    "id": 37
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "general-template",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(36) > div > h2",
-    "content": "general-template. An open-source project by OpenLake. View on GitHub",
-    "id": 38
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "GitStartedWithUs",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(37) > div > h2",
-    "content": "GitStartedWithUs. An open-source project by OpenLake. View on GitHub See site",
-    "id": 39
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "RideShare",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(38) > div > h2",
-    "content": "RideShare. A trusted ridesharing platform for IIT Bhilai students and staff to share rides between campus, Raipur, and nearby cities — making travel affordable, safe, and community-driven. View on GitHub",
-    "id": 40
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "DevLabs-2025",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(39) > div > h2",
-    "content": "DevLabs-2025. An open-source project by OpenLake. View on GitHub",
-    "id": 41
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Sampoorna",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(40) > div > h2",
-    "content": "Sampoorna. One app for all women that covers everything from safety to health and more. 👩💪 View on GitHub",
-    "id": 42
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Branding",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(41) > div > h2",
-    "content": "Branding. The repository contains all branding assets for OpenLake and FOSS Overflow View on GitHub",
-    "id": 43
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Interview-Preparation",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(42) > div > h2",
-    "content": "Interview-Preparation. An open-source project by OpenLake. View on GitHub",
-    "id": 44
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "career-scraper",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(43) > div > h2",
-    "content": "career-scraper. Scrape data to find what kind of trajectories different people took in their careers View on GitHub",
-    "id": 45
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "blog",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(44) > div > h2",
-    "content": "blog. OpenLake's blog View on GitHub See site",
-    "id": 46
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Speech-Analyser",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(45) > div > h2",
-    "content": "Speech-Analyser. An App to help you improve your English fluency 🎤 View on GitHub",
-    "id": 47
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Not-a-Mess",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(46) > div > h2",
-    "content": "Not-a-Mess. An App to help you resolve mess related issues and more 🍽 View on GitHub",
-    "id": 48
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Live-Score-App",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(47) > div > h2",
-    "content": "Live-Score-App. A real-time score web app for sports🏸 and tournaments🏆. View on GitHub",
-    "id": 49
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Insti-Pay",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(48) > div > h2",
-    "content": "Insti-Pay. A payment infrastructure to cater to transactional needs within IIT Bhilai, among all institutes. View on GitHub",
-    "id": 50
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Find-your-Cluster",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(49) > div > h2",
-    "content": "Find-your-Cluster. Find common interests among your peers and build a healthy community 🏫🧍‍♂️ View on GitHub",
-    "id": 51
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "studious-learners",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(50) > div > h2",
-    "content": "studious-learners. Study material for events conducted by OpenLake View on GitHub",
-    "id": 52
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "iitbh-oneStop",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(51) > div > h2",
-    "content": "iitbh-oneStop. An open-source project by OpenLake. View on GitHub",
-    "id": 53
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Activity-Tracker",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(52) > div > h2",
-    "content": "Activity-Tracker. A cross-platform solution to discover how you spend your digital life. 🕵️‍♂️⌛ View on GitHub",
-    "id": 54
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Knowledge",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(53) > div > h2",
-    "content": "Knowledge. All the information that a student needs to have an amazing career. View on GitHub",
-    "id": 55
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Online-Judge",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(54) > div > h2",
-    "content": "Online-Judge. An online judge for programming competitions and assignments. 🧑‍💻📝 View on GitHub",
-    "id": 56
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "leaderboardpro",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(55) > div > h2",
-    "content": "leaderboardpro. An open-source project by OpenLake. View on GitHub",
-    "id": 57
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Virtual-IIT-Bhilai",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(56) > div > h2",
-    "content": "Virtual-IIT-Bhilai. IIT Bhilai virtual campus game world (Godot + NodeJS) 🎓 View on GitHub",
-    "id": 58
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Active-OSS-Community-Finder",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(57) > div > h2",
-    "content": "Active-OSS-Community-Finder. A place to discover the best open source projects where you can become a regular contributor View on GitHub",
-    "id": 59
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Remote-Voting-Blockchain",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(58) > div > h2",
-    "content": "Remote-Voting-Blockchain. Hyperledger Fabric (Blockchain) implementation of electronic voting. View on GitHub",
-    "id": 60
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Memory-Imaging-for-Linux-Family",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(59) > div > h2",
-    "content": "Memory-Imaging-for-Linux-Family. Project to provide tools for linux binary analysis and making changes on the fly. View on GitHub",
-    "id": 61
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Introduction_CPP",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(60) > div > h2",
-    "content": "Introduction_CPP. Introduction to Open source using Algorithms in C++ (Event completed) View on GitHub",
-    "id": 62
-  },
-  {
-    "url": "https://openlake.in/programs",
-    "page_title": "Projects — OpenLake",
-    "heading": "Introduction_Python",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(61) > div > h2",
-    "content": "Introduction_Python. Introduction to Open source using Algorithms in Python (Event completed) View on GitHub Want to contribute? Find these projects on GitHub Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 63
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "OpenLake Events",
-    "level": "h1",
-    "selector": "html > body > main > section:nth-of-type(1) > div:nth-of-type(1) > h1",
-    "content": "OpenLake Events. Explore workshops, hackathons, bootcamps, tech talks, and community events that bring students together to learn, build, and innovate. Stay tuned for the next exciting event organized by OpenLake. 22 Aug 2026 Join us for the official intro session of OpenLake! Meet the team, learn about our vision, upcoming projects, and how you can be a part of our open-source community. 📅 22 Aug 2026 📍 L101, IIT Bhilai Take a look at some of the memorable events organized by OpenLake. 22 Jan 2026 OverFlow into Open Source with India's Largest Open Source Hackathon. 📍 IIT BHILAI 11 Oct 2025 Diving deep into Linux Fundamentals and Installation. From sudo to grep - everything finally made sense! 📍 IIT BHILAI 29 Aug 2025 A hands-on Git & GitHub workshop.Perfect for freshers & anyone curious about open-source! 📍IIT BHILAI 13 Jan 2025 An inspiring and insightful session on Google Summer of Code and how to make meaningful contributions to open source. 📍 IIT BHILAI 18 Jan 2025 Beginner-friendly workshop covering fundamentals of building real-world software projects. 📍 IIT BHILAI 30 Oct 2024 Tailored to equip you with the knowledge and tools to kickstart your journey in software development. 📍 IIT BHILAI 25 June 2023 Open source Tools and Technologies and Open Source opportunities for contributing to global projects. 📍 IIT BHILAI 15 Aug 2022 An introductory workshop on open source. 📍 IIT BHILAI 06 Aug 2022 An introductory workshop on OOP concepts and Flask framework. 📍 IIT BHILAI 12 June 2022 Hands-",
-    "id": 64
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "OpenLake Intro Session 2026-27",
-    "level": "h2",
-    "selector": "#upcoming > div:nth-of-type(1) > h2",
-    "content": "OpenLake Intro Session 2026-27. Stay tuned for the next exciting event organized by OpenLake. 22 Aug 2026 Join us for the official intro session of OpenLake! Meet the team, learn about our vision, upcoming projects, and how you can be a part of our open-source community. 📅 22 Aug 2026 📍 L101, IIT Bhilai",
-    "id": 65
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "OpenLake Intro Session",
-    "level": "h3",
-    "selector": "#upcoming > div:nth-of-type(2) > div > div:nth-of-type(2) > h3",
-    "content": "OpenLake Intro Session. Join us for the official intro session of OpenLake! Meet the team, learn about our vision, upcoming projects, and how you can be a part of our open-source community. 📅 22 Aug 2026 📍 L101, IIT Bhilai",
-    "id": 66
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "Past Events",
-    "level": "h2",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(1) > h2",
-    "content": "Past Events. Take a look at some of the memorable events organized by OpenLake. 22 Jan 2026 OverFlow into Open Source with India's Largest Open Source Hackathon. 📍 IIT BHILAI 11 Oct 2025 Diving deep into Linux Fundamentals and Installation. From sudo to grep - everything finally made sense! 📍 IIT BHILAI 29 Aug 2025 A hands-on Git & GitHub workshop.Perfect for freshers & anyone curious about open-source! 📍IIT BHILAI 13 Jan 2025 An inspiring and insightful session on Google Summer of Code and how to make meaningful contributions to open source. 📍 IIT BHILAI 18 Jan 2025 Beginner-friendly workshop covering fundamentals of building real-world software projects. 📍 IIT BHILAI 30 Oct 2024 Tailored to equip you with the knowledge and tools to kickstart your journey in software development. 📍 IIT BHILAI 25 June 2023 Open source Tools and Technologies and Open Source opportunities for contributing to global projects. 📍 IIT BHILAI 15 Aug 2022 An introductory workshop on open source. 📍 IIT BHILAI 06 Aug 2022 An introductory workshop on OOP concepts and Flask framework. 📍 IIT BHILAI 12 June 2022 Hands-on web development session followed by a mini hackathon, with goodies for participants. 📍 IIT BHILAI Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 67
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "FOSS OVERFLOW",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > div > div:nth-of-type(2) > h3",
-    "content": "FOSS OVERFLOW. OverFlow into Open Source with India's Largest Open Source Hackathon. 📍 IIT BHILAI 11 Oct 2025",
-    "id": 68
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "Linux Installation Workshop",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(2) > h3",
-    "content": "Linux Installation Workshop. Diving deep into Linux Fundamentals and Installation. From sudo to grep - everything finally made sense! 📍 IIT BHILAI 29 Aug 2025",
-    "id": 69
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "Git & GitHub Workshop - Beginner Friendly!",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > h3",
-    "content": "Git & GitHub Workshop - Beginner Friendly!. A hands-on Git & GitHub workshop.Perfect for freshers & anyone curious about open-source! 📍IIT BHILAI 13 Jan 2025",
-    "id": 70
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "GSoC : An Introduction",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(2) > h3",
-    "content": "GSoC : An Introduction. An inspiring and insightful session on Google Summer of Code and how to make meaningful contributions to open source. 📍 IIT BHILAI 18 Jan 2025",
-    "id": 71
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "Intro to Software Development",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > div > div:nth-of-type(2) > h3",
-    "content": "Intro to Software Development. Beginner-friendly workshop covering fundamentals of building real-world software projects. 📍 IIT BHILAI 30 Oct 2024",
-    "id": 72
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "A Quick Start to Software Development",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div:nth-of-type(2) > h3",
-    "content": "A Quick Start to Software Development. Tailored to equip you with the knowledge and tools to kickstart your journey in software development. 📍 IIT BHILAI 25 June 2023",
-    "id": 73
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "How to Open-Source",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(7) > div > div:nth-of-type(2) > h3",
-    "content": "How to Open-Source. Open source Tools and Technologies and Open Source opportunities for contributing to global projects. 📍 IIT BHILAI 15 Aug 2022",
-    "id": 74
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "OpenlySourced with Anand Panchbai",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(8) > div > div:nth-of-type(2) > h3",
-    "content": "OpenlySourced with Anand Panchbai. An introductory workshop on open source. 📍 IIT BHILAI 06 Aug 2022",
-    "id": 75
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "Object Oriented Programming and Flask",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(9) > div > div:nth-of-type(2) > h3",
-    "content": "Object Oriented Programming and Flask. An introductory workshop on OOP concepts and Flask framework. 📍 IIT BHILAI 12 June 2022",
-    "id": 76
-  },
-  {
-    "url": "https://openlake.in/newevents",
-    "page_title": "OpenLake",
-    "heading": "HTML & CSS Tutorial + Hackathon",
-    "level": "h3",
-    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(10) > div > div:nth-of-type(2) > h3",
-    "content": "HTML & CSS Tutorial + Hackathon. Hands-on web development session followed by a mini hackathon, with goodies for participants. 📍 IIT BHILAI Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 77
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "We’re at our best when we’re making.",
-    "level": "h1",
-    "selector": "#main > div:nth-of-type(3) > h1",
-    "content": "We’re at our best when we’re making.. A few beliefs that shape how we build at OpenLake. 01 Learning to code converts you from a consumer to a creator. Suddenly, computers become a tool for making things instead of just using them. 02 Anyone with a laptop and an internet connection can learn to build software. Making things has never been this democratized. 03 We want a space on campus where people are making interesting things with code, every week. Most places don't provide that, so we built it. 04 Most courses teach concepts instead of how to write real code — like learning carpentry without any wood. Here you learn entirely through shipping. 05 Starting out, you won't understand how all the code works. You'll build that understanding as you go, and you'll get stuck along the way. We're here for that part. Browse our projects 06 OpenLake gives you a room full of other people building things. We're designers, writers, engineers, tinkerers. We help one another. Join us. Jump straight into the community and pick up your first issue. Join the community Want the monthly recap? Read the blog Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 78
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Coding is a superpower.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > h2",
-    "content": "Coding is a superpower.. Learning to code converts you from a consumer to a creator. Suddenly, computers become a tool for making things instead of just using them. 02",
-    "id": 79
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Build from anywhere.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > h2",
-    "content": "Build from anywhere.. Anyone with a laptop and an internet connection can learn to build software. Making things has never been this democratized. 03",
-    "id": 80
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Hack, hack, hack.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > h2",
-    "content": "Hack, hack, hack.. We want a space on campus where people are making interesting things with code, every week. Most places don't provide that, so we built it. 04",
-    "id": 81
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Start building.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > h2",
-    "content": "Start building.. Most courses teach concepts instead of how to write real code — like learning carpentry without any wood. Here you learn entirely through shipping. 05",
-    "id": 82
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Learn as you build.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > h2",
-    "content": "Learn as you build.. Starting out, you won't understand how all the code works. You'll build that understanding as you go, and you'll get stuck along the way. We're here for that part. Browse our projects 06",
-    "id": 83
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Be part of a community.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > h2",
-    "content": "Be part of a community.. OpenLake gives you a room full of other people building things. We're designers, writers, engineers, tinkerers. We help one another. Join us.",
-    "id": 84
-  },
-  {
-    "url": "https://openlake.in/philosophy",
-    "page_title": "Philosophy — OpenLake",
-    "heading": "Join the movement.",
-    "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > h2",
-    "content": "Join the movement.. Jump straight into the community and pick up your first issue. Join the community Want the monthly recap? Read the blog Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 85
-  },
-  {
-    "url": "https://openlake.in/team",
-    "page_title": "Team — OpenLake",
-    "heading": "Meet the Present Community.",
-    "level": "h1",
-    "selector": "#main > section:nth-of-type(1) > div > div > h1",
-    "content": "Meet the Present Community.. Meet the passionate students, mentors, and contributors who are actively shaping OpenLake today. Together, they organize events, build projects, mentor learners, and strengthen our growing community. Ashish Kumar Dash Garvit Sharma Aditya Kumar Gautam Rudra Dudhat Lakshya soni Kamireddi Jaswanth Kumar Taha Hussain Akshat Kansal Sujal Som Eashan Hasija Shlok Divyam Siddhi Singh Tanmay Jaiswal Umap Utkarsh Sharad Siddhant Shukla Sanil Saha Kotapati Sai Mounika Adhi Agrawal Harshit Kandpal Kushal Agrawal Neil Chitale Prashant Sati Vidit Shrimali Harshita Sharma Anushka Rath Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 86
-  },
-  {
-    "url": "https://openlake.in/team",
-    "page_title": "Team — OpenLake",
-    "heading": "Secretary",
-    "level": "h2",
-    "selector": "#main > section:nth-of-type(2) > div > h2",
-    "content": "Secretary. Ashish Kumar Dash",
-    "id": 87
-  },
-  {
-    "url": "https://openlake.in/team",
-    "page_title": "Team — OpenLake",
-    "heading": "Domain Leads",
-    "level": "h2",
-    "selector": "#main > section:nth-of-type(3) > div > h2",
-    "content": "Domain Leads. Garvit Sharma Aditya Kumar Gautam Rudra Dudhat",
-    "id": 88
-  },
-  {
-    "url": "https://openlake.in/team",
-    "page_title": "Team — OpenLake",
-    "heading": "Mentors",
-    "level": "h2",
-    "selector": "#main > section:nth-of-type(4) > div > h2",
-    "content": "Mentors. Lakshya soni Kamireddi Jaswanth Kumar Taha Hussain Akshat Kansal Sujal Som Eashan Hasija Shlok Divyam Siddhi Singh Tanmay Jaiswal",
-    "id": 89
-  },
-  {
-    "url": "https://openlake.in/team",
-    "page_title": "Team — OpenLake",
-    "heading": "Maintainers",
-    "level": "h2",
-    "selector": "#main > section:nth-of-type(5) > div > h2",
-    "content": "Maintainers. Umap Utkarsh Sharad Siddhant Shukla Sanil Saha Kotapati Sai Mounika Adhi Agrawal Harshit Kandpal Kushal Agrawal Neil Chitale Prashant Sati Vidit Shrimali Harshita Sharma",
-    "id": 90
-  },
-  {
-    "url": "https://openlake.in/team",
-    "page_title": "Team — OpenLake",
-    "heading": "Outreach Head",
-    "level": "h2",
-    "selector": "#main > section:nth-of-type(6) > div > h2",
-    "content": "Outreach Head. Anushka Rath Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 91
-  },
-  {
-    "url": "https://openlake.in/blog",
-    "page_title": "Blog — OpenLake",
-    "heading": "How to run a DevLabs at your college",
-    "level": "h2",
-    "selector": "#main > section > div > a:nth-of-type(1) > div:nth-of-type(2) > h2",
-    "content": "How to run a DevLabs at your college. The short version: a three-page framework for running a beginner open-source bootcamp with no budget — platforms to use, program structure, and prerequisites. Ashish Kumar Dash Aug 2026 Read post DevLabs Mentorship Community OpenLake",
-    "id": 92
-  },
-  {
-    "url": "https://openlake.in/blog",
-    "page_title": "Blog — OpenLake",
-    "heading": "We ran a summer bootcamp for 150 students with no budget and a lot of WhatsApp",
-    "level": "h2",
-    "selector": "#main > section > div > a:nth-of-type(2) > div:nth-of-type(2) > h2",
-    "content": "We ran a summer bootcamp for 150 students with no budget and a lot of WhatsApp. Notes from DevLabs 2.0: what worked, what quietly fell apart, and what we would tell any student community thinking about doing this. 150 registered, 25 finished — including the number most recap posts leave out. Ashish Kumar Dash Aug 2026 Read post Open Source LFX Mentorship Zowe Java",
-    "id": 93
-  },
-  {
-    "url": "https://openlake.in/blog",
-    "page_title": "Blog — OpenLake",
-    "heading": "Summer Mentorships 2026: LFX Mentorship Mid-Term Report",
-    "level": "h2",
-    "selector": "#main > section > div > a:nth-of-type(3) > div:nth-of-type(2) > h2",
-    "content": "Summer Mentorships 2026: LFX Mentorship Mid-Term Report. From PR #513 to eight merged pull requests into the Zowe Client Java SDK — a mid-term look at shipping production-grade z/OSMF REST APIs through the Open Mainframe Project Summer Mentorship. Ashish Kumar Dash Aug 2026 Read post MCP Architecture AI",
-    "id": 94
-  },
-  {
-    "url": "https://openlake.in/blog",
-    "page_title": "Blog — OpenLake",
-    "heading": "Brok: a blunt blacksmith for your architecture",
-    "level": "h2",
-    "selector": "#main > section > div > a:nth-of-type(4) > div:nth-of-type(2) > h2",
-    "content": "Brok: a blunt blacksmith for your architecture. A deterministic MCP that does the napkin math AI coding assistants skip — finds the bottleneck, prices the egress bill, and roasts your architecture with cited numbers and no hallucinated verdicts. Rudra Dudhat Jun 2026 Read post Microservices Go gRPC Distributed Systems",
-    "id": 95
-  },
-  {
-    "url": "https://openlake.in/blog",
-    "page_title": "Blog — OpenLake",
-    "heading": "Kudos: Engineering a Token-Weighted Social Economy",
-    "level": "h2",
-    "selector": "#main > section > div > a:nth-of-type(5) > div:nth-of-type(2) > h2",
-    "content": "Kudos: Engineering a Token-Weighted Social Economy. A deep technical dive into the polyglot microservices, economic algorithms, gRPC communication, MLFQ feed ranking, and database design powering Kudos — a platform where engagement is a scarce digital currency. Amay Dixit Mar 2026 Read post OpenSource Timeline LFX GSSoC",
-    "id": 96
-  },
-  {
-    "url": "https://openlake.in/blog",
-    "page_title": "Blog — OpenLake",
-    "heading": "The Only OpenSource Calendar You Need!",
-    "level": "h2",
-    "selector": "#main > section > div > a:nth-of-type(6) > div:nth-of-type(2) > h2",
-    "content": "The Only OpenSource Calendar You Need!. An interactive Open Source Program Calendar built for OpenLake, IIT Bhilai. Track majors programs like GSoC, LFX, FOSSEE, ESoC, GSSoC and C4GT through a centralized timeline. Siddhant Shukla Aug 2026 Read post Written by students, for everyone. Want to publish something? Open a PR Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 97
-  },
-  {
-    "url": "https://openlake.in/blog/devlabs-playbook",
-    "page_title": "How to run a DevLabs at your college — OpenLake",
-    "heading": "1. What you need before you start",
-    "level": "h2",
-    "selector": "#main > article > h2:nth-of-type(1)",
-    "content": "1. What you need before you start. People 🔹 One mentor per 10 to 15 mentees. A track with 45 registrations needs three. They do not need to be experts, only one week ahead of their group and willing to stay there. 🔹 Mentors need shipped code, not a completed course. One or two semesters of hands-on work in the domain is enough. No teaching experience required. 🔹 Mentee prerequisites: none, deliberately. Someone who has never written a line of code is still in. The program asks for attendance, not prior knowledge. Time 🔹 Eight weeks, plus two weeks of prep before week one. 🔹 Mentors: 3 to 4 hours a week. Roughly 1 hour prep, 1 to 1.5 hours live, 1 hour on the group chat and PR reviews. Tools All free. GitHub is the only non-negotiable, because the pull request workflow is the entire difference between this and a YouTube playlist. 🔹 GitHub — One org, one repo per track. Every weekly task is submitted as a PR and reviewed. This is the core mechanic. 🔹 WhatsApp — One group per track. Resource drops, small challenges, error screenshots at midnight. The live session is a third of the learning; this is the rest. 🔹 Meet or Zoom — Weekly sessions. Free tier is enough. Record every one. 🔹 Notion or Drive — One shared space per track for resources, notes and slides. Mentees should never have to hunt. 🔹 n8n — AI track only. Free and self-hostable. Shows mentees what an agent does before they write one from scratch.",
-    "id": 98
-  },
-  {
-    "url": "https://openlake.in/blog/devlabs-playbook",
-    "page_title": "How to run a DevLabs at your college — OpenLake",
-    "heading": "2. Choosing tracks",
-    "level": "h2",
-    "selector": "#main > article > h2:nth-of-type(2)",
-    "content": "2. Choosing tracks. 🔹 Pick two or three domains. Do not try to cover everything. Each track needs to be a full eight-week arc on its own, with enough depth that a beginner can demonstrate a finished thing at the end. 🔹 Tracks that have worked: web development (HTML and CSS, then JavaScript, then React, then a deployed app), AI and agentic AI (Python, then APIs, then agent frameworks), game development (engine basics, then one complete game). The domain matters less than whether it ends in something you can show someone. 🔹 Budget 40 to 60 registrations per track, and expect 15 to 20 percent to finish. That is the normal number. Plan the showcase around the people who stay.",
-    "id": 99
-  },
-  {
-    "url": "https://openlake.in/blog/devlabs-playbook",
-    "page_title": "How to run a DevLabs at your college — OpenLake",
-    "heading": "3. The weekly loop",
-    "level": "h2",
-    "selector": "#main > article > h2:nth-of-type(3)",
-    "content": "3. The weekly loop. Every week runs the same six steps. The repetition is the point: mentees stop wondering what happens next and mentors stop reinventing the format. 🔹 Topic drop — What the week covers. A paragraph, not a lecture. 🔹 Resources — Curated links, a short notes PDF, or a deck. Not a YouTube rabbit hole. 🔹 Live session — 1 to 1.5 hours. Demo first, explanation second. Screen-share a build, not slides. Record it. 🔹 Task — A small concrete deliverable. Not a project, a piece of one. 🔹 PR submission — Mentee opens a pull request against the track repo. 🔹 Review — Mentor comments, mentee addresses them, loop closes. This is where the actual learning lands. Sessions on Sunday.",
-    "id": 100
-  },
-  {
-    "url": "https://openlake.in/blog/devlabs-playbook",
-    "page_title": "How to run a DevLabs at your college — OpenLake",
-    "heading": "4. The eight weeks",
-    "level": "h2",
-    "selector": "#main > article > h2:nth-of-type(4)",
-    "content": "4. The eight weeks. 🔹 Weeks 1 to 2, foundations. Highest attendance you will ever have. Keep it accessible. This is where you hook people. 🔹 Weeks 3 to 5, core domain. Attendance starts dropping. Keep session quality identical regardless of how many show up. 🔹 Week 6, the hard module. Budget double the time you think you need. You already know which module it is. 🔹 Weeks 7 to 8, final project and showcase. Close with a short session on GitHub profiles, resumes and how to present what they built. Nobody plans this and every cohort asks for it.",
-    "id": 101
-  },
-  {
-    "url": "https://openlake.in/blog/devlabs-playbook",
-    "page_title": "How to run a DevLabs at your college — OpenLake",
-    "heading": "5. What will go wrong",
-    "level": "h2",
-    "selector": "#main > article > h2:nth-of-type(5)",
-    "content": "5. What will go wrong. All four of these will happen to you. Deciding your response now is cheaper than deciding it in week five. 🔹 Attendance will decay as the curriculum hardens. It is the most common outcome in student-run programs and the least commonly written down. Decide in advance whether you keep running at full intensity for the people who stayed. The answer should be yes. 🔹 One module will cause a spike in drop-offs. In web dev it tends to be React, specifically Hooks. In AI it tends to be state management in agent frameworks. Give these more time, not less. 🔹 Scope creep will hit your project track. By week three someone is describing an open-world RPG. The fix is permission to be ugly: grey rectangles, free asset packs, one win condition. Ship first, decorate later. 🔹 Setup will eat your first session. Unless you push a sandbox repo beforehand, hour one is twelve people simultaneously discovering what an environment variable is.",
-    "id": 102
-  },
-  {
-    "url": "https://openlake.in/blog/devlabs-playbook",
-    "page_title": "How to run a DevLabs at your college — OpenLake",
-    "heading": "6. Two weeks before launch",
-    "level": "h2",
-    "selector": "#main > article > h2:nth-of-type(6)",
-    "content": "6. Two weeks before launch. 🔹 Create the GitHub org and one repo per track. 🔹 Push a sandbox to each repo: folder structure, .env.example, and any boilerplate mentees will need. 🔹 Write weeks 1 to 3 of the curriculum. Do not wing it and do not write all eight either. 🔹 Set up the shared resource space and the track group chats. 🔹 Agree the recording and attendance policy with your mentors, in writing. 🔹 Open registrations. Say prerequisites are none, and mean it. Mentors gain as much as mentees, often more. That is the actual pitch when you are asking people to give up their summer. Lead with it. Hail Open Source! — IIT Bhilai’s open-source society · openlake.in github.com/OpenLake This is the short version. The full write-up of DevLabs 2.0 — what worked, what quietly fell apart, and the parts most recap posts leave out — is in the long post. Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 103
-  },
-  {
     "url": "https://openlake.in/blog/devlabs-2",
     "page_title": "We ran a summer bootcamp for 150 students — DevLabs 2.0 — OpenLake",
     "heading": "What we changed from v1",
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(1)",
     "content": "What we changed from v1. The first DevLabs hopped between topics. A week of this, a week of that. People finished it with a shallow map of a lot of things and the ability to build none of them. So 2.0 went domain-based. Pick one track, stay in it, come out able to ship something in that specific thing. Three tracks: web development, AI and agentic AI, and game development. Prerequisites: none, deliberately. If you had never written a line of code, you were still in.",
-    "id": 104
+    "id": 2
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -951,7 +33,7 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(2)",
     "content": "The org chart is just students. There is no adult in this story. Our mentors were second- and third-year students, and several of them were teaching material they had finished learning about a week earlier. Coming from a background in classical ML and deep learning I had a conceptual edge, but the generative and agentic space was a relatively new frontier for me too. Knowing I had to deliver comprehensive sessions meant I could not learn any of it shallowly. 🔹 AI and agentic AI — led by Rudra Dudhat, who ran it around a full-time AI automations internship, using breaks at work to prepare session content and giving an hour every evening to actually running the session. 🔹 Web development — carried by Jaswanth Kumar, Garvit Sharma, Taha Hussain and Umap Utkarsh. 🔹 Game development — led by Aditya Kumar Gautam. 🔹 Agentic AI — Siddhi Singh, Sujal Som and Tanmay Jaiswal. 🔹 Every one of them is a student of IIT Bhilai. The structure that held it together was boring and worked: 🔹 Mentors extend it in their own style. They compiled a condensed Git and GitHub notes PDF, built a slide deck for HTML and CSS, and split React across two weeks, basics and Hooks first and Router second, because one week was never going to be enough. Some even wrote a full sample project every week so his mentees had working code to compare their own against. None of this was assigned. It was consistently better than anything we would have centrally planned. 🔹 Weekly loop. Topic, resources, live session, task, review. 🔹 Submissions go throu",
-    "id": 105
+    "id": 3
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -960,7 +42,7 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(3)",
     "content": "WhatsApp was the real classroom. The live sessions were maybe a third of it. The rest happened in track group chats: daily resource drops, small challenges, polls, and people posting screenshots of errors at midnight. Taha Hussain and Umap Utkarsh kept the web track chat alive through the week, which mattered more than any single session did. The hardest part of that turned out to be social rather than technical. Initially many mentees were hesitant to ask doubts. Most preferred to stay silent even when they were confused. I focused on creating an environment friendly enough that they felt confident asking without hesitation, and gradually the group became much more interactive. Nobody puts “engineered psychological safety in a WhatsApp group” on a bootcamp syllabus, but that was a real deliverable.",
-    "id": 106
+    "id": 4
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -969,7 +51,7 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(4)",
     "content": "The part everyone leaves out of the recap post. One hundred and fifty registered. Twenty-five finished. Weeks one and two were packed. As the curriculum got harder, the room emptied. This is the most common thing that happens to student-run programs and the least commonly written down, so: it happened to us. The drop was not random. It clustered on the hard modules. In web dev it was React, specifically Hooks and Router, compressed into a schedule too tight to actually practise them. In the AI track it was LangGraph’s state management, where people completely comfortable with deterministic code hit a wall. That AI wall is worth describing, because it was the most interesting teaching problem we ran into. Students arriving with solid DSA fundamentals are used to writing code that does exactly what it is told, line by line. Agentic systems ask them to build something where a model decides what to call next, and where the failure mode is a hallucinated parameter or an infinite reasoning loop rather than a clean exception. The mentors independently reported the same instinct and the same discipline in resisting it. My natural instinct when someone shared a broken workflow was to ask for remote control, spot the flaw in their ReAct loop and fix it for them. I had to actively restrain myself. Instead I started asking why they thought the agent chose the search tool instead of the calculator, or what context was missing from the prompt that made it hallucinate a parameter. Game development hit a wall of a completely different kin",
-    "id": 107
+    "id": 5
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -978,7 +60,7 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(5)",
     "content": "What the mentors said. The consistent line was that mentoring was selfish in the best way. Preparing to explain something forces a depth of understanding that consuming it never does. Before every session I revised the topics thoroughly and prepared examples and interview-style questions so I could answer any doubt confidently. That preparation strengthened my own fundamentals more than anything else I did that summer. The difficulty was rarely syntax. It was time. Balancing sessions against internships and personal commitments taught the mentors more about scheduling, communication and responsibility than any of them expected, and Siddhi Singh, Sujal Som and Tanmay Jaiswal were all doing it alongside their own summer plans. The payoff every one of them pointed to was the same moment: a mentee who eight weeks earlier had never touched Git, screen-sharing something that worked. In the AI track, agents that could research a topic, pull data and summaries it without a human in the loop. In web dev, a deployed app built by someone who started at “what is a div”. The real breakthrough was not when their code finally ran without throwing an exception. It was the moment they stopped looking at the AI as a magic black box and started treating it as a programmable, orchestratable system.",
-    "id": 108
+    "id": 6
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -987,7 +69,7 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(6)",
     "content": "What the mentees said. The praise was concrete and mostly about logistics. 🔹 Mentees pointed to the learning flow and the resources sitting in one well-arranged place as the thing that made a track followable. 🔹 They talked about finally being able to build the projects they had wanted to build for a while. 🔹 One arrived with no HTML or CSS experience at all and put his progress down to the modules being organised well enough that consistent practice was sufficient on its own. Most of them named a mentor rather than a session. 🔹 One thanked his for checking on task status week after week and helping whenever he got stuck — a lower-glamour form of mentoring than a good lecture and evidently a more effective one. 🔹 On the AI side, a mentee credited Siddhi Singh for opening every week with a plain-language overview before the deep end, and for walking him through his first n8n setup personally. 🔹 Another credited Rudra Dudhat with taking him from a rough idea of what an agent was to genuine proficiency. 🔹 The mentee who built AMINITY, a virtual hospital assistant, credited Sujal Som for the guidance that got it from a sketch to a working system. The criticism was concrete too, and consistent enough that we are treating it as a spec for next year: 🔹 The hard modules got the same time as the easy ones. Mentees called the React schedule congested and argued that Hooks in particular needed practice time the calendar did not allow. Three of them raised it independently, and asked for a longer runway on fin",
-    "id": 109
+    "id": 7
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -996,7 +78,7 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(7)",
     "content": "What we would tell another society. If you are a student group thinking about running something like this: 🔹 Mentors gain more than mentees. This is the actual recruitment pitch. Every mentor we had came out of the summer better than they went in, and several said so unprompted. Lead with that when you are asking people to give up their break. 🔹 Route everything through PRs. It costs you nothing and it is the only part of the program that teaches how open source actually works. 🔹 Budget double the time for the hard module. You already know which one it is. So do your mentees. 🔹 Record the sessions. We did not. It is the single cheapest fix on this list and it would have blunted the attendance problem. 🔹 Expect the drop-off and decide in advance how you will respond. Deciding mid-program whether to keep going when four people show up is a bad time to be making that call. 🔹 Publish the completion number. Twenty-five out of a hundred and fifty is not a number anybody enjoys writing down. It is also the only number that tells another organiser what to actually expect, and every recap post that hides it makes the next society feel like they failed at something normal.",
-    "id": 110
+    "id": 8
   },
   {
     "url": "https://openlake.in/blog/devlabs-2",
@@ -1005,7 +87,241 @@
     "level": "h2",
     "selector": "#main > article > h2:nth-of-type(8)",
     "content": "What is next. DevLabs 2.0 is done. Certificates are going out to everyone who completed a track, final project results are still being judged, and we are opening maintainer roles on live OpenLake projects for people who want to skip the beginner path and work on real codebases. For the incoming batch, we are building a mentorship program from scratch. Different shape, same principle: give people a road and a person to ask. If you are running something similar at your college, or you have solved the attendance decay problem and want to tell us how, we would genuinely like to hear it. Hail Open Source! — IIT Bhilai’s open-source society · openlake.in github.com/OpenLake DevLabs 2.0 mentors: Jaswanth Kumar, Garvit Sharma, Taha Hussain and Umap Utkarsh (web development); Rudra Dudhat, Siddhi Singh, Sujal Som and Tanmay Jaiswal (AI and agentic AI); Aditya Kumar Gautam, Shlok Divyam and Eashan Hasija (game development). Thanks also to every mentee who wrote up their experience for this piece. Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 111
+    "id": 9
+  },
+  {
+    "url": "https://openlake.in/blog/devlabs-playbook",
+    "page_title": "How to run a DevLabs at your college — OpenLake",
+    "heading": "1. What you need before you start",
+    "level": "h2",
+    "selector": "#main > article > h2:nth-of-type(1)",
+    "content": "1. What you need before you start. People 🔹 One mentor per 10 to 15 mentees. A track with 45 registrations needs three. They do not need to be experts, only one week ahead of their group and willing to stay there. 🔹 Mentors need shipped code, not a completed course. One or two semesters of hands-on work in the domain is enough. No teaching experience required. 🔹 Mentee prerequisites: none, deliberately. Someone who has never written a line of code is still in. The program asks for attendance, not prior knowledge. Time 🔹 Eight weeks, plus two weeks of prep before week one. 🔹 Mentors: 3 to 4 hours a week. Roughly 1 hour prep, 1 to 1.5 hours live, 1 hour on the group chat and PR reviews. Tools All free. GitHub is the only non-negotiable, because the pull request workflow is the entire difference between this and a YouTube playlist. 🔹 GitHub — One org, one repo per track. Every weekly task is submitted as a PR and reviewed. This is the core mechanic. 🔹 WhatsApp — One group per track. Resource drops, small challenges, error screenshots at midnight. The live session is a third of the learning; this is the rest. 🔹 Meet or Zoom — Weekly sessions. Free tier is enough. Record every one. 🔹 Notion or Drive — One shared space per track for resources, notes and slides. Mentees should never have to hunt. 🔹 n8n — AI track only. Free and self-hostable. Shows mentees what an agent does before they write one from scratch.",
+    "id": 10
+  },
+  {
+    "url": "https://openlake.in/blog/devlabs-playbook",
+    "page_title": "How to run a DevLabs at your college — OpenLake",
+    "heading": "2. Choosing tracks",
+    "level": "h2",
+    "selector": "#main > article > h2:nth-of-type(2)",
+    "content": "2. Choosing tracks. 🔹 Pick two or three domains. Do not try to cover everything. Each track needs to be a full eight-week arc on its own, with enough depth that a beginner can demonstrate a finished thing at the end. 🔹 Tracks that have worked: web development (HTML and CSS, then JavaScript, then React, then a deployed app), AI and agentic AI (Python, then APIs, then agent frameworks), game development (engine basics, then one complete game). The domain matters less than whether it ends in something you can show someone. 🔹 Budget 40 to 60 registrations per track, and expect 15 to 20 percent to finish. That is the normal number. Plan the showcase around the people who stay.",
+    "id": 11
+  },
+  {
+    "url": "https://openlake.in/blog/devlabs-playbook",
+    "page_title": "How to run a DevLabs at your college — OpenLake",
+    "heading": "3. The weekly loop",
+    "level": "h2",
+    "selector": "#main > article > h2:nth-of-type(3)",
+    "content": "3. The weekly loop. Every week runs the same six steps. The repetition is the point: mentees stop wondering what happens next and mentors stop reinventing the format. 🔹 Topic drop — What the week covers. A paragraph, not a lecture. 🔹 Resources — Curated links, a short notes PDF, or a deck. Not a YouTube rabbit hole. 🔹 Live session — 1 to 1.5 hours. Demo first, explanation second. Screen-share a build, not slides. Record it. 🔹 Task — A small concrete deliverable. Not a project, a piece of one. 🔹 PR submission — Mentee opens a pull request against the track repo. 🔹 Review — Mentor comments, mentee addresses them, loop closes. This is where the actual learning lands. Sessions on Sunday.",
+    "id": 12
+  },
+  {
+    "url": "https://openlake.in/blog/devlabs-playbook",
+    "page_title": "How to run a DevLabs at your college — OpenLake",
+    "heading": "4. The eight weeks",
+    "level": "h2",
+    "selector": "#main > article > h2:nth-of-type(4)",
+    "content": "4. The eight weeks. 🔹 Weeks 1 to 2, foundations. Highest attendance you will ever have. Keep it accessible. This is where you hook people. 🔹 Weeks 3 to 5, core domain. Attendance starts dropping. Keep session quality identical regardless of how many show up. 🔹 Week 6, the hard module. Budget double the time you think you need. You already know which module it is. 🔹 Weeks 7 to 8, final project and showcase. Close with a short session on GitHub profiles, resumes and how to present what they built. Nobody plans this and every cohort asks for it.",
+    "id": 13
+  },
+  {
+    "url": "https://openlake.in/blog/devlabs-playbook",
+    "page_title": "How to run a DevLabs at your college — OpenLake",
+    "heading": "5. What will go wrong",
+    "level": "h2",
+    "selector": "#main > article > h2:nth-of-type(5)",
+    "content": "5. What will go wrong. All four of these will happen to you. Deciding your response now is cheaper than deciding it in week five. 🔹 Attendance will decay as the curriculum hardens. It is the most common outcome in student-run programs and the least commonly written down. Decide in advance whether you keep running at full intensity for the people who stayed. The answer should be yes. 🔹 One module will cause a spike in drop-offs. In web dev it tends to be React, specifically Hooks. In AI it tends to be state management in agent frameworks. Give these more time, not less. 🔹 Scope creep will hit your project track. By week three someone is describing an open-world RPG. The fix is permission to be ugly: grey rectangles, free asset packs, one win condition. Ship first, decorate later. 🔹 Setup will eat your first session. Unless you push a sandbox repo beforehand, hour one is twelve people simultaneously discovering what an environment variable is.",
+    "id": 14
+  },
+  {
+    "url": "https://openlake.in/blog/devlabs-playbook",
+    "page_title": "How to run a DevLabs at your college — OpenLake",
+    "heading": "6. Two weeks before launch",
+    "level": "h2",
+    "selector": "#main > article > h2:nth-of-type(6)",
+    "content": "6. Two weeks before launch. 🔹 Create the GitHub org and one repo per track. 🔹 Push a sandbox to each repo: folder structure, .env.example, and any boilerplate mentees will need. 🔹 Write weeks 1 to 3 of the curriculum. Do not wing it and do not write all eight either. 🔹 Set up the shared resource space and the track group chats. 🔹 Agree the recording and attendance policy with your mentors, in writing. 🔹 Open registrations. Say prerequisites are none, and mean it. Mentors gain as much as mentees, often more. That is the actual pitch when you are asking people to give up their summer. Lead with it. Hail Open Source! — IIT Bhilai’s open-source society · openlake.in github.com/OpenLake This is the short version. The full write-up of DevLabs 2.0 — what worked, what quietly fell apart, and the parts most recap posts leave out — is in the long post. Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 15
+  },
+  {
+    "url": "https://openlake.in/blog",
+    "page_title": "Blog — OpenLake",
+    "heading": "How to run a DevLabs at your college",
+    "level": "h2",
+    "selector": "#main > section > div > a:nth-of-type(1) > div:nth-of-type(2) > h2",
+    "content": "How to run a DevLabs at your college. The short version: a three-page framework for running a beginner open-source bootcamp with no budget — platforms to use, program structure, and prerequisites. Ashish Kumar Dash Aug 2026 Read post DevLabs Mentorship Community OpenLake",
+    "id": 16
+  },
+  {
+    "url": "https://openlake.in/blog",
+    "page_title": "Blog — OpenLake",
+    "heading": "We ran a summer bootcamp for 150 students with no budget and a lot of WhatsApp",
+    "level": "h2",
+    "selector": "#main > section > div > a:nth-of-type(2) > div:nth-of-type(2) > h2",
+    "content": "We ran a summer bootcamp for 150 students with no budget and a lot of WhatsApp. Notes from DevLabs 2.0: what worked, what quietly fell apart, and what we would tell any student community thinking about doing this. 150 registered, 25 finished — including the number most recap posts leave out. Ashish Kumar Dash Aug 2026 Read post Open Source LFX Mentorship Zowe Java",
+    "id": 17
+  },
+  {
+    "url": "https://openlake.in/blog",
+    "page_title": "Blog — OpenLake",
+    "heading": "Summer Mentorships 2026: LFX Mentorship Mid-Term Report",
+    "level": "h2",
+    "selector": "#main > section > div > a:nth-of-type(3) > div:nth-of-type(2) > h2",
+    "content": "Summer Mentorships 2026: LFX Mentorship Mid-Term Report. From PR #513 to eight merged pull requests into the Zowe Client Java SDK — a mid-term look at shipping production-grade z/OSMF REST APIs through the Open Mainframe Project Summer Mentorship. Ashish Kumar Dash Aug 2026 Read post MCP Architecture AI",
+    "id": 18
+  },
+  {
+    "url": "https://openlake.in/blog",
+    "page_title": "Blog — OpenLake",
+    "heading": "Brok: a blunt blacksmith for your architecture",
+    "level": "h2",
+    "selector": "#main > section > div > a:nth-of-type(4) > div:nth-of-type(2) > h2",
+    "content": "Brok: a blunt blacksmith for your architecture. A deterministic MCP that does the napkin math AI coding assistants skip — finds the bottleneck, prices the egress bill, and roasts your architecture with cited numbers and no hallucinated verdicts. Rudra Dudhat Jun 2026 Read post Microservices Go gRPC Distributed Systems",
+    "id": 19
+  },
+  {
+    "url": "https://openlake.in/blog",
+    "page_title": "Blog — OpenLake",
+    "heading": "Kudos: Engineering a Token-Weighted Social Economy",
+    "level": "h2",
+    "selector": "#main > section > div > a:nth-of-type(5) > div:nth-of-type(2) > h2",
+    "content": "Kudos: Engineering a Token-Weighted Social Economy. A deep technical dive into the polyglot microservices, economic algorithms, gRPC communication, MLFQ feed ranking, and database design powering Kudos — a platform where engagement is a scarce digital currency. Amay Dixit Mar 2026 Read post OpenSource Timeline LFX GSSoC",
+    "id": 20
+  },
+  {
+    "url": "https://openlake.in/blog",
+    "page_title": "Blog — OpenLake",
+    "heading": "The Only OpenSource Calendar You Need!",
+    "level": "h2",
+    "selector": "#main > section > div > a:nth-of-type(6) > div:nth-of-type(2) > h2",
+    "content": "The Only OpenSource Calendar You Need!. An interactive Open Source Program Calendar built for OpenLake, IIT Bhilai. Track majors programs like GSoC, LFX, FOSSEE, ESoC, GSSoC and C4GT through a centralized timeline. Siddhant Shukla Aug 2026 Read post Written by students, for everyone. Want to publish something? Open a PR Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 21
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "OpenLake Events",
+    "level": "h1",
+    "selector": "html > body > main > section:nth-of-type(1) > div:nth-of-type(1) > h1",
+    "content": "OpenLake Events. Explore workshops, hackathons, bootcamps, tech talks, and community events that bring students together to learn, build, and innovate. Stay tuned for the next exciting event organized by OpenLake. 22 Aug 2026 Join us for the official intro session of OpenLake! Meet the team, learn about our vision, upcoming projects, and how you can be a part of our open-source community. 📅 22 Aug 2026 📍 L101, IIT Bhilai Take a look at some of the memorable events organized by OpenLake. 22 Jan 2026 OverFlow into Open Source with India's Largest Open Source Hackathon. 📍 IIT BHILAI 11 Oct 2025 Diving deep into Linux Fundamentals and Installation. From sudo to grep - everything finally made sense! 📍 IIT BHILAI 29 Aug 2025 A hands-on Git & GitHub workshop.Perfect for freshers & anyone curious about open-source! 📍IIT BHILAI 13 Jan 2025 An inspiring and insightful session on Google Summer of Code and how to make meaningful contributions to open source. 📍 IIT BHILAI 18 Jan 2025 Beginner-friendly workshop covering fundamentals of building real-world software projects. 📍 IIT BHILAI 30 Oct 2024 Tailored to equip you with the knowledge and tools to kickstart your journey in software development. 📍 IIT BHILAI 25 June 2023 Open source Tools and Technologies and Open Source opportunities for contributing to global projects. 📍 IIT BHILAI 15 Aug 2022 An introductory workshop on open source. 📍 IIT BHILAI 06 Aug 2022 An introductory workshop on OOP concepts and Flask framework. 📍 IIT BHILAI 12 June 2022 Hands-",
+    "id": 22
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "OpenLake Intro Session 2026-27",
+    "level": "h2",
+    "selector": "#upcoming > div:nth-of-type(1) > h2",
+    "content": "OpenLake Intro Session 2026-27. Stay tuned for the next exciting event organized by OpenLake. 22 Aug 2026 Join us for the official intro session of OpenLake! Meet the team, learn about our vision, upcoming projects, and how you can be a part of our open-source community. 📅 22 Aug 2026 📍 L101, IIT Bhilai",
+    "id": 23
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "OpenLake Intro Session",
+    "level": "h3",
+    "selector": "#upcoming > div:nth-of-type(2) > div > div:nth-of-type(2) > h3",
+    "content": "OpenLake Intro Session. Join us for the official intro session of OpenLake! Meet the team, learn about our vision, upcoming projects, and how you can be a part of our open-source community. 📅 22 Aug 2026 📍 L101, IIT Bhilai",
+    "id": 24
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "Past Events",
+    "level": "h2",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(1) > h2",
+    "content": "Past Events. Take a look at some of the memorable events organized by OpenLake. 22 Jan 2026 OverFlow into Open Source with India's Largest Open Source Hackathon. 📍 IIT BHILAI 11 Oct 2025 Diving deep into Linux Fundamentals and Installation. From sudo to grep - everything finally made sense! 📍 IIT BHILAI 29 Aug 2025 A hands-on Git & GitHub workshop.Perfect for freshers & anyone curious about open-source! 📍IIT BHILAI 13 Jan 2025 An inspiring and insightful session on Google Summer of Code and how to make meaningful contributions to open source. 📍 IIT BHILAI 18 Jan 2025 Beginner-friendly workshop covering fundamentals of building real-world software projects. 📍 IIT BHILAI 30 Oct 2024 Tailored to equip you with the knowledge and tools to kickstart your journey in software development. 📍 IIT BHILAI 25 June 2023 Open source Tools and Technologies and Open Source opportunities for contributing to global projects. 📍 IIT BHILAI 15 Aug 2022 An introductory workshop on open source. 📍 IIT BHILAI 06 Aug 2022 An introductory workshop on OOP concepts and Flask framework. 📍 IIT BHILAI 12 June 2022 Hands-on web development session followed by a mini hackathon, with goodies for participants. 📍 IIT BHILAI Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 25
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "FOSS OVERFLOW",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > div > div:nth-of-type(2) > h3",
+    "content": "FOSS OVERFLOW. OverFlow into Open Source with India's Largest Open Source Hackathon. 📍 IIT BHILAI 11 Oct 2025",
+    "id": 26
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "Linux Installation Workshop",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(2) > h3",
+    "content": "Linux Installation Workshop. Diving deep into Linux Fundamentals and Installation. From sudo to grep - everything finally made sense! 📍 IIT BHILAI 29 Aug 2025",
+    "id": 27
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "Git & GitHub Workshop - Beginner Friendly!",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > h3",
+    "content": "Git & GitHub Workshop - Beginner Friendly!. A hands-on Git & GitHub workshop.Perfect for freshers & anyone curious about open-source! 📍IIT BHILAI 13 Jan 2025",
+    "id": 28
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "GSoC : An Introduction",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(2) > h3",
+    "content": "GSoC : An Introduction. An inspiring and insightful session on Google Summer of Code and how to make meaningful contributions to open source. 📍 IIT BHILAI 18 Jan 2025",
+    "id": 29
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "Intro to Software Development",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > div > div:nth-of-type(2) > h3",
+    "content": "Intro to Software Development. Beginner-friendly workshop covering fundamentals of building real-world software projects. 📍 IIT BHILAI 30 Oct 2024",
+    "id": 30
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "A Quick Start to Software Development",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div:nth-of-type(2) > h3",
+    "content": "A Quick Start to Software Development. Tailored to equip you with the knowledge and tools to kickstart your journey in software development. 📍 IIT BHILAI 25 June 2023",
+    "id": 31
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "How to Open-Source",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(7) > div > div:nth-of-type(2) > h3",
+    "content": "How to Open-Source. Open source Tools and Technologies and Open Source opportunities for contributing to global projects. 📍 IIT BHILAI 15 Aug 2022",
+    "id": 32
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "OpenlySourced with Anand Panchbai",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(8) > div > div:nth-of-type(2) > h3",
+    "content": "OpenlySourced with Anand Panchbai. An introductory workshop on open source. 📍 IIT BHILAI 06 Aug 2022",
+    "id": 33
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "Object Oriented Programming and Flask",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(9) > div > div:nth-of-type(2) > h3",
+    "content": "Object Oriented Programming and Flask. An introductory workshop on OOP concepts and Flask framework. 📍 IIT BHILAI 12 June 2022",
+    "id": 34
+  },
+  {
+    "url": "https://openlake.in/newevents",
+    "page_title": "OpenLake",
+    "heading": "HTML & CSS Tutorial + Hackathon",
+    "level": "h3",
+    "selector": "html > body > main > section:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(10) > div > div:nth-of-type(2) > h3",
+    "content": "HTML & CSS Tutorial + Hackathon. Hands-on web development session followed by a mini hackathon, with goodies for participants. 📍 IIT BHILAI Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 35
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1014,7 +330,7 @@
     "level": "h1",
     "selector": "html > body > main > section > div > h1",
     "content": "Meet the Past Community.. Honoring the members whose leadership, dedication, and contributions helped shape OpenLake. Their efforts laid the foundation for the vibrant community we have today. Amay Dixit Divyansh Dubey Harshit Kandpal Sakshi Shamrao Jadhav Saurav Gupta Rajeev Kumar Slok Tulsyan Aviral Saxena Harshita Patidar Sumagna Das Ashish Kumar Dash Sri Varshith Nimmagadda Thanmaie Nagineni Rahul Raj Umap Utkarsh Sharad Bodike Chaithali Potnuru Jagath Khushagra Barfa Neil Chitale Kushaal Kumar Pothula Nishchay Rajput Sumit Kumar Pathak Hemanth Kumar Reddy Kriti Arora Arbaz Shaikh Sachin Prakash Amay Dixit Sumit Pathak Shashank Pant Divyanshu Prakash Nidhi Singh Nishant Tushar Bansal Madhur Jain Sudeep Ranjan Sahoo Aditya Dubey Arya Lanjewar Ayush Krishnan Javed Habib Roshan Jha Rohit Ashwani Shubham Daule Siddhi Aggarwal Arnav Prakash Choudhury Sudhir Sharma Satvik Vemuganti Aakash Thatte Abhishek Singh Khushwaha Ananya Hooda Anshu Kumar Sudeep Ranjan Sahoo Chaitanya Bisht Harshith Naresh Chunduri Madhur Jain Sarvesh Kumar Kumar Shivendu Shashwat Jaiswal Ambar Shikhar Rishi Shashwat Ashutosh Gopal Ashita Shivam Akshat Sunit Anand Panchbhai Rachuri Sri Pramodh Anees Ahmed Yatendra Singh Meghana Varanasi Kumar Shivendu Ambar Mutha Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 112
+    "id": 36
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1023,7 +339,7 @@
     "level": "h2",
     "selector": "html > body > main > div > section:nth-of-type(1) > h2",
     "content": "2025 – 2026. Amay Dixit Divyansh Dubey Harshit Kandpal Sakshi Shamrao Jadhav Saurav Gupta Rajeev Kumar Slok Tulsyan Aviral Saxena Harshita Patidar Sumagna Das Ashish Kumar Dash Sri Varshith Nimmagadda Thanmaie Nagineni Rahul Raj Umap Utkarsh Sharad Bodike Chaithali Potnuru Jagath Khushagra Barfa Neil Chitale Kushaal Kumar Pothula",
-    "id": 113
+    "id": 37
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1032,7 +348,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(1) > div:nth-of-type(1) > div > h3",
     "content": "Coordinator. Amay Dixit",
-    "id": 114
+    "id": 38
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1041,7 +357,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > h3",
     "content": "Mentors. Divyansh Dubey Harshit Kandpal Sakshi Shamrao Jadhav Saurav Gupta Rajeev Kumar Slok Tulsyan Aviral Saxena Harshita Patidar Sumagna Das Ashish Kumar Dash Sri Varshith Nimmagadda Thanmaie Nagineni",
-    "id": 115
+    "id": 39
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1050,7 +366,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > h3",
     "content": "Maintainers. Rahul Raj Umap Utkarsh Sharad Bodike Chaithali Potnuru Jagath Khushagra Barfa Neil Chitale Kushaal Kumar Pothula",
-    "id": 116
+    "id": 40
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1059,7 +375,7 @@
     "level": "h2",
     "selector": "html > body > main > div > section:nth-of-type(2) > h2",
     "content": "2024 – 2025. Nishchay Rajput Sumit Kumar Pathak Hemanth Kumar Reddy Kriti Arora Arbaz Shaikh Sachin Prakash Amay Dixit Sumit Pathak Shashank Pant Divyanshu Prakash Nidhi Singh Nishant",
-    "id": 117
+    "id": 41
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1068,7 +384,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(2) > div:nth-of-type(1) > div > h3",
     "content": "Coordinators. Nishchay Rajput Sumit Kumar Pathak",
-    "id": 118
+    "id": 42
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1077,7 +393,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(2) > div:nth-of-type(2) > div > h3",
     "content": "Mentors. Hemanth Kumar Reddy Kriti Arora Arbaz Shaikh Sachin Prakash Amay Dixit Sumit Pathak Shashank Pant Divyanshu Prakash Nidhi Singh Nishant",
-    "id": 119
+    "id": 43
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1086,7 +402,7 @@
     "level": "h2",
     "selector": "html > body > main > div > section:nth-of-type(3) > h2",
     "content": "2023 – 2024. Tushar Bansal Madhur Jain Sudeep Ranjan Sahoo Aditya Dubey Arya Lanjewar Ayush Krishnan Javed Habib Roshan Jha Rohit Ashwani Shubham Daule Siddhi Aggarwal Arnav Prakash Choudhury",
-    "id": 120
+    "id": 44
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1095,7 +411,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(3) > div:nth-of-type(1) > div > h3",
     "content": "Coordinators. Tushar Bansal Madhur Jain",
-    "id": 121
+    "id": 45
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1104,7 +420,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(3) > div:nth-of-type(2) > div > h3",
     "content": "Mentors. Sudeep Ranjan Sahoo Aditya Dubey Arya Lanjewar Ayush Krishnan Javed Habib Roshan Jha Rohit Ashwani Shubham Daule Siddhi Aggarwal Arnav Prakash Choudhury",
-    "id": 122
+    "id": 46
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1113,7 +429,7 @@
     "level": "h2",
     "selector": "html > body > main > div > section:nth-of-type(4) > h2",
     "content": "2022 – 2023. Sudhir Sharma Satvik Vemuganti Aakash Thatte Abhishek Singh Khushwaha Ananya Hooda Anshu Kumar Sudeep Ranjan Sahoo Chaitanya Bisht Harshith Naresh Chunduri Madhur Jain Sarvesh Kumar",
-    "id": 123
+    "id": 47
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1122,7 +438,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(4) > div:nth-of-type(1) > div > h3",
     "content": "Coordinators. Sudhir Sharma Satvik Vemuganti",
-    "id": 124
+    "id": 48
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1131,7 +447,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(4) > div:nth-of-type(2) > div > h3",
     "content": "Mentors. Aakash Thatte Abhishek Singh Khushwaha Ananya Hooda Anshu Kumar Sudeep Ranjan Sahoo Chaitanya Bisht Harshith Naresh Chunduri Madhur Jain Sarvesh Kumar",
-    "id": 125
+    "id": 49
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1140,7 +456,7 @@
     "level": "h2",
     "selector": "html > body > main > div > section:nth-of-type(5) > h2",
     "content": "2021 – 2022. Kumar Shivendu Shashwat Jaiswal Ambar Shikhar Rishi Shashwat Ashutosh Gopal Ashita Shivam Akshat Sunit",
-    "id": 126
+    "id": 50
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1149,7 +465,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(5) > div:nth-of-type(1) > div > h3",
     "content": "Coordinators. Kumar Shivendu Shashwat Jaiswal",
-    "id": 127
+    "id": 51
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1158,7 +474,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(5) > div:nth-of-type(2) > div > h3",
     "content": "Mentors. Ambar Shikhar Rishi Shashwat Ashutosh Gopal Ashita Shivam Akshat Sunit",
-    "id": 128
+    "id": 52
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1167,7 +483,7 @@
     "level": "h2",
     "selector": "html > body > main > div > section:nth-of-type(6) > h2",
     "content": "2020 – 2021. Anand Panchbhai Rachuri Sri Pramodh Anees Ahmed Yatendra Singh Meghana Varanasi Kumar Shivendu Ambar Mutha Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 129
+    "id": 53
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1176,7 +492,7 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(6) > div:nth-of-type(1) > div > h3",
     "content": "Coordinators. Anand Panchbhai Rachuri Sri Pramodh Anees Ahmed Yatendra Singh",
-    "id": 130
+    "id": 54
   },
   {
     "url": "https://openlake.in/past-community",
@@ -1185,420 +501,1077 @@
     "level": "h3",
     "selector": "html > body > main > div > section:nth-of-type(6) > div:nth-of-type(2) > div > h3",
     "content": "Mentors. Meghana Varanasi Kumar Shivendu Ambar Mutha Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
-    "id": 131
+    "id": 55
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "Learn Web Development with the Best Free Resources",
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "We’re at our best when we’re making.",
     "level": "h1",
-    "selector": "html > body > section:nth-of-type(1) > div > h1",
-    "content": "Learn Web Development with the Best Free Resources. From HTML and CSS to React, Node.js and Full Stack Development, discover curated videos, documentation, roadmaps and projects—all in one place. Beginner Learn HTML from scratch with hands-on examples. 🎥 Video → 📖 Learn More → Beginner Master CSS layouts, Flexbox, Grid, animations, and responsive design. 🎥 Video → 📖 Learn More → Beginner Learn modern JavaScript with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Build modern user interfaces with React from the ground up. 🎥 Video → 📖 Learn More → Intermediate Learn backend development with Node.js, including modules, file system, APIs, and asynchronous programming. 🎥 Video → 📖 Learn More → Intermediate Build powerful REST APIs with Express.js, middleware, routing, authentication, and database integration. 🎥 Video → 📖 Learn More → Advanced Master Next.js with App Router, Server Components, routing, data fetching, and deployment. 🎥 Video → 📖 Learn More → Intermediate Learn MongoDB from basics to advanced concepts, including CRUD operations, indexing, aggregation, and database design. 🎥 Video → 📖 Learn More → Intermediate Learn Django from basics to advanced concepts, including models, views, templates, authentication, REST APIs, and building scalable web applications. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub.",
-    "id": 132
+    "selector": "#main > div:nth-of-type(3) > h1",
+    "content": "We’re at our best when we’re making.. A few beliefs that shape how we build at OpenLake. 01 Learning to code converts you from a consumer to a creator. Suddenly, computers become a tool for making things instead of just using them. 02 Anyone with a laptop and an internet connection can learn to build software. Making things has never been this democratized. 03 We want a space on campus where people are making interesting things with code, every week. Most places don't provide that, so we built it. 04 Most courses teach concepts instead of how to write real code — like learning carpentry without any wood. Here you learn entirely through shipping. 05 Starting out, you won't understand how all the code works. You'll build that understanding as you go, and you'll get stuck along the way. We're here for that part. Browse our projects 06 OpenLake gives you a room full of other people building things. We're designers, writers, engineers, tinkerers. We help one another. Join us. Jump straight into the community and pick up your first issue. Join the community Want the monthly recap? Read the blog Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 56
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "Featured Resources",
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Coding is a superpower.",
     "level": "h2",
-    "selector": "html > body > section:nth-of-type(2) > div > h2",
-    "content": "Featured Resources. Beginner Learn HTML from scratch with hands-on examples. 🎥 Video → 📖 Learn More → Beginner Master CSS layouts, Flexbox, Grid, animations, and responsive design. 🎥 Video → 📖 Learn More → Beginner Learn modern JavaScript with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Build modern user interfaces with React from the ground up. 🎥 Video → 📖 Learn More → Intermediate Learn backend development with Node.js, including modules, file system, APIs, and asynchronous programming. 🎥 Video → 📖 Learn More → Intermediate Build powerful REST APIs with Express.js, middleware, routing, authentication, and database integration. 🎥 Video → 📖 Learn More → Advanced Master Next.js with App Router, Server Components, routing, data fetching, and deployment. 🎥 Video → 📖 Learn More → Intermediate Learn MongoDB from basics to advanced concepts, including CRUD operations, indexing, aggregation, and database design. 🎥 Video → 📖 Learn More → Intermediate Learn Django from basics to advanced concepts, including models, views, templates, authentication, REST APIs, and building scalable web applications. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub.",
-    "id": 133
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > h2",
+    "content": "Coding is a superpower.. Learning to code converts you from a consumer to a creator. Suddenly, computers become a tool for making things instead of just using them. 02",
+    "id": 57
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "HTML",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
-    "content": "HTML. Learn HTML from scratch with hands-on examples. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 134
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Build from anywhere.",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > h2",
+    "content": "Build from anywhere.. Anyone with a laptop and an internet connection can learn to build software. Making things has never been this democratized. 03",
+    "id": 58
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "CSS",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
-    "content": "CSS. Master CSS layouts, Flexbox, Grid, animations, and responsive design. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 135
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Hack, hack, hack.",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > h2",
+    "content": "Hack, hack, hack.. We want a space on campus where people are making interesting things with code, every week. Most places don't provide that, so we built it. 04",
+    "id": 59
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "JavaScript",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
-    "content": "JavaScript. Learn modern JavaScript with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 136
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Start building.",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > h2",
+    "content": "Start building.. Most courses teach concepts instead of how to write real code — like learning carpentry without any wood. Here you learn entirely through shipping. 05",
+    "id": 60
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "React",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
-    "content": "React. Build modern user interfaces with React from the ground up. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 137
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Learn as you build.",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > h2",
+    "content": "Learn as you build.. Starting out, you won't understand how all the code works. You'll build that understanding as you go, and you'll get stuck along the way. We're here for that part. Browse our projects 06",
+    "id": 61
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "Node.js",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
-    "content": "Node.js. Learn backend development with Node.js, including modules, file system, APIs, and asynchronous programming. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 138
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Be part of a community.",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > h2",
+    "content": "Be part of a community.. OpenLake gives you a room full of other people building things. We're designers, writers, engineers, tinkerers. We help one another. Join us.",
+    "id": 62
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "Express.js",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
-    "content": "Express.js. Build powerful REST APIs with Express.js, middleware, routing, authentication, and database integration. 🎥 Video → 📖 Learn More → Advanced",
-    "id": 139
+    "url": "https://openlake.in/philosophy",
+    "page_title": "Philosophy — OpenLake",
+    "heading": "Join the movement.",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > h2",
+    "content": "Join the movement.. Jump straight into the community and pick up your first issue. Join the community Want the monthly recap? Read the blog Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 63
   },
   {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "Next.js",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
-    "content": "Next.js. Master Next.js with App Router, Server Components, routing, data fetching, and deployment. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 140
-  },
-  {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "MongoDB",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
-    "content": "MongoDB. Learn MongoDB from basics to advanced concepts, including CRUD operations, indexing, aggregation, and database design. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 141
-  },
-  {
-    "url": "https://openlake.in/fiscal-sponsorship",
-    "page_title": "Fiscal Sponsorship — Hack Club",
-    "heading": "Django",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(9) > div:nth-of-type(2) > h3",
-    "content": "Django. Learn Django from basics to advanced concepts, including models, views, templates, authentication, REST APIs, and building scalable web applications. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub.",
-    "id": 142
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Learn App Development with the Best Free Resources",
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Projects @ OpenLake",
     "level": "h1",
-    "selector": "html > body > section:nth-of-type(1) > div > h1",
-    "content": "Learn App Development with the Best Free Resources. From Flutter and React Native to Android and iOS development, discover curated videos, official documentation, roadmaps, and projects—all in one place. Beginner Learn Flutter from basics to advanced concepts for building beautiful cross-platform mobile applications. 🎥 Video → 📖 Learn More → Intermediate Build cross-platform Android and iOS apps using React Native and JavaScript. 🎥 Video → 📖 Learn More → Beginner Learn native Android development with Android Studio, activities, layouts, and app architecture. 🎥 Video → 📖 Learn More → Beginner Master Kotlin, the official language for Android development, from fundamentals to advanced concepts. 🎥 Video → 📖 Learn More → Intermediate Learn Swift programming to build modern, high-performance iOS applications. 🎥 Video → 📖 Learn More → Intermediate Learn Firebase Authentication, Firestore, Storage, Cloud Functions, and Hosting for mobile apps. 🎥 Video → 📖 Learn More → Beginner Learn the Dart programming language, the foundation of Flutter development. 🎥 Video → 📖 Learn More → Beginner Set up Android Studio and learn debugging, emulators, profiling, and app deployment. 🎥 Video → 📖 Learn More → Advanced Build modern Android UIs using Jetpack Compose with declarative UI principles. 🎥 Video → 📖 Learn More → Projects Events Web Development App Development Game Development AI & ML Join the community Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by stud",
-    "id": 143
+    "selector": "#main > div:nth-of-type(3) > h1",
+    "content": "Projects @ OpenLake. We always strive towards the benefit of society with our projects. Website for OpenLake - Open Source Club of IIT Bhilai :ocean: View on GitHub See site Source code of OpenLake's official Website View on GitHub See site A centralized platform for managing student data and Positions of Responsibility (PORs) within CoSA. Built with React, Node.js, and MongoDB, it provides secure role-based access, streamlined data management, and a modern interface for efficient administration. View on GitHub See site The ultimate Codeforces companion platform. Features a built-in IDE, real-time 1v1 DSA battles, a comparison dashboard, and full submission/stat synchronization with Codeforces, all wrapped in a gamified experience View on GitHub See site 🛍️ A student-centric campus marketplace platform to buy, sell, and exchange items within the college community. View on GitHub See site FOSSI (Free open-source silicon) : Groups focus on learning, getting exposure onto EDA tools, fun projects in verticals of algorithms to transistor gates View on GitHub AI Voice Agent that adapts dynamically and provides user friendly, personalized experience View on GitHub A community-driven platform to review and rate courses and instructors at IIT Bhilai. Built with Next.js, TypeScript, and Supabase, it helps students make informed course selections through detailed reviews, grading insights, and instructor ratings. View on GitHub See site This repository serves as an archive for the proposals for  GSoC - Goog",
+    "id": 64
   },
   {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Featured Resources",
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "openlake-website",
     "level": "h2",
-    "selector": "html > body > section:nth-of-type(2) > div > h2",
-    "content": "Featured Resources. Beginner Learn Flutter from basics to advanced concepts for building beautiful cross-platform mobile applications. 🎥 Video → 📖 Learn More → Intermediate Build cross-platform Android and iOS apps using React Native and JavaScript. 🎥 Video → 📖 Learn More → Beginner Learn native Android development with Android Studio, activities, layouts, and app architecture. 🎥 Video → 📖 Learn More → Beginner Master Kotlin, the official language for Android development, from fundamentals to advanced concepts. 🎥 Video → 📖 Learn More → Intermediate Learn Swift programming to build modern, high-performance iOS applications. 🎥 Video → 📖 Learn More → Intermediate Learn Firebase Authentication, Firestore, Storage, Cloud Functions, and Hosting for mobile apps. 🎥 Video → 📖 Learn More → Beginner Learn the Dart programming language, the foundation of Flutter development. 🎥 Video → 📖 Learn More → Beginner Set up Android Studio and learn debugging, emulators, profiling, and app deployment. 🎥 Video → 📖 Learn More → Advanced Build modern Android UIs using Jetpack Compose with declarative UI principles. 🎥 Video → 📖 Learn More →",
-    "id": 144
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(1) > div > h2",
+    "content": "openlake-website. Website for OpenLake - Open Source Club of IIT Bhilai :ocean: View on GitHub See site",
+    "id": 65
   },
   {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Flutter",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
-    "content": "Flutter. Learn Flutter from basics to advanced concepts for building beautiful cross-platform mobile applications. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 145
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "React Native",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
-    "content": "React Native. Build cross-platform Android and iOS apps using React Native and JavaScript. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 146
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Android Development",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
-    "content": "Android Development. Learn native Android development with Android Studio, activities, layouts, and app architecture. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 147
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Kotlin",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
-    "content": "Kotlin. Master Kotlin, the official language for Android development, from fundamentals to advanced concepts. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 148
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Swift",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
-    "content": "Swift. Learn Swift programming to build modern, high-performance iOS applications. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 149
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Firebase",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
-    "content": "Firebase. Learn Firebase Authentication, Firestore, Storage, Cloud Functions, and Hosting for mobile apps. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 150
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Dart",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
-    "content": "Dart. Learn the Dart programming language, the foundation of Flutter development. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 151
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Android Studio",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
-    "content": "Android Studio. Set up Android Studio and learn debugging, emulators, profiling, and app deployment. 🎥 Video → 📖 Learn More → Advanced",
-    "id": 152
-  },
-  {
-    "url": "https://openlake.in/conduct",
-    "page_title": "Code of Conduct — Hack Club",
-    "heading": "Jetpack Compose",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(9) > div:nth-of-type(2) > h3",
-    "content": "Jetpack Compose. Build modern Android UIs using Jetpack Compose with declarative UI principles. 🎥 Video → 📖 Learn More →",
-    "id": 153
-  },
-  {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Learn Game Development with the Best Free Resources",
-    "level": "h1",
-    "selector": "html > body > section:nth-of-type(1) > div > h1",
-    "content": "Learn Game Development with the Best Free Resources. Learn game development using Unity, Unreal Engine, Godot, Blender, C#, C++, and industry-standard tools. Explore curated videos, official documentation, roadmaps, and hands-on projects—all in one place. Beginner Learn Unity from basics to advanced concepts for creating 2D and 3D games using C#. 🎥 Video → 📖 Learn More → Intermediate Master Unreal Engine, Blueprints, and C++ to build high-quality AAA games. 🎥 Video → 📖 Learn More → Beginner Learn Godot Engine for developing powerful 2D and 3D games with open-source tools. 🎥 Video → 📖 Learn More → Beginner Create stunning 3D models, animations, and game assets using Blender. 🎥 Video → 📖 Learn More → Beginner Learn C# programming for Unity game development with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Master C++ programming for Unreal Engine and advanced game development. 🎥 Video → 📖 Learn More → Beginner Understand game mechanics, storytelling, level design, and player experience to build engaging games. 🎥 Video → 📖 Learn More → Beginner Learn pixel art and sprite animation for creating beautiful 2D games. 🎥 Video → 📖 Learn More → Intermediate Build 2D games quickly with GameMaker using drag-and-drop tools and GML scripting. 🎥 Video → 📖 Learn More → Projects Events Web Development App Development Game Development AI & ML Join the community Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai.",
-    "id": 154
-  },
-  {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Featured Resources",
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "OpenLake--Website",
     "level": "h2",
-    "selector": "html > body > section:nth-of-type(2) > div > h2",
-    "content": "Featured Resources. Beginner Learn Unity from basics to advanced concepts for creating 2D and 3D games using C#. 🎥 Video → 📖 Learn More → Intermediate Master Unreal Engine, Blueprints, and C++ to build high-quality AAA games. 🎥 Video → 📖 Learn More → Beginner Learn Godot Engine for developing powerful 2D and 3D games with open-source tools. 🎥 Video → 📖 Learn More → Beginner Create stunning 3D models, animations, and game assets using Blender. 🎥 Video → 📖 Learn More → Beginner Learn C# programming for Unity game development with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Master C++ programming for Unreal Engine and advanced game development. 🎥 Video → 📖 Learn More → Beginner Understand game mechanics, storytelling, level design, and player experience to build engaging games. 🎥 Video → 📖 Learn More → Beginner Learn pixel art and sprite animation for creating beautiful 2D games. 🎥 Video → 📖 Learn More → Intermediate Build 2D games quickly with GameMaker using drag-and-drop tools and GML scripting. 🎥 Video → 📖 Learn More →",
-    "id": 155
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(2) > div > h2",
+    "content": "OpenLake--Website. Source code of OpenLake's official Website View on GitHub See site",
+    "id": 66
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Unity",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
-    "content": "Unity. Learn Unity from basics to advanced concepts for creating 2D and 3D games using C#. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 156
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Student_Database_COSA",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(3) > div > h2",
+    "content": "Student_Database_COSA. A centralized platform for managing student data and Positions of Responsibility (PORs) within CoSA. Built with React, Node.js, and MongoDB, it provides secure role-based access, streamlined data management, and a modern interface for efficient administration. View on GitHub See site",
+    "id": 67
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Unreal Engine",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
-    "content": "Unreal Engine. Master Unreal Engine, Blueprints, and C++ to build high-quality AAA games. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 157
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "canonforces",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(4) > div > h2",
+    "content": "canonforces. The ultimate Codeforces companion platform. Features a built-in IDE, real-time 1v1 DSA battles, a comparison dashboard, and full submission/stat synchronization with Codeforces, all wrapped in a gamified experience View on GitHub See site",
+    "id": 68
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Godot",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
-    "content": "Godot. Learn Godot Engine for developing powerful 2D and 3D games with open-source tools. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 158
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Campus-Marketplace",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(5) > div > h2",
+    "content": "Campus-Marketplace. 🛍️ A student-centric campus marketplace platform to buy, sell, and exchange items within the college community. View on GitHub See site",
+    "id": 69
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Blender",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
-    "content": "Blender. Create stunning 3D models, animations, and game assets using Blender. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 159
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "FOSSI",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(6) > div > h2",
+    "content": "FOSSI. FOSSI (Free open-source silicon) : Groups focus on learning, getting exposure onto EDA tools, fun projects in verticals of algorithms to transistor gates View on GitHub",
+    "id": 70
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "C#",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
-    "content": "C#. Learn C# programming for Unity game development with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 160
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "AI-Voice-Agent",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(7) > div > h2",
+    "content": "AI-Voice-Agent. AI Voice Agent that adapts dynamically and provides user friendly, personalized experience View on GitHub",
+    "id": 71
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "C++",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
-    "content": "C++. Master C++ programming for Unreal Engine and advanced game development. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 161
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "RateMyCourse",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(8) > div > h2",
+    "content": "RateMyCourse. A community-driven platform to review and rate courses and instructors at IIT Bhilai. Built with Next.js, TypeScript, and Supabase, it helps students make informed course selections through detailed reviews, grading insights, and instructor ratings. View on GitHub See site",
+    "id": 72
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Game Design",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
-    "content": "Game Design. Understand game mechanics, storytelling, level design, and player experience to build engaging games. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 162
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "GSoC_Proposals",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(9) > div > h2",
+    "content": "GSoC_Proposals. This repository serves as an archive for the proposals for  GSoC - Google Summer of Code and other Great Open-Source Programs of IIT Bhilai students. View on GitHub",
+    "id": 73
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "Aseprite",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
-    "content": "Aseprite. Learn pixel art and sprite animation for creating beautiful 2D games. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 163
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "iitbh-cgpa",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(10) > div > h2",
+    "content": "iitbh-cgpa. A browser extension that calculates CGPA directly from IIT Bhilai's AIMS Portal View on GitHub",
+    "id": 74
   },
   {
-    "url": "https://openlake.in/privacy-and-terms",
-    "page_title": "Privacy Notice & Terms — Hack Club",
-    "heading": "GameMaker",
-    "level": "h3",
-    "selector": "html > body > section:nth-of-type(2) > div > div > div:nth-of-type(9) > div:nth-of-type(2) > h3",
-    "content": "GameMaker. Build 2D games quickly with GameMaker using drag-and-drop tools and GML scripting. 🎥 Video → 📖 Learn More →",
-    "id": 164
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Homework-Scheduler",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(11) > div > h2",
+    "content": "Homework-Scheduler. Helps teachers decide homework deadlines by keeping a track of other commitments and assignments of the students. 🧑‍🏫🧑‍🎓 View on GitHub See site",
+    "id": 75
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "bhilaee-labs",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(12) > div > h2",
+    "content": "bhilaee-labs. A structured, interactive virtual laboratory platform designed for Electrical & Electronics Engineering students at IIT Bhilai. The platform provides comprehensive, digitized experiment guides complete with theory, observations, circuit diagrams, mathematical equations, and seamless, one-click access to an interactive circuit simulator. View on GitHub See site",
+    "id": 76
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "SmartTriage",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(13) > div > h2",
+    "content": "SmartTriage. SmartTriage is an ML bot that keeps OpenLake maintainers focused on shipping, not clutter. It uses semantic search to catch duplicate issues even when phrased differently, and scans commit history to auto‑assign the right reviewer. By automating triage, it speeds collaboration and showcases a real‑world NLP pipeline. View on GitHub",
+    "id": 77
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Centre-for-Career-Planning-and-Services-Portal",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(14) > div > h2",
+    "content": "Centre-for-Career-Planning-and-Services-Portal. A specialized job posting platform designed for IIT Bhilai students. The platform aims to bridge the gap between students and the placement cell. View on GitHub See site",
+    "id": 78
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "bhilaee-simulator",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(15) > div > h2",
+    "content": "bhilaee-simulator. A browser-based circuit simulator for electrical engineering lab experiments. Built with zero dependencies — pure HTML, CSS, and JavaScript using ES6 modules. Supports DC, AC, and transient analysis with real-time oscilloscope visualization and pre-built experiment templates across three labs: Basic EE, Devices & Circuits, and Sensor Lab. View on GitHub See site",
+    "id": 79
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Leaderboard-Pro",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(16) > div > h2",
+    "content": "Leaderboard-Pro. Leaderboard that scrapes data from other programming platforms 🥇 View on GitHub See site",
+    "id": 80
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "File-Sharing-App",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(17) > div > h2",
+    "content": "File-Sharing-App. File Sharing Application between different devices ( with p2p technology ) View on GitHub",
+    "id": 81
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Smart-Insti-App",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(18) > div > h2",
+    "content": "Smart-Insti-App. A one-stop App for all institute related information and updates 📱🏫 View on GitHub",
+    "id": 82
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "GetWelPlus",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(19) > div > h2",
+    "content": "GetWelPlus. An open-source project by OpenLake. View on GitHub",
+    "id": 83
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Hub",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(20) > div > h2",
+    "content": "Hub. OpenLake Hub is the central integration and synchronization layer for the OpenLake ecosystem. It connects independent apps, maintains global entity mappings, aggregates data, and powers unified feeds and APIs for cross-platform services. View on GitHub See site",
+    "id": 84
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Bit",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(21) > div > h2",
+    "content": "Bit. Git and git server made from scratch for IIT Bhilai. View on GitHub",
+    "id": 85
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Quiz-App",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(22) > div > h2",
+    "content": "Quiz-App. A real-time quizzing, polling, and survey platform built for IIT Bhilai. Designed for interactive sessions, data collection, and academic engagement — especially useful for data science students and campus communities. Features include time-bound quizzes, live leaderboards, and survey analytics. View on GitHub",
+    "id": 86
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Bhilaipedia",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(23) > div > h2",
+    "content": "Bhilaipedia. Bhilaipedia (IIT Bhilai's only Wikipedia) is a collaborative knowledge platform powered by MediaWiki and MySQL, containerized using Docker. This project includes an initial SQL backup, allowing you to restore and continue development instantly. View on GitHub See site",
+    "id": 87
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Smart-Cams",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(24) > div > h2",
+    "content": "Smart-Cams. Give superpowers to your CCTV/Mobile cameras with Computer vision 📷🤖 View on GitHub",
+    "id": 88
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "WatchParty",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(25) > div > h2",
+    "content": "WatchParty. Watch movies with your friends remotely. Interact with them using the chat. 🎥🥳 View on GitHub See site",
+    "id": 89
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "PixOss",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(26) > div > h2",
+    "content": "PixOss. Deployment of our Canvas View on GitHub See site",
+    "id": 90
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Knowledge-Sharing-Platform",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(27) > div > h2",
+    "content": "Knowledge-Sharing-Platform. A college level application to share study notes and reviews for professors and courses 📝 View on GitHub See site",
+    "id": 91
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Photo-Sharing-App",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(28) > div > h2",
+    "content": "Photo-Sharing-App. Upload group photos, arrange them by faces using ML and share them with ease. 🤳🤖 View on GitHub",
+    "id": 92
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "iitbh-calendar",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(29) > div > h2",
+    "content": "iitbh-calendar. Generate your calendar for courses at IIT Bhilai View on GitHub See site",
+    "id": 93
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Projectory",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(30) > div > h2",
+    "content": "Projectory. An open-source project by OpenLake. View on GitHub",
+    "id": 94
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "auth-kit",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(31) > div > h2",
+    "content": "auth-kit. Auth Kit is the centralized authentication and identity provider for the OpenLake ecosystem. It offers secure SSO, JWT-based access control, role management, and unified login services for all connected applications. View on GitHub",
+    "id": 95
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "SciTech_council_website",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(32) > div > h2",
+    "content": "SciTech_council_website. Sci-tech Council of IIT BHILAI View on GitHub See site",
+    "id": 96
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "FOSS-Overflow",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(33) > div > h2",
+    "content": "FOSS-Overflow. Annual Open Source Program of IIT Bhilai View on GitHub See site",
+    "id": 97
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Infra",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(34) > div > h2",
+    "content": "Infra. This repository contains all the automation tools, bots, scripts, and configurations that help keep OpenLake running efficiently. View on GitHub",
+    "id": 98
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": ".github",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(35) > div > h2",
+    "content": ".github. An open-source project by OpenLake. View on GitHub",
+    "id": 99
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "general-template",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(36) > div > h2",
+    "content": "general-template. An open-source project by OpenLake. View on GitHub",
+    "id": 100
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "GitStartedWithUs",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(37) > div > h2",
+    "content": "GitStartedWithUs. An open-source project by OpenLake. View on GitHub See site",
+    "id": 101
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "RideShare",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(38) > div > h2",
+    "content": "RideShare. A trusted ridesharing platform for IIT Bhilai students and staff to share rides between campus, Raipur, and nearby cities — making travel affordable, safe, and community-driven. View on GitHub",
+    "id": 102
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "DevLabs-2025",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(39) > div > h2",
+    "content": "DevLabs-2025. An open-source project by OpenLake. View on GitHub",
+    "id": 103
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Sampoorna",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(40) > div > h2",
+    "content": "Sampoorna. One app for all women that covers everything from safety to health and more. 👩💪 View on GitHub",
+    "id": 104
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Branding",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(41) > div > h2",
+    "content": "Branding. The repository contains all branding assets for OpenLake and FOSS Overflow View on GitHub",
+    "id": 105
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Interview-Preparation",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(42) > div > h2",
+    "content": "Interview-Preparation. An open-source project by OpenLake. View on GitHub",
+    "id": 106
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "career-scraper",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(43) > div > h2",
+    "content": "career-scraper. Scrape data to find what kind of trajectories different people took in their careers View on GitHub",
+    "id": 107
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "blog",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(44) > div > h2",
+    "content": "blog. OpenLake's blog View on GitHub See site",
+    "id": 108
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Speech-Analyser",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(45) > div > h2",
+    "content": "Speech-Analyser. An App to help you improve your English fluency 🎤 View on GitHub",
+    "id": 109
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Not-a-Mess",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(46) > div > h2",
+    "content": "Not-a-Mess. An App to help you resolve mess related issues and more 🍽 View on GitHub",
+    "id": 110
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Live-Score-App",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(47) > div > h2",
+    "content": "Live-Score-App. A real-time score web app for sports🏸 and tournaments🏆. View on GitHub",
+    "id": 111
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Insti-Pay",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(48) > div > h2",
+    "content": "Insti-Pay. A payment infrastructure to cater to transactional needs within IIT Bhilai, among all institutes. View on GitHub",
+    "id": 112
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Find-your-Cluster",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(49) > div > h2",
+    "content": "Find-your-Cluster. Find common interests among your peers and build a healthy community 🏫🧍‍♂️ View on GitHub",
+    "id": 113
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "studious-learners",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(50) > div > h2",
+    "content": "studious-learners. Study material for events conducted by OpenLake View on GitHub",
+    "id": 114
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "iitbh-oneStop",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(51) > div > h2",
+    "content": "iitbh-oneStop. An open-source project by OpenLake. View on GitHub",
+    "id": 115
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Activity-Tracker",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(52) > div > h2",
+    "content": "Activity-Tracker. A cross-platform solution to discover how you spend your digital life. 🕵️‍♂️⌛ View on GitHub",
+    "id": 116
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Knowledge",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(53) > div > h2",
+    "content": "Knowledge. All the information that a student needs to have an amazing career. View on GitHub",
+    "id": 117
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Online-Judge",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(54) > div > h2",
+    "content": "Online-Judge. An online judge for programming competitions and assignments. 🧑‍💻📝 View on GitHub",
+    "id": 118
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "leaderboardpro",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(55) > div > h2",
+    "content": "leaderboardpro. An open-source project by OpenLake. View on GitHub",
+    "id": 119
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Virtual-IIT-Bhilai",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(56) > div > h2",
+    "content": "Virtual-IIT-Bhilai. IIT Bhilai virtual campus game world (Godot + NodeJS) 🎓 View on GitHub",
+    "id": 120
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Active-OSS-Community-Finder",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(57) > div > h2",
+    "content": "Active-OSS-Community-Finder. A place to discover the best open source projects where you can become a regular contributor View on GitHub",
+    "id": 121
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Remote-Voting-Blockchain",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(58) > div > h2",
+    "content": "Remote-Voting-Blockchain. Hyperledger Fabric (Blockchain) implementation of electronic voting. View on GitHub",
+    "id": 122
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Memory-Imaging-for-Linux-Family",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(59) > div > h2",
+    "content": "Memory-Imaging-for-Linux-Family. Project to provide tools for linux binary analysis and making changes on the fly. View on GitHub",
+    "id": 123
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Introduction_CPP",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(60) > div > h2",
+    "content": "Introduction_CPP. Introduction to Open source using Algorithms in C++ (Event completed) View on GitHub",
+    "id": 124
+  },
+  {
+    "url": "https://openlake.in/programs",
+    "page_title": "Projects — OpenLake",
+    "heading": "Introduction_Python",
+    "level": "h2",
+    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(61) > div > h2",
+    "content": "Introduction_Python. Introduction to Open source using Algorithms in Python (Event completed) View on GitHub Want to contribute? Find these projects on GitHub Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 125
+  },
+  {
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "Learn AI & Machine Learning with the Best Free Resources",
     "level": "h1",
     "selector": "#main > section:nth-of-type(1) > div > h1",
-    "content": "Learn AI & Machine Learning with the Best Free Resources. Explore Artificial Intelligence, Machine Learning, Deep Learning, Data Science, Generative AI, and Large Language Models through curated videos, official documentation, roadmaps, and hands-on projects—all in one place. Beginner Learn Python from basics to advanced concepts for AI, Machine Learning, Data Science, and automation. 🎥 Video → 📖 Learn More → Beginner Master NumPy for numerical computing, arrays, linear algebra, and scientific computing. 🎥 Video → 📖 Learn More → Beginner Learn Pandas for data manipulation, cleaning, analysis, and visualization. 🎥 Video → 📖 Learn More → Beginner Create professional charts and visualizations using Matplotlib. 🎥 Video → 📖 Learn More → Intermediate Build machine learning models using Scikit-learn for classification, regression, and clustering. 🎥 Video → 📖 Learn More → Intermediate Learn TensorFlow to build and train deep learning models for AI applications. 🎥 Video → 📖 Learn More → Intermediate Master PyTorch for deep learning, neural networks, and AI research. 🎥 Video → 📖 Learn More → Intermediate Learn computer vision using OpenCV for image processing and object detection. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub.",
-    "id": 165
+    "content": "Learn AI & Machine Learning with the Best Free Resources. Explore Artificial Intelligence, Machine Learning, Deep Learning, Data Science, Generative AI, and Large Language Models through curated videos, official documentation, roadmaps, and hands-on projects—all in one place. Beginner Learn Python from basics to advanced concepts for AI, Machine Learning, Data Science, and automation. 🎥 Video → 📖 Learn More → Beginner Master NumPy for numerical computing, arrays, linear algebra, and scientific computing. 🎥 Video → 📖 Learn More → Beginner Learn Pandas for data manipulation, cleaning, analysis, and visualization. 🎥 Video → 📖 Learn More → Beginner Create professional charts and visualizations using Matplotlib. 🎥 Video → 📖 Learn More → Intermediate Build machine learning models using Scikit-learn for classification, regression, and clustering. 🎥 Video → 📖 Learn More → Intermediate Learn TensorFlow to build and train deep learning models for AI applications. 🎥 Video → 📖 Learn More → Intermediate Master PyTorch for deep learning, neural networks, and AI research. 🎥 Video → 📖 Learn More → Intermediate Learn computer vision using OpenCV for image processing and object detection. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 126
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "Featured Resources",
     "level": "h2",
     "selector": "#main > section:nth-of-type(2) > div > h2",
-    "content": "Featured Resources. Beginner Learn Python from basics to advanced concepts for AI, Machine Learning, Data Science, and automation. 🎥 Video → 📖 Learn More → Beginner Master NumPy for numerical computing, arrays, linear algebra, and scientific computing. 🎥 Video → 📖 Learn More → Beginner Learn Pandas for data manipulation, cleaning, analysis, and visualization. 🎥 Video → 📖 Learn More → Beginner Create professional charts and visualizations using Matplotlib. 🎥 Video → 📖 Learn More → Intermediate Build machine learning models using Scikit-learn for classification, regression, and clustering. 🎥 Video → 📖 Learn More → Intermediate Learn TensorFlow to build and train deep learning models for AI applications. 🎥 Video → 📖 Learn More → Intermediate Master PyTorch for deep learning, neural networks, and AI research. 🎥 Video → 📖 Learn More → Intermediate Learn computer vision using OpenCV for image processing and object detection. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub.",
-    "id": 166
+    "content": "Featured Resources. Beginner Learn Python from basics to advanced concepts for AI, Machine Learning, Data Science, and automation. 🎥 Video → 📖 Learn More → Beginner Master NumPy for numerical computing, arrays, linear algebra, and scientific computing. 🎥 Video → 📖 Learn More → Beginner Learn Pandas for data manipulation, cleaning, analysis, and visualization. 🎥 Video → 📖 Learn More → Beginner Create professional charts and visualizations using Matplotlib. 🎥 Video → 📖 Learn More → Intermediate Build machine learning models using Scikit-learn for classification, regression, and clustering. 🎥 Video → 📖 Learn More → Intermediate Learn TensorFlow to build and train deep learning models for AI applications. 🎥 Video → 📖 Learn More → Intermediate Master PyTorch for deep learning, neural networks, and AI research. 🎥 Video → 📖 Learn More → Intermediate Learn computer vision using OpenCV for image processing and object detection. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 127
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "Python",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
     "content": "Python. Learn Python from basics to advanced concepts for AI, Machine Learning, Data Science, and automation. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 167
+    "id": 128
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "NumPy",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
     "content": "NumPy. Master NumPy for numerical computing, arrays, linear algebra, and scientific computing. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 168
+    "id": 129
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "Pandas",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
     "content": "Pandas. Learn Pandas for data manipulation, cleaning, analysis, and visualization. 🎥 Video → 📖 Learn More → Beginner",
-    "id": 169
+    "id": 130
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "Matplotlib",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
     "content": "Matplotlib. Create professional charts and visualizations using Matplotlib. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 170
+    "id": 131
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "Scikit-learn",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
     "content": "Scikit-learn. Build machine learning models using Scikit-learn for classification, regression, and clustering. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 171
+    "id": 132
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "TensorFlow",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
     "content": "TensorFlow. Learn TensorFlow to build and train deep learning models for AI applications. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 172
+    "id": 133
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "PyTorch",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
     "content": "PyTorch. Master PyTorch for deep learning, neural networks, and AI research. 🎥 Video → 📖 Learn More → Intermediate",
-    "id": 173
+    "id": 134
   },
   {
-    "url": "https://openlake.in/safety",
-    "page_title": "Safety — Hack Club",
+    "url": "https://openlake.in/resources/ai-ml",
+    "page_title": "AI & Machine Learning Resources — OpenLake",
     "heading": "OpenCV",
     "level": "h3",
     "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
-    "content": "OpenCV. Learn computer vision using OpenCV for image processing and object detection. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub.",
-    "id": 174
+    "content": "OpenCV. Learn computer vision using OpenCV for image processing and object detection. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 135
   },
   {
-    "url": "https://openlake.in/newsletterpage",
-    "page_title": "OpenLake",
-    "heading": "The OpenLake Newsletter",
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Learn App Development with the Best Free Resources",
     "level": "h1",
-    "selector": "#main > div:nth-of-type(3) > h1",
-    "content": "The OpenLake Newsletter. Build logs, project spotlights, and what's happening at IIT Bhilai's open-source hub. One issue a month. No spam, ever. Issue 15 January 2026 Our biggest cohort yet ships its first pull requests, we spotlight three student-led projects, and there's a new hardware corner in the makerspace. Here's everything that happened at OpenLake this month. Open Source Community Events Read issue Issue 10 December 2025 The very first OpenLake newsletter. What we're building, why open source matters at IIT Bhilai, and how to get involved whether you write code, design, or just love shipping things. Welcome Open Source Read issue Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub. System mode",
-    "id": 175
+    "selector": "#main > section:nth-of-type(1) > div > h1",
+    "content": "Learn App Development with the Best Free Resources. From Flutter and React Native to Android and iOS development, discover curated videos, official documentation, roadmaps, and projects—all in one place. Beginner Learn Flutter from basics to advanced concepts for building beautiful cross-platform mobile applications. 🎥 Video → 📖 Learn More → Intermediate Build cross-platform Android and iOS apps using React Native and JavaScript. 🎥 Video → 📖 Learn More → Beginner Learn native Android development with Android Studio, activities, layouts, and app architecture. 🎥 Video → 📖 Learn More → Beginner Master Kotlin, the official language for Android development, from fundamentals to advanced concepts. 🎥 Video → 📖 Learn More → Intermediate Learn Swift programming to build modern, high-performance iOS applications. 🎥 Video → 📖 Learn More → Intermediate Learn Firebase Authentication, Firestore, Storage, Cloud Functions, and Hosting for mobile apps. 🎥 Video → 📖 Learn More → Beginner Learn the Dart programming language, the foundation of Flutter development. 🎥 Video → 📖 Learn More → Beginner Set up Android Studio and learn debugging, emulators, profiling, and app deployment. 🎥 Video → 📖 Learn More → Advanced Build modern Android UIs using Jetpack Compose with declarative UI principles. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 136
   },
   {
-    "url": "https://openlake.in/newsletterpage",
-    "page_title": "OpenLake",
-    "heading": "Winter of Code kicks off",
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Featured Resources",
     "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(1) > div > div > h2",
-    "content": "Winter of Code kicks off. Our biggest cohort yet ships its first pull requests, we spotlight three student-led projects, and there's a new hardware corner in the makerspace. Here's everything that happened at OpenLake this month. Open Source Community Events Read issue Issue 10 December 2025",
-    "id": 176
+    "selector": "#main > section:nth-of-type(2) > div > h2",
+    "content": "Featured Resources. Beginner Learn Flutter from basics to advanced concepts for building beautiful cross-platform mobile applications. 🎥 Video → 📖 Learn More → Intermediate Build cross-platform Android and iOS apps using React Native and JavaScript. 🎥 Video → 📖 Learn More → Beginner Learn native Android development with Android Studio, activities, layouts, and app architecture. 🎥 Video → 📖 Learn More → Beginner Master Kotlin, the official language for Android development, from fundamentals to advanced concepts. 🎥 Video → 📖 Learn More → Intermediate Learn Swift programming to build modern, high-performance iOS applications. 🎥 Video → 📖 Learn More → Intermediate Learn Firebase Authentication, Firestore, Storage, Cloud Functions, and Hosting for mobile apps. 🎥 Video → 📖 Learn More → Beginner Learn the Dart programming language, the foundation of Flutter development. 🎥 Video → 📖 Learn More → Beginner Set up Android Studio and learn debugging, emulators, profiling, and app deployment. 🎥 Video → 📖 Learn More → Advanced Build modern Android UIs using Jetpack Compose with declarative UI principles. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 137
   },
   {
-    "url": "https://openlake.in/newsletterpage",
-    "page_title": "OpenLake",
-    "heading": "Hello from the Lake",
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Flutter",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
+    "content": "Flutter. Learn Flutter from basics to advanced concepts for building beautiful cross-platform mobile applications. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 138
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "React Native",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
+    "content": "React Native. Build cross-platform Android and iOS apps using React Native and JavaScript. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 139
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Android Development",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
+    "content": "Android Development. Learn native Android development with Android Studio, activities, layouts, and app architecture. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 140
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Kotlin",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
+    "content": "Kotlin. Master Kotlin, the official language for Android development, from fundamentals to advanced concepts. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 141
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Swift",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
+    "content": "Swift. Learn Swift programming to build modern, high-performance iOS applications. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 142
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Firebase",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
+    "content": "Firebase. Learn Firebase Authentication, Firestore, Storage, Cloud Functions, and Hosting for mobile apps. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 143
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Dart",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
+    "content": "Dart. Learn the Dart programming language, the foundation of Flutter development. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 144
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Android Studio",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
+    "content": "Android Studio. Set up Android Studio and learn debugging, emulators, profiling, and app deployment. 🎥 Video → 📖 Learn More → Advanced",
+    "id": 145
+  },
+  {
+    "url": "https://openlake.in/resources/app-development",
+    "page_title": "App Development Resources — OpenLake",
+    "heading": "Jetpack Compose",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(9) > div:nth-of-type(2) > h3",
+    "content": "Jetpack Compose. Build modern Android UIs using Jetpack Compose with declarative UI principles. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 146
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Learn Game Development with the Best Free Resources",
+    "level": "h1",
+    "selector": "#main > section:nth-of-type(1) > div > h1",
+    "content": "Learn Game Development with the Best Free Resources. Learn game development using Unity, Unreal Engine, Godot, Blender, C#, C++, and industry-standard tools. Explore curated videos, official documentation, roadmaps, and hands-on projects—all in one place. Beginner Learn Unity from basics to advanced concepts for creating 2D and 3D games using C#. 🎥 Video → 📖 Learn More → Intermediate Master Unreal Engine, Blueprints, and C++ to build high-quality AAA games. 🎥 Video → 📖 Learn More → Beginner Learn Godot Engine for developing powerful 2D and 3D games with open-source tools. 🎥 Video → 📖 Learn More → Beginner Create stunning 3D models, animations, and game assets using Blender. 🎥 Video → 📖 Learn More → Beginner Learn C# programming for Unity game development with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Master C++ programming for Unreal Engine and advanced game development. 🎥 Video → 📖 Learn More → Beginner Understand game mechanics, storytelling, level design, and player experience to build engaging games. 🎥 Video → 📖 Learn More → Beginner Learn pixel art and sprite animation for creating beautiful 2D games. 🎥 Video → 📖 Learn More → Intermediate Build 2D games quickly with GameMaker using drag-and-drop tools and GML scripting. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 147
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Featured Resources",
     "level": "h2",
-    "selector": "#main > div:nth-of-type(3) > div:nth-of-type(3) > div:nth-of-type(2) > div > div > h2",
-    "content": "Hello from the Lake. The very first OpenLake newsletter. What we're building, why open source matters at IIT Bhilai, and how to get involved whether you write code, design, or just love shipping things. Welcome Open Source Read issue Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with ❤️ by students at IIT Bhilai. Open source on GitHub. System mode",
-    "id": 177
+    "selector": "#main > section:nth-of-type(2) > div > h2",
+    "content": "Featured Resources. Beginner Learn Unity from basics to advanced concepts for creating 2D and 3D games using C#. 🎥 Video → 📖 Learn More → Intermediate Master Unreal Engine, Blueprints, and C++ to build high-quality AAA games. 🎥 Video → 📖 Learn More → Beginner Learn Godot Engine for developing powerful 2D and 3D games with open-source tools. 🎥 Video → 📖 Learn More → Beginner Create stunning 3D models, animations, and game assets using Blender. 🎥 Video → 📖 Learn More → Beginner Learn C# programming for Unity game development with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Master C++ programming for Unreal Engine and advanced game development. 🎥 Video → 📖 Learn More → Beginner Understand game mechanics, storytelling, level design, and player experience to build engaging games. 🎥 Video → 📖 Learn More → Beginner Learn pixel art and sprite animation for creating beautiful 2D games. 🎥 Video → 📖 Learn More → Intermediate Build 2D games quickly with GameMaker using drag-and-drop tools and GML scripting. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 148
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Unity",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
+    "content": "Unity. Learn Unity from basics to advanced concepts for creating 2D and 3D games using C#. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 149
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Unreal Engine",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
+    "content": "Unreal Engine. Master Unreal Engine, Blueprints, and C++ to build high-quality AAA games. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 150
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Godot",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
+    "content": "Godot. Learn Godot Engine for developing powerful 2D and 3D games with open-source tools. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 151
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Blender",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
+    "content": "Blender. Create stunning 3D models, animations, and game assets using Blender. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 152
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "C#",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
+    "content": "C#. Learn C# programming for Unity game development with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 153
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "C++",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
+    "content": "C++. Master C++ programming for Unreal Engine and advanced game development. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 154
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Game Design",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
+    "content": "Game Design. Understand game mechanics, storytelling, level design, and player experience to build engaging games. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 155
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "Aseprite",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
+    "content": "Aseprite. Learn pixel art and sprite animation for creating beautiful 2D games. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 156
+  },
+  {
+    "url": "https://openlake.in/resources/game-development",
+    "page_title": "Game Development Resources — OpenLake",
+    "heading": "GameMaker",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(9) > div:nth-of-type(2) > h3",
+    "content": "GameMaker. Build 2D games quickly with GameMaker using drag-and-drop tools and GML scripting. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 157
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "Learn Web Development with the Best Free Resources",
+    "level": "h1",
+    "selector": "#main > section:nth-of-type(1) > div > h1",
+    "content": "Learn Web Development with the Best Free Resources. From HTML and CSS to React, Node.js and Full Stack Development, discover curated videos, documentation, roadmaps and projects—all in one place. Beginner Learn HTML from scratch with hands-on examples. 🎥 Video → 📖 Learn More → Beginner Master CSS layouts, Flexbox, Grid, animations, and responsive design. 🎥 Video → 📖 Learn More → Beginner Learn modern JavaScript with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Build modern user interfaces with React from the ground up. 🎥 Video → 📖 Learn More → Intermediate Learn backend development with Node.js, including modules, file system, APIs, and asynchronous programming. 🎥 Video → 📖 Learn More → Intermediate Build powerful REST APIs with Express.js, middleware, routing, authentication, and database integration. 🎥 Video → 📖 Learn More → Advanced Master Next.js with App Router, Server Components, routing, data fetching, and deployment. 🎥 Video → 📖 Learn More → Intermediate Learn MongoDB from basics to advanced concepts, including CRUD operations, indexing, aggregation, and database design. 🎥 Video → 📖 Learn More → Intermediate Learn Django from basics to advanced concepts, including models, views, templates, authentication, REST APIs, and building scalable web applications. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 158
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "Featured Resources",
+    "level": "h2",
+    "selector": "#main > section:nth-of-type(2) > div > h2",
+    "content": "Featured Resources. Beginner Learn HTML from scratch with hands-on examples. 🎥 Video → 📖 Learn More → Beginner Master CSS layouts, Flexbox, Grid, animations, and responsive design. 🎥 Video → 📖 Learn More → Beginner Learn modern JavaScript with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate Build modern user interfaces with React from the ground up. 🎥 Video → 📖 Learn More → Intermediate Learn backend development with Node.js, including modules, file system, APIs, and asynchronous programming. 🎥 Video → 📖 Learn More → Intermediate Build powerful REST APIs with Express.js, middleware, routing, authentication, and database integration. 🎥 Video → 📖 Learn More → Advanced Master Next.js with App Router, Server Components, routing, data fetching, and deployment. 🎥 Video → 📖 Learn More → Intermediate Learn MongoDB from basics to advanced concepts, including CRUD operations, indexing, aggregation, and database design. 🎥 Video → 📖 Learn More → Intermediate Learn Django from basics to advanced concepts, including models, views, templates, authentication, REST APIs, and building scalable web applications. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 159
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "HTML",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(1) > div:nth-of-type(2) > h3",
+    "content": "HTML. Learn HTML from scratch with hands-on examples. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 160
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "CSS",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h3",
+    "content": "CSS. Master CSS layouts, Flexbox, Grid, animations, and responsive design. 🎥 Video → 📖 Learn More → Beginner",
+    "id": 161
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "JavaScript",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(3) > div:nth-of-type(2) > h3",
+    "content": "JavaScript. Learn modern JavaScript with practical examples and projects. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 162
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "React",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(4) > div:nth-of-type(2) > h3",
+    "content": "React. Build modern user interfaces with React from the ground up. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 163
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "Node.js",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(5) > div:nth-of-type(2) > h3",
+    "content": "Node.js. Learn backend development with Node.js, including modules, file system, APIs, and asynchronous programming. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 164
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "Express.js",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(6) > div:nth-of-type(2) > h3",
+    "content": "Express.js. Build powerful REST APIs with Express.js, middleware, routing, authentication, and database integration. 🎥 Video → 📖 Learn More → Advanced",
+    "id": 165
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "Next.js",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(7) > div:nth-of-type(2) > h3",
+    "content": "Next.js. Master Next.js with App Router, Server Components, routing, data fetching, and deployment. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 166
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "MongoDB",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(8) > div:nth-of-type(2) > h3",
+    "content": "MongoDB. Learn MongoDB from basics to advanced concepts, including CRUD operations, indexing, aggregation, and database design. 🎥 Video → 📖 Learn More → Intermediate",
+    "id": 167
+  },
+  {
+    "url": "https://openlake.in/resources/web-development",
+    "page_title": "Web Development Resources — OpenLake",
+    "heading": "Django",
+    "level": "h3",
+    "selector": "#main > section:nth-of-type(2) > div > div > div:nth-of-type(9) > div:nth-of-type(2) > h3",
+    "content": "Django. Learn Django from basics to advanced concepts, including models, views, templates, authentication, REST APIs, and building scalable web applications. 🎥 Video → 📖 Learn More → Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 168
+  },
+  {
+    "url": "https://openlake.in/team",
+    "page_title": "Team — OpenLake",
+    "heading": "Meet the Present Community.",
+    "level": "h1",
+    "selector": "#main > section:nth-of-type(1) > div > div > h1",
+    "content": "Meet the Present Community.. Meet the passionate students, mentors, and contributors who are actively shaping OpenLake today. Together, they organize events, build projects, mentor learners, and strengthen our growing community. Ashish Kumar Dash Garvit Sharma Aditya Kumar Gautam Rudra Dudhat Lakshya soni Kamireddi Jaswanth Kumar Taha Hussain Akshat Kansal Sujal Som Eashan Hasija Shlok Divyam Siddhi Singh Tanmay Jaiswal Umap Utkarsh Sharad Siddhant Shukla Sanil Saha Kotapati Sai Mounika Adhi Agrawal Harshit Kandpal Kushal Agrawal Neil Chitale Prashant Sati Vidit Shrimali Harshita Sharma Anushka Rath Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 169
+  },
+  {
+    "url": "https://openlake.in/team",
+    "page_title": "Team — OpenLake",
+    "heading": "Secretary",
+    "level": "h2",
+    "selector": "#main > section:nth-of-type(2) > div > h2",
+    "content": "Secretary. Ashish Kumar Dash",
+    "id": 170
+  },
+  {
+    "url": "https://openlake.in/team",
+    "page_title": "Team — OpenLake",
+    "heading": "Domain Leads",
+    "level": "h2",
+    "selector": "#main > section:nth-of-type(3) > div > h2",
+    "content": "Domain Leads. Garvit Sharma Aditya Kumar Gautam Rudra Dudhat",
+    "id": 171
+  },
+  {
+    "url": "https://openlake.in/team",
+    "page_title": "Team — OpenLake",
+    "heading": "Mentors",
+    "level": "h2",
+    "selector": "#main > section:nth-of-type(4) > div > h2",
+    "content": "Mentors. Lakshya soni Kamireddi Jaswanth Kumar Taha Hussain Akshat Kansal Sujal Som Eashan Hasija Shlok Divyam Siddhi Singh Tanmay Jaiswal",
+    "id": 172
+  },
+  {
+    "url": "https://openlake.in/team",
+    "page_title": "Team — OpenLake",
+    "heading": "Maintainers",
+    "level": "h2",
+    "selector": "#main > section:nth-of-type(5) > div > h2",
+    "content": "Maintainers. Umap Utkarsh Sharad Siddhant Shukla Sanil Saha Kotapati Sai Mounika Adhi Agrawal Harshit Kandpal Kushal Agrawal Neil Chitale Prashant Sati Vidit Shrimali Harshita Sharma",
+    "id": 173
+  },
+  {
+    "url": "https://openlake.in/team",
+    "page_title": "Team — OpenLake",
+    "heading": "Outreach Head",
+    "level": "h2",
+    "selector": "#main > section:nth-of-type(6) > div > h2",
+    "content": "Outreach Head. Anushka Rath Turning ideas into open source. openlake@iitbhilai.ac.in OpenLake Philosophy Our Team Resources Projects © 2026 OpenLake. Built with 💙 by students at IIT Bhilai. Light mode",
+    "id": 174
   }
 ]

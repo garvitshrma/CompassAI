@@ -52,10 +52,7 @@ The CSS selector stored alongside each chunk is what makes navigation possible. 
 | `retrieval.py` | Hybrid search — semantic embeddings + fuzzy lexical matching | (imported by `answer.py`) |
 | `answer.py` | Retrieves top chunk, grounds an LLM, returns answer or refusal | interactive query loop |
 | `search.py` | Standalone semantic-only search (superseded by `retrieval.py`) | `embeddings.npy` + query loop |
-<<<<<<< HEAD
 | `rebuild_site.py` | Re-crawl one site from the live web and rebuild its `sites/<id>/` index | `chunks.json` + `embeddings.npy` |
-=======
->>>>>>> c0f06ae31c59b24853a752e27125702c04a97969
 
 ---
 
@@ -82,14 +79,9 @@ python crawler_js.py https://openlake.in/
 # 2. Chunk it
 python chunker.py
 
-<<<<<<< HEAD
 # 3. Answer questions  (needs a free OpenRouter API key)
 # Get one at https://openrouter.ai/keys
 setx OPENROUTER_API_KEY "sk-or-v1-..."   # then reopen the terminal
-=======
-# 3. Answer questions  (needs a free Groq API key)
-setx GROQ_API_KEY "gsk_..."   # then reopen the terminal
->>>>>>> c0f06ae31c59b24853a752e27125702c04a97969
 python answer.py
 ```
 
@@ -117,11 +109,7 @@ On top of that:
 - **sentence-transformers** — local embeddings (`all-MiniLM-L6-v2`)
 - **rapidfuzz** — fuzzy lexical matching
 - **numpy** — vector similarity
-<<<<<<< HEAD
 - **Switchable LLM provider** — Gemini (primary) with automatic failover, via `.env` (`LLM_API_KEY` / `LLM_BASE_URL` / `LLM_MODEL`); also runs on Groq, OpenRouter, or local Ollama
-=======
-- **Groq** — free-tier LLM for the grounded answer layer
->>>>>>> c0f06ae31c59b24853a752e27125702c04a97969
 - **FastAPI** — API layer *(coming)*
 - **Supabase + pgvector** — production vector store *(coming)*
 - **Vanilla JS + Shadow DOM** — embeddable widget *(coming)*
@@ -155,11 +143,7 @@ Screen awareness, works in any app on any computer. Cross-platform from day one.
 - [ ] Embeddable widget (Shadow DOM)
 - [ ] First paying customer
 
-<<<<<<< HEAD
 **Known issues:** thin-content pages can over-match generic queries. Person names ARE retrievable when they exist on the site (rarity-weighted content matching); people who aren't on the site correctly refuse rather than guess.
-=======
-**Known issues:** thin-content pages can over-match generic queries; individual person names on team pages aren't retrievable yet.
->>>>>>> c0f06ae31c59b24853a752e27125702c04a97969
 
 ---
 

@@ -56,6 +56,7 @@ Usage from api.py:
 """
 
 import json
+import os
 import re
 from pathlib import Path
 from urllib.parse import urlparse
@@ -157,6 +158,11 @@ FILLER = {"where", "is", "are", "the", "all", "of", "a", "an", "to",
           "me", "take", "show", "find", "i", "want", "can", "how",
           "do", "on", "in", "at", "page", "please", "what"}
 
+# How many chunks onnxruntime embeds in one forward pass. This is a MEMORY
+# knob, not a speed knob — see the measurement table in _encode(). Override with
+# EMBED_BATCH in .env if you move to a larger instance.
+EMBED_BATCH = int(os.environ.get("EMBED_BATCH", "16"))
+
 # Module-level cache for the loaded model. The leading underscore is a Python
 # convention meaning "private, do not touch from outside this module".
 # read more: https://peps.python.org/pep-0008/#descriptive-naming-styles
@@ -222,7 +228,26 @@ def _encode(texts):
       cosine similarity on every query forever after.
       read more: https://en.wikipedia.org/wiki/Cosine_similarity
     """
-    vecs = np.array(list(model().embed(texts)), dtype=np.float32)
+    # BATCH SIZE IS THE WHOLE BALLGAME ON A 512MB BOX. fastembed defaults to
+    # batch_size=256, and onnxruntime sizes its inference arena from the batch:
+    # embedding this site's 178 chunks at the default peaked at 778MB resident,
+    # i.e. Render's free tier OOM-killed the worker on EVERY /ingest that
+    # actually re-embedded. Render's proxy then answers 502 with no CORS
+    # headers, so the browser reports it as "blocked by CORS policy" and the
+    # widget shows "Something went wrong" — an OOM wearing a CORS costume.
+    #
+    # Measured on this index (178 chunks, avg 404 chars):
+    #     batch   peak RSS    time
+    #       4      222 MB     36.0s
+    #      16      290 MB     22.7s      <- chosen: fastest AND well under 512
+    #      32      377 MB     30.7s
+    #     256      778 MB     OOM
+    #
+    # 16 is not a guess; larger batches stop helping here because the arena
+    # grows faster than the parallelism pays back. Raise it only alongside a
+    # bigger instance, and re-measure if you do.
+    vecs = np.array(list(model().embed(texts, batch_size=EMBED_BATCH)),
+                    dtype=np.float32)
 
     # np.linalg.norm computes each vector's length (its L2 / Euclidean norm).
     #   axis=1        -> compute one norm per ROW (per vector), not for the
@@ -381,14 +406,30 @@ def embed_site(site_id):
     # The list comprehension preserves chunks.json's order, which preserves the
     # invariant "row i of the matrix IS chunks[i]". Everything downstream
     # depends on that.
-    vecs = _encode([build_text(c) for c in chunks])
-
-    # .npy is NumPy's own binary format. Compared to saving as JSON it is far
-    # smaller (raw float32 bytes, no text encoding) and loads near-instantly
-    # via memory mapping rather than being parsed.
-    # read more: https://numpy.org/doc/stable/reference/generated/numpy.save.html
-    np.save(d / "embeddings.npy", vecs)
+    vecs = encode_chunks(chunks)
+    save_vectors(site_id, vecs)
     return chunks, vecs
+
+
+def encode_chunks(chunks):
+    """Embed a list of chunk dicts into a matrix, one row per chunk, in order.
+
+    Split out of embed_site so /ingest can embed ONLY a newly-changed page's
+    chunks and splice them into the existing matrix, instead of re-running the
+    model over the whole site for a one-page edit.
+    """
+    return _encode([build_text(c) for c in chunks])
+
+
+def save_vectors(site_id, vecs):
+    """Persist a site's embedding matrix.
+
+    .npy is NumPy's own binary format. Compared to saving as JSON it is far
+    smaller (raw float32 bytes, no text encoding) and loads near-instantly
+    via memory mapping rather than being parsed.
+    read more: https://numpy.org/doc/stable/reference/generated/numpy.save.html
+    """
+    np.save(site_dir(site_id) / "embeddings.npy", vecs)
 
 
 def load_site(site_id, reembed=False):

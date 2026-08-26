@@ -63,6 +63,7 @@ load_dotenv()
 
 import hashlib      # SHA-256, used to detect whether a page's HTML changed
 import os           # environment variables
+import re           # normalising HTML before hashing it (see _content_hash)
 import json         # reading/writing chunks.json and meta.json
 import threading    # locks, to stop two visitors triggering the same crawl twice
 import time         # sleeping in the periodic re-index loop
@@ -82,9 +83,12 @@ from pydantic import BaseModel
 # read more: https://openrouter.ai/docs
 from openai import OpenAI  # type: ignore[import-not-found]
 
-from retrieval import load_all_sites, embed_site, site_dir, SITES_DIR, model, load_site
+import numpy as np
+
+from retrieval import (load_all_sites, embed_site, site_dir, SITES_DIR, model,
+                       load_site, encode_chunks, save_vectors)
 from answer import answer
-from indexer import index_site
+from indexer import index_site, is_excluded
 
 # Upper bound on the HTML a browser may POST to /ingest.
 # WHY: without a cap, one visitor (or one attacker) posting a 500MB page would
@@ -158,6 +162,44 @@ _query_cache = {}
 # CONCURRENCY: worst case two threads reload simultaneously and assign the
 # same freshly-read tuple twice — idempotent, no lock needed.
 STATE["mtimes"] = {}
+
+
+def _excludes(sid):
+    """Path patterns this site's owner does not want indexed, or [].
+
+    Stored as sites/<site_id>/exclude.json — a plain JSON list:
+
+        ["/imprint", "/it-admins", "/internal/*"]
+
+    Kept as per-site DATA rather than code so it can differ per customer and be
+    changed without a deploy. Read fresh on each crawl rather than cached at
+    boot, so editing the file takes effect on the next re-index.
+
+    Every read path tolerates a missing or malformed file by returning [] —
+    "index everything", the zero-config default. A broken exclude file must
+    never take a customer's whole site offline.
+    """
+    raw = _read_json(sid, "exclude.json", [])
+    if isinstance(raw, dict):            # tolerate {"exclude": [...]}
+        raw = raw.get("exclude", [])
+    return [str(p) for p in raw] if isinstance(raw, list) else []
+
+
+def _stamp_mtimes(sid):
+    """Record the mtimes of the files we just wrote for this site.
+
+    Every publish path (register / auto-register / ingest / refresh) writes
+    chunks.json + embeddings.npy and then hands the SAME data to STATE. Without
+    stamping, _site_data_fresh sees mtimes it does not recognise on the very
+    next query and reloads from disk — re-reading, and possibly re-embedding,
+    an index the process is already holding. That turned each write into a
+    guaranteed redundant reload, which on this box is exactly the work we have
+    just spent the whole endpoint avoiding.
+    """
+    d = site_dir(sid)
+    cj, ej = d / "chunks.json", d / "embeddings.npy"
+    if cj.exists() and ej.exists():
+        STATE["mtimes"][sid] = (cj.stat().st_mtime, ej.stat().st_mtime)
 
 
 def _site_data_fresh(sid):
@@ -582,7 +624,15 @@ def query(body: QueryIn):
     # boot (rebuild_site.py, /refresh from another process, hand edit), we
     # pick up the new index here without a restart.
     _site_data_fresh(sid)
-    chunks, vecs = site
+
+    # RE-READ FROM STATE AFTER THE REFRESH, do not reuse the tuple captured
+    # above. _site_data_fresh may have just replaced STATE["sites"][sid] with a
+    # newer index; unpacking the older local `site` would answer this request
+    # from the stale data we had specifically just detected and replaced — so
+    # the reload only ever took effect on the NEXT request, defeating its
+    # purpose on precisely the request that paid to discover the change.
+    # It also mattered for the cache key below, which is keyed on len(chunks).
+    chunks, vecs = STATE["sites"].get(sid, site)
 
     # ---- cache lookup -----------------------------------------------------
     # Normalised the same way as the site id: case and stray whitespace do not
@@ -683,6 +733,7 @@ def register(body: RegisterIn, x_admin_token: str = Header(default="")):
     # OLD index; after it, the new one. Because it is one dict assignment, no
     # request can ever observe a half-updated site.
     STATE["sites"][sid] = (chunks, vecs)
+    _stamp_mtimes(sid)
     return {"site_id": sid, "chunks": len(chunks), "status": "indexed"}
 
 
@@ -765,7 +816,7 @@ def auto_register(body: AutoRegisterIn):
                     "message": "Site was indexed while waiting."}
 
         print(f"[auto-register] crawling {sid}...")
-        raw_chunks = index_site(f"https://{sid}")
+        raw_chunks = index_site(f"https://{sid}", _excludes(sid))
 
         # PROTOCOL FALLBACK. We stored only the bare hostname, so we have to
         # guess the scheme. HTTPS first (correct for essentially every modern
@@ -774,7 +825,7 @@ def auto_register(body: AutoRegisterIn):
         # case and saves the site from being unindexable.
         if not raw_chunks:
             # try http if https failed
-            raw_chunks = index_site(f"http://{sid}")
+            raw_chunks = index_site(f"http://{sid}", _excludes(sid))
 
         if not raw_chunks:
             # Note: HTTP 200 with status="failed", not an HTTP error — same
@@ -802,6 +853,7 @@ def auto_register(body: AutoRegisterIn):
         # embed and load into memory
         chunks, vecs = embed_site(sid)
         STATE["sites"][sid] = (chunks, vecs)
+        _stamp_mtimes(sid)
 
         # A DIAGNOSTIC HINT rather than a silent partial failure. Finding fewer
         # than 5 sections almost always means the site is a JS-rendered SPA and
@@ -864,7 +916,8 @@ def _refresh_site(sid):
     """
     # HTTPS first, then HTTP fallback — same protocol fallback as
     # auto-register, since we store bare hostnames.
-    raw = index_site(f"https://{sid}") or index_site(f"http://{sid}")
+    ex = _excludes(sid)
+    raw = index_site(f"https://{sid}", ex) or index_site(f"http://{sid}", ex)
     if not raw:
         return "crawl_failed", 0
 
@@ -875,6 +928,7 @@ def _refresh_site(sid):
 
     chunks, vecs = embed_site(sid)
     STATE["sites"][sid] = (chunks, vecs)     # atomic publish
+    _stamp_mtimes(sid)
     return "refreshed", len(chunks)
 
 
@@ -1008,6 +1062,55 @@ def _read_json(sid, name, default):
             pass          # fall through to the default
     return default
 
+def _content_hash(html: str) -> str:
+    """Fingerprint a page by its CONTENT, ignoring per-render noise.
+
+    WHY NOT JUST sha256(html)
+    -------------------------
+    Because raw HTML carries a lot that we never index, and any churn in it
+    forces a needless re-chunk and re-embed of an unchanged page. Framework
+    build ids, generated class hashes, nonces and hydration payloads all move
+    between renders and between deploys without a word of visible copy
+    changing.
+
+    HONESTY ABOUT WHAT WAS MEASURED. Four Playwright loads of openlake.in's
+    heaviest page produced ONE distinct raw sha256 — so on this site, today,
+    raw hashing was already stable and this function is not repairing an
+    observed re-embed storm. It is insurance, and it is cheap. What was
+    verified directly:
+
+        edit body text        -> digest changes    (correct: we index it)
+        edit a heading        -> digest changes    (correct: we index it)
+        swap a <script> body  -> digest unchanged  (correct: never indexed)
+        change a class attr   -> digest unchanged  (correct: never indexed)
+
+    So we hash what we actually index: script/style bodies dropped, comments
+    dropped, tag attributes dropped (the tag NAME is kept, because heading
+    structure is what chunking keys on), whitespace collapsed.
+
+    Deliberately cheaper and blunter than parsing: a regex pass over a few
+    hundred KB costs microseconds. The error directions are asymmetric and this
+    errs the safe way — a false MISS just does the work anyway (the old
+    behaviour), while a false HIT would serve stale content. Dropping only
+    non-indexed material is what keeps false hits off the table.
+
+    ONE CAVEAT WORTH KNOWING: the widget captures the DOM on a fixed timer, so
+    on a slow page it can post a partially-hydrated snapshot. That is a genuine
+    content difference, and no hashing scheme can or should paper over it — the
+    fix for that lives in the widget's capture timing, not here.
+    """
+    # <script> and <style> bodies: never chunked, and the biggest source of
+    # per-render churn on SPA frameworks (__NEXT_DATA__, hydration blobs).
+    s = re.sub(r"(?is)<(script|style)\b.*?</\1\s*>", " ", html)
+    # HTML comments — build ids and SSR markers hide here.
+    s = re.sub(r"(?s)<!--.*?-->", " ", s)
+    # Tag attributes: class hashes, data-reactroot, nonces, ids. We keep the tag
+    # NAME because heading structure is what chunking keys on.
+    s = re.sub(r"<([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>", r"<\1>", s)
+    s = re.sub(r"\s+", " ", s).strip().lower()
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
+
+
 def _origin_ok(origin: str, sid: str) -> bool:
     """
     Anti-poisoning guard. Allow when: no Origin header (non-browser),
@@ -1094,6 +1197,18 @@ def ingest(body: IngestIn, origin: str = Header(default="")):
 
     url = body.url or f"https://{sid}"
 
+    # HONOUR THE SITE'S EXCLUSIONS HERE TOO. The crawler skips these paths, but
+    # the widget runs on every page a visitor opens — including the excluded
+    # ones — and would post them straight back. Without this check the
+    # exclusion would appear to work right after a re-index and then silently
+    # decay as real traffic reintroduced the pages one by one, which is a
+    # miserable bug to chase.
+    if is_excluded(url, _excludes(sid)):
+        cur = STATE["sites"].get(sid)
+        return {"site_id": sid, "chunks": len(cur[0]) if cur else 0,
+                "status": "excluded",
+                "message": "This page is excluded from indexing."}
+
     # ---- THE CHANGE-DETECTION HASH ---------------------------------------
     # SHA-256 of the raw HTML gives us a compact fingerprint of this exact page
     # version. If the fingerprint matches what we stored last time, the page is
@@ -1106,7 +1221,7 @@ def ingest(body: IngestIn, origin: str = Header(default="")):
     # read more:
     #   https://docs.python.org/3/library/hashlib.html
     #   https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag
-    page_hash = hashlib.sha256(body.html.encode("utf-8")).hexdigest()
+    page_hash = _content_hash(body.html)
 
     lock = _get_site_lock(sid)
     # 60s here rather than 120s as in auto-register: ingest does much less work
@@ -1136,14 +1251,19 @@ def ingest(body: IngestIn, origin: str = Header(default="")):
         # ---- THE MERGE: replace this page, keep every other page ----------
         # merge: replace this URL's chunks, keep the rest
         #
-        # This is an UPSERT keyed on url. The list comprehension keeps every
-        # chunk that came from a DIFFERENT url, and then we append this page's
-        # freshly-generated chunks. Result: re-visiting a page updates it in
-        # place rather than duplicating it, and the site's index grows
-        # page-by-page as real visitors browse. That incremental behaviour is
-        # what makes the whole zero-setup model work.
-        merged = [c for c in _read_json(sid, "chunks.json", [])
-                  if c.get("url") != url]
+        # This is an UPSERT keyed on url. We keep every chunk that came from a
+        # DIFFERENT url, then append this page's freshly-generated chunks.
+        # Result: re-visiting a page updates it in place rather than
+        # duplicating it, and the site's index grows page-by-page as real
+        # visitors browse. That incremental behaviour is what makes the whole
+        # zero-setup model work.
+        #
+        # We track the KEPT ROWS' INDICES, not just the chunks, because those
+        # indices are what let us reuse their existing embeddings below.
+        old_chunks = _read_json(sid, "chunks.json", [])
+        keep_rows = [i for i, c in enumerate(old_chunks)
+                     if c.get("url") != url]
+        merged = [old_chunks[i] for i in keep_rows]
         merged.extend(page_chunks)
 
         # RENUMBER. Absolutely required, not cosmetic: the ids must stay equal
@@ -1167,15 +1287,41 @@ def ingest(body: IngestIn, origin: str = Header(default="")):
         (d / "meta.json").write_text(
             json.dumps(meta, ensure_ascii=False), encoding="utf-8")
 
-        # RE-EMBED THE WHOLE SITE. Honest note on the trade-off: this is O(all
-        # chunks) work for what was an O(one page) change, and on a large site
-        # it is the slow part of this endpoint. It is kept because it is simple
-        # and obviously correct, and because the hash check above means it only
-        # runs when a page genuinely changed. The optimisation — embedding just
-        # the new chunks and splicing rows into the existing matrix — is a clear
-        # future improvement.
-        chunks, vecs = embed_site(sid)
+        # ---- EMBED ONLY WHAT CHANGED --------------------------------------
+        # This used to call embed_site(sid), re-running the model over EVERY
+        # chunk on the site for a one-page edit. Two costs: the obvious CPU
+        # one, and a memory spike proportional to the whole index — which on a
+        # 512MB container is what actually killed the process.
+        #
+        # The splice: rows for pages we kept are lifted straight out of the
+        # matrix already in memory; only this page's chunks go through the
+        # model. `old_vecs[keep_rows]` is NumPy fancy indexing — it selects
+        # those rows, in that order, in one C-level copy. Because `merged` was
+        # built as (kept chunks, then new chunks) and we stack in exactly that
+        # order, the "row i IS chunks[i]" invariant is preserved by
+        # construction rather than by luck.
+        #
+        # THE GUARD MATTERS: we only take this path when the in-memory matrix
+        # provably corresponds to the chunks we just read off disk. If anything
+        # is out of step — a restart, a hand-edited chunks.json, a refresh that
+        # landed in between — we fall back to the full rebuild, which is slower
+        # but cannot be wrong. Never splice onto a matrix you cannot verify.
+        cur = STATE["sites"].get(sid)
+        old_vecs = cur[1] if cur is not None else None
+        if old_vecs is not None and len(old_vecs) == len(old_chunks):
+            new_vecs = encode_chunks(page_chunks)
+            vecs = (np.vstack([old_vecs[keep_rows], new_vecs])
+                    if keep_rows else new_vecs)
+            chunks = merged
+            save_vectors(sid, vecs)
+            print(f"[ingest] {sid} {url}: embedded {len(page_chunks)} new "
+                  f"(reused {len(keep_rows)})")
+        else:
+            print(f"[ingest] {sid}: index/matrix out of step, full rebuild")
+            chunks, vecs = embed_site(sid)
+
         STATE["sites"][sid] = (chunks, vecs)
+        _stamp_mtimes(sid)
         print(f"[ingest] {sid} {url}: +{len(page_chunks)}, {len(chunks)} total")
         return {"site_id": sid, "chunks": len(chunks), "status": "indexed",
                 "message": f"Indexed this page ({len(page_chunks)} sections)."}

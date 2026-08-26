@@ -94,6 +94,49 @@ def _clean_url(url):
     return urldefrag(url)[0].rstrip("/")
 
 
+def _is_excluded(url, patterns):
+    """True if this URL's path matches any site-owner exclusion pattern.
+
+    WHY THIS IS DATA AND NOT AN `if` IN THE CRAWLER
+    -----------------------------------------------
+    Sitemap seeding correctly finds pages that no link points to. Sometimes the
+    site owner does not want those surfaced anyway — a legal imprint, an
+    internal IT page — even though they are real, public, and listed. That is a
+    judgement about the SITE, not about crawling, so it belongs beside the
+    site's data (sites/<id>/exclude.json), not in shared code. Hardcoding one
+    customer's paths here would silently apply them to every other customer.
+
+    Patterns are matched against the path only, so they stay stable across
+    http/https and www/non-www:
+
+        "/imprint"        exact path
+        "/internal/*"     that path and everything beneath it
+
+    A missing or empty exclude.json means "index everything", which keeps the
+    zero-config onboarding story intact — this only ever costs you something if
+    you deliberately opt in.
+    """
+    if not patterns:
+        return False
+    path = urlparse(url).path.rstrip("/").lower() or "/"
+    for pat in patterns:
+        p = str(pat).strip().rstrip("/").lower() or "/"
+        if p.endswith("/*"):
+            base = p[:-2]
+            if path == base or path.startswith(base + "/"):
+                return True
+        elif path == p:
+            return True
+    return False
+
+
+# Public alias. /ingest in api.py must apply the SAME rule as the crawler:
+# excluding a page from crawling but still letting a visitor's browser post it
+# back through /ingest would quietly reintroduce it, and the exclusion would
+# appear to "stop working" some time after every deploy.
+is_excluded = _is_excluded
+
+
 def _same_domain(url, root_netloc):
     """Stay on the site we started from; never wander onto external links."""
     return urlparse(url).netloc == root_netloc
@@ -105,6 +148,88 @@ def _is_html_url(url):
     bad = (".pdf", ".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp",
            ".zip", ".mp4", ".mp3", ".css", ".js", ".ico", ".woff", ".woff2")
     return not path.endswith(bad)
+
+
+def _sitemap_urls(root, session):
+    """Return every URL listed in the site's sitemap(s), or [] if there is none.
+
+    WHY THIS IS THE HIGHEST-VALUE SEED WE HAVE
+    ------------------------------------------
+    A BFS crawl can only reach pages that some OTHER page links to in its
+    SERVER-RENDERED html. On a modern JS site the navigation is built by the
+    framework at runtime, so `requests` sees a header with almost no <a> tags
+    and most of the site is unreachable — not missing, not blocked, just
+    invisible.
+
+    That is not hypothetical. Measured on openlake.in with a real browser,
+    opening every menu and disclosure on every page, desktop and mobile:
+
+        reachable by a non-JS crawler   8  (/, 4 nav pages, /blog, 2 posts)
+        reachable by a human clicking  12  (+ 4 /resources/* behind a desktop
+                                            dropdown, invisible on mobile)
+        listed in sitemap.xml          16  (+ /past-community, /it-admins,
+                                            /imprint, /safeguarding)
+
+    Those last four are TRUE ORPHANS — no page links to them at all. Only the
+    sitemap knows they exist, and /past-community is exactly the kind of page a
+    visitor wants and cannot find, which is the case Compass exists to solve.
+
+    So: seed the frontier from the sitemap, then let BFS run as well. The two
+    sources are complementary and neither is complete on its own — the sitemap
+    misses pages that exist but were never listed (/newsletterpage here), and
+    the link crawl misses everything above.
+
+    Whether an orphan SHOULD be surfaced is the site owner's call, not the
+    crawler's — see _is_excluded.
+
+    We follow the sitemap protocol far enough to be useful and no further:
+    <sitemapindex> (a sitemap of sitemaps) is expanded one level, which covers
+    essentially every real site.
+    read more: https://www.sitemaps.org/protocol.html
+    """
+    candidates = []
+
+    # robots.txt may name the sitemap explicitly, and that is more reliable than
+    # guessing — some sites put it at a non-standard path.
+    try:
+        r = session.get(urljoin(root, "/robots.txt"), timeout=TIMEOUT)
+        if r.status_code == 200:
+            for line in r.text.splitlines():
+                if line.lower().startswith("sitemap:"):
+                    candidates.append(line.split(":", 1)[1].strip())
+    except Exception:
+        pass
+
+    # The conventional location, tried whether or not robots.txt mentioned one.
+    # dict.fromkeys dedupes while preserving order.
+    candidates.append(urljoin(root, "/sitemap.xml"))
+    candidates = list(dict.fromkeys(candidates))
+
+    found = []
+    seen_maps = set()
+    while candidates and len(found) < MAX_PAGES:
+        sm = candidates.pop(0)
+        if sm in seen_maps:
+            continue
+        seen_maps.add(sm)
+        try:
+            r = session.get(sm, timeout=TIMEOUT)
+            if r.status_code != 200:
+                continue
+            # A 404 handler that returns HTML with status 200 is common; parsing
+            # it as XML just yields no <loc> tags, which is harmless.
+            locs = re.findall(r"<loc>\s*(.*?)\s*</loc>", r.text, re.I | re.S)
+        except Exception:
+            continue
+
+        # <sitemapindex> nests sitemaps inside <loc> too. Distinguish by the
+        # root element rather than by the URL, which can be named anything.
+        if "<sitemapindex" in r.text[:2000].lower():
+            candidates.extend(locs[:20])          # bound the fan-out
+            continue
+        found.extend(locs)
+
+    return found
 
 
 def _load_robots(root):
@@ -124,8 +249,10 @@ def _load_robots(root):
     return rp
 
 
-def _crawl(root):
+def _crawl(root, exclude=None):
     """Fetch pages breadth-first, return list of {url, title, html}.
+
+    `exclude` is the site's list of path patterns to skip (see _is_excluded).
 
     KEY DIFFERENCE FROM crawler.py: nothing is written to disk. Pages accumulate
     in the `pages` list in RAM and are handed straight to the chunker. That is
@@ -146,6 +273,22 @@ def _crawl(root):
     seen = {root}                         # O(1) dedupe of queued URLs
     queue = deque([(root, 0)])            # BFS frontier of (url, depth)
     pages = []
+
+    # ---- SEED THE FRONTIER FROM THE SITEMAP -------------------------------
+    # Everything here goes in at depth 0, so sitemap pages are fetched before
+    # anything BFS discovers and are never cut off by MAX_DEPTH. Pages listed
+    # in the sitemap are the ones the site owner considers real; links found by
+    # crawling are a best-effort supplement. See _sitemap_urls for why a link
+    # crawl alone cannot see most of a JS-rendered site.
+    for u in _sitemap_urls(root, session):
+        u = _clean_url(u)
+        if (u not in seen and _same_domain(u, root_netloc)
+                and _is_html_url(u) and u.startswith("http")
+                and not _is_excluded(u, exclude)):
+            seen.add(u)
+            queue.append((u, 0))
+    if len(seen) > 1:
+        print(f"[crawl] sitemap seeded {len(seen) - 1} url(s)")
 
     while queue and len(pages) < MAX_PAGES:
         url, depth = queue.popleft()      # popleft => breadth-first
@@ -181,19 +324,57 @@ def _crawl(root):
         if r.status_code != 200 or "text/html" not in ctype:
             continue
 
+        # ---- RECORD WHERE WE LANDED, NOT WHERE WE AIMED --------------------
+        # requests follows redirects by default, so `r.url` may differ from the
+        # `url` we requested. Storing the REQUESTED url here was a real and
+        # actively harmful bug: openlake.in 301s /fiscal-sponsorship ->
+        # /resources/web-development, so the index ended up holding web-dev
+        # resource content under a url whose page is titled "Fiscal
+        # Sponsorship". Compass's entire promise is "we take you to the exact
+        # place"; sending a visitor to the wrong URL is the worst thing this
+        # system can do, and it fails silently because the redirect resolves.
+        #
+        # It also breaks two other things: the widget's samePage check compares
+        # data.url against location.href and would never match, and re-crawling
+        # via the sitemap (which lists the POST-redirect url) would index the
+        # same page a SECOND time under its real name.
+        final = _clean_url(r.url)
+        # RE-CHECK AFTER THE REDIRECT. An allowed url can land on an excluded
+        # one; checking only the requested url would let the destination in
+        # through the back door.
+        if _is_excluded(final, exclude):
+            time.sleep(DELAY)
+            continue
+        if final != url:
+            # Mark the alias seen too, so a later link to the pre-redirect url
+            # does not queue a duplicate fetch of the same page.
+            seen.add(final)
+
         soup = BeautifulSoup(r.text, "html.parser")
         title = soup.title.get_text(strip=True) if soup.title else ""
 
+        # Two different urls can redirect to the same destination; without this
+        # the page would be chunked twice and both copies embedded.
+        if any(p["url"] == final for p in pages):
+            time.sleep(DELAY)
+            continue
+
         # Store the raw HTML in memory instead of writing a file.
-        pages.append({"url": url, "title": title, "html": r.text})
+        pages.append({"url": final, "title": title, "html": r.text})
 
         if depth < MAX_DEPTH:
             for a in soup.find_all("a", href=True):
-                nxt = _clean_url(urljoin(url, a["href"]))
+                # urljoin against `final`, not `url`: a relative href on a page
+                # reached through a redirect resolves against the page's real
+                # location. /conduct -> /resources/app-development means href
+                # "./web-development" is /resources/web-development, not
+                # /web-development.
+                nxt = _clean_url(urljoin(final, a["href"]))
                 if (nxt not in seen
                         and _same_domain(nxt, root_netloc)
                         and _is_html_url(nxt)
-                        and nxt.startswith("http")):     # rejects mailto:/tel:
+                        and nxt.startswith("http")       # rejects mailto:/tel:
+                        and not _is_excluded(nxt, exclude)):
                     seen.add(nxt)
                     queue.append((nxt, depth + 1))
 
@@ -321,7 +502,7 @@ def _chunk_page(html, url, title):
 # Functions WITHOUT a leading underscore are the module's intended interface.
 # The underscore-prefixed ones above are internal implementation detail.
 
-def index_site(root_url):
+def index_site(root_url, exclude=None):
     """
     Crawl a site and return a list of chunks ready for embedding.
     Lightweight: requests + BS4 only, no Playwright, no disk I/O.
@@ -337,7 +518,7 @@ def index_site(root_url):
     if not root_url.startswith("http"):
         root_url = "https://" + root_url
 
-    pages = _crawl(root_url)
+    pages = _crawl(root_url, exclude)
     if not pages:
         return []                          # unreachable, or robots-blocked
 

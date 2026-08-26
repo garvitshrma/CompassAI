@@ -85,7 +85,7 @@
   // after "data-"). The `||` chain provides a default, and the `me &&` guard
   // handles currentScript being null in odd loading situations — without it,
   // reading `.dataset` of null would throw and the widget would never load.
-  const API = (me && me.dataset.api) || "https://compassai-vkoe.onrender.com";
+  const API = (me && me.dataset.api) || "https://compassai-za69.onrender.com";
 
   // The site identity. Defaulting to `location.hostname` is what makes
   // installation zero-config: the widget works out which index it belongs to
@@ -392,6 +392,14 @@
     try {
       const res = await fetch(API + "/query", {
         method: "POST",
+        // WITHOUT A TIMEOUT this hangs indefinitely. On a sleeping free-tier
+        // instance the first request can take ~50s to wake the container, and
+        // the visitor stares at "Looking..." with no way to tell whether it is
+        // slow or dead. 60s is chosen to sit just past a realistic cold start,
+        // so a genuine wake-up still succeeds but a black hole does not hang
+        // the widget forever.
+        // read more: https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal/timeout_static
+        signal: AbortSignal.timeout(60000),
         // This header is what makes the browser send a CORS PREFLIGHT — an
         // automatic OPTIONS request asking the server for permission first.
         // That is why "OPTIONS" appears in allow_methods in api.py; omit it
@@ -400,6 +408,25 @@
         // fetch cannot send an object; the body must be a string.
         body: JSON.stringify({ query: q, site_id: SITE }),
       });
+      // ---- CHECK THE STATUS BEFORE PARSING ----
+      // fetch does NOT reject on an HTTP error status — a 502 is a perfectly
+      // successful fetch as far as the promise is concerned. So res.json() was
+      // being handed Render's HTML error page, throwing a SyntaxError, and
+      // landing in the catch below as the same generic "something went wrong"
+      // that a real network failure produces.
+      //
+      // That cost real debugging time: a 502 caused by the server being
+      // OOM-killed carries no CORS headers (it never reaches the app), so the
+      // browser reports it as a CORS violation, and the widget reported it as
+      // a generic failure. Three different stories for one root cause. Naming
+      // the 5xx case explicitly is what makes the next outage readable.
+      if (!res.ok) {
+        body.innerHTML = res.status >= 500
+          ? `<span class="muted">Compass is waking up or busy. Try again in a moment.</span>`
+          : `<span class="muted">Compass couldn't handle that request (${res.status}).</span>`;
+        return;
+      }
+
       const data = await res.json();
 
       // ---- the refusal path ----
@@ -467,10 +494,13 @@
         body.innerHTML = `${escapeHtml(data.explanation)} <br><a href="${data.url}">Take me there →</a>`;
       }
     } catch (e) {
-      // Catches network failure, a CORS rejection, invalid JSON, or the Render
-      // free instance being asleep. One plain message rather than exposing a
-      // raw error to a non-technical visitor.
-      body.innerHTML = `<span class="muted">Something went wrong reaching Compass.</span>`;
+      // Now only reached for genuine transport failures — HTTP error statuses
+      // are handled above. A timeout raises TimeoutError, which deserves its
+      // own wording: "it is slow" and "it is broken" call for different
+      // reactions from the visitor.
+      body.innerHTML = e && e.name === "TimeoutError"
+        ? `<span class="muted">Taking too long to respond. Try again in a moment.</span>`
+        : `<span class="muted">Couldn't reach Compass. Check your connection and try again.</span>`;
     } finally {
       // `finally` runs on every path — success, refusal, exception, and even the
       // early `return` in the not-found branch. That guarantees the button is

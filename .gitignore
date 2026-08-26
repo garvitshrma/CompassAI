@@ -8,3 +8,8 @@ venv/
 .env
 .vscode/
 .idea/
+
+# local widget testing (untracked)
+local-test.html
+sites/localhost/
+sites/127.0.0.1/
