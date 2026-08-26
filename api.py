@@ -66,6 +66,8 @@ import os           # environment variables
 import json         # reading/writing chunks.json and meta.json
 import threading    # locks, to stop two visitors triggering the same crawl twice
 
+from collections import OrderedDict   # backs the bounded LRU answer cache
+
 # asynccontextmanager turns a generator function into an async context manager.
 # FastAPI's `lifespan` uses it: everything before `yield` runs at startup,
 # everything after runs at shutdown.
@@ -110,6 +112,74 @@ from indexer import chunk_rendered
 #  database. That is exactly what "Supabase + pgvector" on the roadmap means.
 # ============================================================================
 STATE = {"sites": {}, "llm": None}
+
+# ---- the answer cache -------------------------------------------------------
+# WHY A CACHE EARNS ITS PLACE HERE, when caches are usually premature:
+#
+# A navigation widget sees the SAME handful of questions over and over. Every
+# visitor to a gym site asks about the coaches; every student asks about fees.
+# The query distribution is tiny and extremely repetitive — which is the exact
+# shape where a cache pays off enormously.
+#
+# It fixes both of this project's real problems at once:
+#   LATENCY — a hit answers in microseconds instead of ~600ms.
+#   RATE LIMITS — Groq's free tier allows 8,000 tokens per minute, and one query
+#     costs ~700, so the WHOLE SERVER can serve roughly ten uncached queries a
+#     minute across every customer site before it starts returning 429s. Cached
+#     answers cost zero tokens and do not touch that budget at all.
+#
+# CORRECTNESS: the key includes site_id, so no site can ever read another's
+# answer. It is invalidated on re-index (see _invalidate_cache) because a fresh
+# crawl can change which selector a question should resolve to.
+#
+# `OrderedDict` gives O(1) move-to-end and popitem(last=False), which is all an
+# LRU needs. Bounded size matters on a 512MB box: an unbounded dict keyed on
+# visitor-supplied strings is a memory-exhaustion vector.
+# read more: https://docs.python.org/3/library/collections.html#collections.OrderedDict
+_CACHE_MAX = 500
+_cache = OrderedDict()
+_cache_lock = threading.Lock()
+
+
+def _cache_key(sid, query):
+    """Normalise so trivial variations share one entry.
+
+    "Where are the Projects?" / "where are the projects" / "  WHERE ARE THE
+    PROJECTS " all collapse to the same key. `.split()` with no argument splits
+    on arbitrary runs of whitespace and drops empties, so re-joining with single
+    spaces normalises internal spacing too — cheaper and more robust than a regex.
+    """
+    return sid, " ".join(query.lower().split())
+
+
+def _cache_get(sid, query):
+    with _cache_lock:
+        key = _cache_key(sid, query)
+        if key in _cache:
+            # Mark as most-recently-used, so hot queries survive eviction.
+            _cache.move_to_end(key)
+            return _cache[key]
+    return None
+
+
+def _cache_put(sid, query, value):
+    with _cache_lock:
+        _cache[_cache_key(sid, query)] = value
+        # Evict oldest. last=False pops from the FRONT (least recently used).
+        while len(_cache) > _CACHE_MAX:
+            _cache.popitem(last=False)
+
+
+def _invalidate_cache(sid):
+    """Drop every cached answer for one site, after its index changes.
+
+    We build the doomed key list BEFORE deleting, rather than deleting during
+    iteration — mutating a dict while iterating it raises RuntimeError. This is
+    the standard two-pass form.
+    """
+    with _cache_lock:
+        for key in [k for k in _cache if k[0] == sid]:
+            del _cache[key]
 
 # ---- concurrency control ----------------------------------------------------
 # THE PROBLEM: /auto-register kicks off a crawl that can take 30+ seconds. If
@@ -211,7 +281,19 @@ async def lifespan(app: FastAPI):
     # Build the Groq HTTP client once. It maintains a connection pool
     # internally, so reusing it across requests avoids re-doing TCP and TLS
     # handshakes on every single query.
-    STATE["llm"] = Groq(api_key=key)
+    #
+    # THE TIMEOUT AND RETRY SETTINGS ARE A LATENCY FIX, not boilerplate.
+    # The SDK defaults to max_retries=2 with exponential backoff and a generous
+    # timeout. On a free API tier — where 429 rate-limit responses are routine,
+    # not exceptional — those defaults quietly turn ONE slow call into three
+    # sequential attempts with waits in between. A visitor watching a spinner
+    # experiences that as the widget hanging for the better part of a minute.
+    #
+    # A navigation widget is an interactive UI: an answer that arrives after ten
+    # seconds is worth less than an honest "couldn't find that" after eight. So
+    # we bound the whole thing — one retry, hard 8-second ceiling per attempt —
+    # and let answer()'s except branch turn a timeout into a clean refusal.
+    STATE["llm"] = Groq(api_key=key, timeout=8.0, max_retries=1)
 
     print(f"ready. {len(STATE['sites'])} site(s): {list(STATE['sites'])}")
 
@@ -385,10 +467,26 @@ def query(body: QueryIn):
                 "url": None, "selector": None, "heading": None,
                 "explanation": None, "confidence": None}
 
+    # CACHE LOOKUP, before any work at all. See the note at _cache: a nav widget
+    # gets asked the same dozen questions endlessly, so this is a high-hit-rate
+    # cache, and a hit costs no time and no Groq tokens.
+    hit = _cache_get(sid, body.query)
+    if hit is not None:
+        return hit
+
     # Unpack the stored 2-tuple and hand this site's data — and only this site's
     # data — to the answer pipeline. This is where tenant isolation happens.
     chunks, vecs = site
-    return answer(body.query, chunks, vecs, STATE["llm"])
+    result = answer(body.query, chunks, vecs, STATE["llm"])
+
+    # Only cache real verdicts. A transient failure (Groq down, rate-limited,
+    # timed out) must NOT be frozen into the cache for the next 500 queries —
+    # that would turn a thirty-second blip into a lasting outage for the exact
+    # questions visitors ask most. Genuine refusals ARE cached: "this site has no
+    # pricing page" is a stable fact about the index, not a transient error.
+    if result.get("reason") != "the assistant is temporarily unavailable":
+        _cache_put(sid, body.query, result)
+    return result
 
 
 @app.post("/register", response_model=RegisterOut)
@@ -468,6 +566,9 @@ def register(body: RegisterIn, x_admin_token: str = Header(default="")):
     # OLD index; after it, the new one. Because it is one dict assignment, no
     # request can ever observe a half-updated site.
     STATE["sites"][sid] = (chunks, vecs)
+    # The index changed, so previously cached answers may now point at stale
+    # selectors or miss newly-added sections. Drop them.
+    _invalidate_cache(sid)
     return {"site_id": sid, "chunks": len(chunks), "status": "indexed"}
 
 
@@ -587,6 +688,7 @@ def auto_register(body: AutoRegisterIn):
         # embed and load into memory
         chunks, vecs = embed_site(sid)
         STATE["sites"][sid] = (chunks, vecs)
+        _invalidate_cache(sid)
 
         # A DIAGNOSTIC HINT rather than a silent partial failure. Finding fewer
         # than 5 sections almost always means the site is a JS-rendered SPA and
@@ -835,6 +937,7 @@ def ingest(body: IngestIn, origin: str = Header(default="")):
         # future improvement.
         chunks, vecs = embed_site(sid)
         STATE["sites"][sid] = (chunks, vecs)
+        _invalidate_cache(sid)
         print(f"[ingest] {sid} {url}: +{len(page_chunks)}, {len(chunks)} total")
         return {"site_id": sid, "chunks": len(chunks), "status": "indexed",
                 "message": f"Indexed this page ({len(page_chunks)} sections)."}

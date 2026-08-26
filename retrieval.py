@@ -56,6 +56,7 @@ Usage from api.py:
 """
 
 import json
+import os
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -90,6 +91,20 @@ SITES_DIR = Path("sites")
 #   and that is the only reason this project can be deployed for free.
 #   read more: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"   # 384-dim, ONNX
+
+# WHERE THE 90MB OF MODEL WEIGHTS LIVE ON DISK — and why this line is worth 40
+# seconds of cold-start latency.
+#
+# fastembed defaults `cache_dir` to tempfile.gettempdir(), i.e. /tmp. On Render's
+# free tier /tmp is EPHEMERAL and is not part of the built image, so every cold
+# boot found an empty cache and re-downloaded the whole model from HuggingFace
+# before the server could answer a single request. Free instances spin down after
+# 15 minutes idle, so in practice most visitors hit a cold boot.
+#
+# Pointing the cache at a repo-relative folder lets render.yaml's buildCommand
+# download the model ONCE at build time. Build output IS baked into the image, so
+# the running container finds the weights already on disk and just mmaps them.
+MODEL_CACHE = Path(os.environ.get("FASTEMBED_CACHE", ".model_cache"))
 
 # ---- the blend weights ------------------------------------------------------
 # These sum to 1.0, so the combined score stays roughly on a 0..1 scale, which
@@ -162,7 +177,9 @@ def model():
     """
     global _model
     if _model is None:
-        _model = TextEmbedding(model_name=EMBED_MODEL)
+        # cache_dir is what keeps the weights out of ephemeral /tmp. See the
+        # MODEL_CACHE comment above — this is a cold-start fix, not a tidiness one.
+        _model = TextEmbedding(model_name=EMBED_MODEL, cache_dir=str(MODEL_CACHE))
     return _model
 
 

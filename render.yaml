@@ -2,10 +2,19 @@ services:
   - type: web
     name: compass-api
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    # Download the embedding model AT BUILD TIME, into a repo-relative folder.
+    # Build output is baked into the image; /tmp is not. Without this line every
+    # cold boot re-downloaded ~90MB from HuggingFace before serving a request,
+    # which is where most of the 30-60s cold-start latency came from.
+    buildCommand: |
+      pip install -r requirements.txt
+      python -c "from retrieval import model; model(); print('embedder cached')"
     startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: GROQ_API_KEY
         sync: false
-      - key: VOYAGE_API_KEY
+      - key: ADMIN_TOKEN
         sync: false
+      - key: FASTEMBED_CACHE
+        value: .model_cache

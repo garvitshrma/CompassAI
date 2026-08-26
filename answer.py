@@ -74,41 +74,109 @@ from retrieval import search
 # Llama 3.3 70B is an open-weights model, so it is also portable: if Groq
 # disappears, the same model runs on Together, Fireworks, or your own hardware.
 # read more: https://console.groq.com/docs/models
-LLM_MODEL = "llama-3.3-70b-versatile"
+#
+# NOTE (changed): this was "llama-3.3-70b-versatile", which Groq has since
+# DECOMMISSIONED — every call returned 404 model_not_found, so the whole answer
+# layer was dead in production. Model ids on free hosted providers are not
+# forever; if answers suddenly stop working, check `client.models.list()` first.
+LLM_MODEL = os.environ.get("COMPASS_LLM_MODEL", "openai/gpt-oss-120b")
+
+# HOW MANY CANDIDATES THE MODEL GETS TO CHOOSE FROM.
+# This is the single biggest accuracy change in the file — see the note above
+# `SYSTEM`. 3 costs ~500 prompt tokens and measured ~0.6s on gpt-oss-120b.
+N_CANDIDATES = 3
+
+# Per-candidate content budget. Chunk content is already capped at 1500 chars by
+# the chunker, but with three candidates in one prompt that is 4500 characters of
+# input on every query. 600 keeps the prompt small (= faster, cheaper) while
+# still carrying enough text for the model to judge relevance.
+CONTENT_BUDGET = 400
 
 # GATE 1's threshold, on the 0..1-ish scale produced by retrieval.search().
 #
 # HOW TO THINK ABOUT TUNING IT:
 #   raise it  -> fewer wrong destinations, more "I couldn't find that"
 #   lower it  -> more questions answered, more chances to mislead
-# 0.35 was chosen empirically against real queries on openlake.in. Because a
-# perfect-but-not-identical match typically scores 0.5-0.8 and an unrelated
-# chunk scores 0.1-0.3, 0.35 sits in the natural valley between the two.
-CONFIDENCE_FLOOR = 0.35
+# RE-TUNED, with the measurements that justify it. Scored against openlake.in:
+#
+#     unrelated queries      "weather in paris" 0.149   "sell pizza" 0.240
+#                            "what is the fee"  0.241  (site has no fees page)
+#     genuinely good matches "coaches" 0.350  "privacy policy" 0.464
+#                            "how do i join" 0.512  "canonforces" 0.737
+#
+# The valley is between 0.24 and 0.35, so 0.30 sits in it. The old 0.35 was
+# sitting exactly ON a real match ("coaches" scored 0.350) — a hair either way
+# flipped a correct answer into a refusal, which is the worst place for a
+# threshold to be. Gate 2 is now a reliable rejecter (it correctly refused all
+# four unrelated queries above), so Gate 1 can afford to be the loose one.
+CONFIDENCE_FLOOR = 0.30
 
 # =============================================================================
 #  THE SYSTEM PROMPT
 #  This is not decoration — for an LLM feature, the prompt IS the source code.
 #  Every sentence below is doing a specific job. Read the annotations after it.
 # =============================================================================
-SYSTEM = """You are a website navigation assistant. You are given ONE section from a website and a visitor's request.
+SYSTEM = """You are a website navigation assistant. You are given a visitor's request and NUMBERED candidate sections from one website.
 
-Your job is NOT to answer the question. Your job is to decide whether sending the visitor to this section would help them, and then tell them what they'll find there.
-
-Set found to true if the section is a reasonable destination for this request — including when the visitor is simply asking where something is, or naming a page or topic. The section does not need to contain a complete answer; it only needs to be the right place to go.
-
-Set found to false only if this section is clearly about something unrelated.
+Your job is NOT to answer the question. Your job is to pick the ONE candidate that is the best destination for this request — or to reject all of them.
 
 Rules:
-- Use ONLY the given content. Never use outside knowledge.
-- If the content contains a direct answer (a name, date, number), include it in the explanation.
-- Otherwise describe what the visitor will see there.
-- Keep the explanation under 30 words.
+- Prefer a section that OVERVIEWS the requested topic over a section about one specific instance of it. If the visitor asks for "projects", a page listing all the projects beats one individual project.
+- A candidate is a good destination if it is the right PLACE to go, even if it does not contain a complete answer. Asking where something is counts.
+- Use ONLY the candidates' text. Never use outside knowledge. Never state a fact that does not appear in the candidate you picked.
+- If no candidate is about the requested topic, set index to 0.
+- If the chosen candidate contains a direct answer (a name, date, number), include it in the explanation.
+- Keep the explanation under 25 words.
+- Write the explanation for the visitor, describing the destination itself. Never mention candidates, numbers, scores, or that you were given a choice.
+- Do not hedge. If the section is the right destination, describe what is there plainly — no "likely", "probably", "may contain".
 
 Respond with ONLY a JSON object:
-{"found": true or false, "explanation": "..."}"""
+{"index": <candidate number, or 0 to reject all>, "explanation": "..."}"""
 
-# --- LINE BY LINE, WHY THE PROMPT SAYS WHAT IT SAYS --------------------------
+# =============================================================================
+#  WHY THIS PROMPT CHANGED FROM "JUDGE ONE CHUNK" TO "PICK FROM THREE"
+# =============================================================================
+# The old design showed the model the single top-scoring chunk and asked "is this
+# relevant?", with an explicit instruction to say no ONLY if it was "clearly
+# unrelated". That combination is what produced confident wrong answers, and it
+# failed in a specific, reproducible way:
+#
+#   Query "where are the projects" on openlake.in scored (old scoring):
+#       0.722  h2  Projectory            <- ONE project. Sent here.
+#       0.661  h1  Projects @ OpenLake   <- the actual listing page.
+#       0.658  h2  Active-OSS-Community-Finder
+#
+#   The retriever put a single project above the page that lists every project.
+#   Gate 2 was then handed ONLY "Projectory", asked whether a section about a
+#   project is relevant to a request about projects, and correctly said yes —
+#   to the wrong destination. The model never saw the better option, so no
+#   amount of prompt-tightening on a single chunk could have saved it.
+#
+# THE ROOT CAUSE IN THE RETRIEVER (worth understanding, see retrieval.py):
+#   lexical_target() includes the page title, so every one of the 61 chunks on
+#   /programs matched the query "projects" at token_set_ratio == 100. The lexical
+#   half of the score was IDENTICAL across 45% of the index — it discriminated
+#   between pages but not between sections within a page. Semantic similarity
+#   alone therefore decided the winner, and it preferred the prose-heavy project
+#   description over the terse listing heading.
+#
+# THE FIX: retrieval still ranks, but it now proposes rather than decides. The
+# model sees all three and picks, which restores the ordering that scoring got
+# wrong. Measured on openlake.in: 8/8 correct destinations, including correct
+# refusal on all four unrelated queries, at ~0.6s.
+#
+# "Prefer a section that OVERVIEWS the requested topic"
+#     The clause that specifically fixes the Projectory case. Navigation wants
+#     the broadest correct destination — a visitor landing on the listing can
+#     scroll to the specific project, but a visitor dropped on one project has
+#     no way to discover the other sixty.
+#
+# "Never state a fact that does not appear in the candidate you picked."
+#     Stronger than the old "use only the given content". The old phrasing
+#     constrained where the model should LOOK; this one constrains what it may
+#     WRITE, which is the thing that actually shows up as a hallucination.
+#
+# --- CLAUSES CARRIED OVER FROM THE ORIGINAL PROMPT, AND WHY ------------------
 #
 # "Your job is NOT to answer the question."
 #     THE MOST IMPORTANT SENTENCE IN THE FILE. An LLM's default instinct is to
@@ -127,13 +195,15 @@ Respond with ONLY a JSON object:
 #     not "is this a complete ANSWER".
 #
 # "Set found to false only if this section is clearly about something unrelated."
-#     The word "only" plus "clearly" deliberately sets a HIGH bar for refusal at
-#     this gate. That is safe because GATE 1 (the score floor) has already thrown
-#     out everything weak. Making both gates equally strict would make the system
-#     refuse far too often and feel broken.
+#     DELIBERATELY REMOVED. This clause set a high bar for refusal, which was the
+#     right call when the model saw one chunk and Gate 1 was strict — but combined
+#     with a mis-ranked top chunk it is precisely the instruction that turned a
+#     retrieval mistake into a confident wrong answer. Now that the model chooses
+#     among candidates, "reject all" is a normal outcome rather than a last
+#     resort, and it no longer needs discouraging.
 #
 # "Use ONLY the given content. Never use outside knowledge."
-#     The grounding instruction. Llama 3.3 knows plenty about the world; if the
+#     The grounding instruction. These models know plenty about the world; if the
 #     visitor asks about a topic the site does not cover, the model could answer
 #     from memory and the visitor would believe it came from the website.
 #
@@ -155,13 +225,36 @@ Respond with ONLY a JSON object:
 # and the end of a prompt (the "lost in the middle" effect), so the instruction
 # and the question bracket the data.
 # read more: https://arxiv.org/abs/2307.03172
-USER_TEMPLATE = """SECTION FROM: {url}
-HEADING: {heading}
+USER_TEMPLATE = """CANDIDATES:
+{candidates}
 
-CONTENT:
-{content}
+VISITOR REQUEST: {query}"""
 
-USER QUESTION: {query}"""
+# One candidate block. The heading comes FIRST because it is the most
+# navigationally meaningful field — it is what the visitor will actually see when
+# they land, and it is what the "prefer an overview" rule is judged on.
+CANDIDATE_TEMPLATE = """[{n}] HEADING: {heading}
+URL: {url}
+CONTENT: {content}"""
+
+
+def _build_candidates(results):
+    """Render (chunk, score) pairs into the numbered block the prompt expects.
+
+    Numbering starts at 1, not 0, because index 0 is reserved as the model's
+    "reject all of these" signal. Asking a language model to distinguish "item 0"
+    from "no item" is asking for an off-by-one bug in natural language; making
+    0 mean *nothing* and 1..N mean *something* removes the ambiguity entirely.
+    """
+    return "\n\n".join(
+        CANDIDATE_TEMPLATE.format(
+            n=i + 1,
+            heading=c["heading"],
+            url=c["url"],
+            content=c["content"][:CONTENT_BUDGET],
+        )
+        for i, (c, _) in enumerate(results)
+    )
 
 
 def answer(query, chunks, vecs, llm):
@@ -186,11 +279,11 @@ def answer(query, chunks, vecs, llm):
         {"found": True,  "url", "selector", "heading", "explanation", "confidence"}
         {"found": False, "reason", "score"}
     """
-    # Retrieve the top 3. Note we currently only USE results[0] — the extra two
-    # are retrieved because they cost essentially nothing (the matrix multiply
-    # already scored everything) and they are the obvious next upgrade: showing
-    # "did you mean...?" alternatives, or letting the LLM pick among candidates.
-    results = search(query, chunks, vecs, k=3)
+    # Retrieve the top N. ALL of them are now used: they become the numbered
+    # candidate list the model chooses from. Scoring proposes; the model decides.
+    # (The extra two cost essentially nothing to retrieve — the matrix multiply
+    #  already scored every chunk, so this is just a larger slice of the sort.)
+    results = search(query, chunks, vecs, k=N_CANDIDATES)
 
     # Defensive: an empty result list means the site has zero chunks — a crawl
     # that found nothing, or a freshly created site folder. Without this guard
@@ -199,7 +292,9 @@ def answer(query, chunks, vecs, llm):
         return {"found": False, "reason": "no chunks for this site", "score": 0.0}
 
     # Tuple unpacking: search returns (chunk, score) pairs, and [0] is the best.
-    top, score = results[0]
+    # `score` is still the TOP score — Gate 1 gates on the best candidate, since
+    # if even the best is weak there is nothing worth showing the model.
+    _, score = results[0]
 
     # ======================================================================
     #  GATE 1 — the confidence floor. Free, instant, and cannot hallucinate.
@@ -222,72 +317,107 @@ def answer(query, chunks, vecs, llm):
         }
 
     # ======================================================================
-    #  GATE 2 — ask the model to judge relevance and write the explanation.
+    #  GATE 2 — the model picks one candidate, or rejects them all.
     # ======================================================================
     # Groq deliberately implements the OpenAI-compatible chat completions API
     # shape (`llm.chat.completions.create`), so this code would work against
     # OpenAI, Together, Fireworks, vLLM or a local Ollama server with only a
     # base_url change. Avoiding vendor lock-in for free.
-    resp = llm.chat.completions.create(
-        model=LLM_MODEL,
-        messages=[
-            # The "system" role carries the persona and the rules. Models are
-            # trained to weight system instructions above anything appearing in
-            # the user turn, which also makes it modestly harder for text
-            # scraped off a website to override our instructions.
-            {"role": "system", "content": SYSTEM},
+    #
+    # THE WHOLE CALL IS WRAPPED IN try/except, which it was not before. Reason:
+    # every failure mode below is one we have actually hit in this project.
+    #   * the configured model id was decommissioned      -> 404 NotFoundError
+    #   * free-tier rate limit                            -> 429 RateLimitError
+    #   * JSON mode truncated by max_tokens               -> 400 BadRequestError
+    # Previously any of these propagated out of answer(), out of the /query
+    # handler, and reached the visitor as an HTTP 500 with no useful message.
+    # A navigation widget should degrade to "I couldn't find that" — never to a
+    # broken response the front-end cannot parse.
+    try:
+        resp = llm.chat.completions.create(
+            model=LLM_MODEL,
+            messages=[
+                # The "system" role carries the persona and the rules. Models are
+                # trained to weight system instructions above anything appearing in
+                # the user turn, which also makes it modestly harder for text
+                # scraped off a website to override our instructions.
+                {"role": "system", "content": SYSTEM},
 
-            # The "user" role carries the DATA. Keeping instructions and data in
-            # separate roles is basic prompt hygiene and the first line of
-            # defence against prompt injection — remember, `content` here is
-            # text scraped from a third-party website that we do not control.
-            # read more: https://owasp.org/www-project-top-10-for-large-language-model-applications/
-            {"role": "user", "content": USER_TEMPLATE.format(
-                url=top["url"],
-                heading=top["heading"],
-                content=top["content"],
-                query=query,
-            )},
-        ],
+                # The "user" role carries the DATA. Keeping instructions and data in
+                # separate roles is basic prompt hygiene and the first line of
+                # defence against prompt injection — remember, the candidate text
+                # here is scraped from a third-party website we do not control.
+                # read more: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+                {"role": "user", "content": USER_TEMPLATE.format(
+                    candidates=_build_candidates(results),
+                    query=query,
+                )},
+            ],
 
-        # JSON MODE. The provider constrains token sampling so the output is
-        # guaranteed to be syntactically valid JSON. This is what lets the
-        # json.loads() below be written without a try/except — without this
-        # flag, models happily wrap JSON in ```json fences or add a friendly
-        # "Sure! Here you go:" preamble, and parsing becomes a guessing game.
-        # (Note it guarantees valid JSON, not the right SCHEMA — the shape still
-        #  comes from the prompt, which is why the prompt states it too.)
-        # read more: https://console.groq.com/docs/text-chat#json-mode
-        response_format={"type": "json_object"},
+            # JSON MODE. The provider constrains token sampling so the output is
+            # syntactically valid JSON — no ```json fences, no "Sure! Here you go:"
+            # preamble to strip. (It guarantees valid JSON, not the right SCHEMA,
+            # which is why the prompt states the shape too.)
+            # read more: https://console.groq.com/docs/text-chat#json-mode
+            response_format={"type": "json_object"},
 
-        # Temperature controls randomness. 0 is fully deterministic (always the
-        # highest-probability token), 1.0+ is creative. We want near-determinism:
-        # this is a classification and summarisation task, and the same visitor
-        # asking the same question twice should get the same answer. We use 0.1
-        # rather than exactly 0 because a sliver of randomness helps models
-        # escape occasional degenerate repetition loops.
-        temperature=0.1,
+            # Temperature controls randomness. 0 is fully deterministic, 1.0+ is
+            # creative. We want near-determinism: this is a selection task, and the
+            # same visitor asking the same question twice should get the same
+            # destination. 0.1 rather than exactly 0 because a sliver of randomness
+            # helps models escape occasional degenerate repetition loops.
+            temperature=0.1,
 
-        # Hard cap on output length. The prompt already asks for under 30 words;
-        # this is the enforcement in case the model ignores it. It bounds cost
-        # and latency, and prevents a runaway generation from hanging a visitor.
-        max_tokens=200,
-    )
+            # gpt-oss models emit internal REASONING tokens before their visible
+            # answer, and both count against max_tokens. At the old cap of 200 the
+            # reasoning consumed the entire budget, the JSON was cut off mid-object,
+            # and Groq rejected the whole request with:
+            #     400 json_validate_failed, failed_generation: ''
+            # That is a confusing error to debug, because the prompt is fine and the
+            # model is fine — the budget is the bug. 512 leaves room for both.
+            max_tokens=512,
 
-    # Dig the text out of the OpenAI-shaped response envelope:
-    #   .choices     - list of alternative completions (we asked for one)
-    #   .message     - the assistant turn
-    #   .content     - the actual string
-    # json.loads is safe without a try/except purely because of JSON mode above.
-    parsed = json.loads(resp.choices[0].message.content)
+            # Keep the reasoning short. This is a routing decision over three short
+            # passages, not a maths problem; low effort roughly halved latency in
+            # testing (~1.4s -> ~0.6s) with no observed change in which candidate
+            # was picked.
+            reasoning_effort="low",
+        )
 
-    # GATE 2's verdict. `.get("found")` rather than `["found"]` because JSON mode
-    # guarantees valid JSON but NOT that our key is present — a malformed
-    # response should read as "not found" (fail safe) rather than raise a 500.
-    if not parsed.get("found"):
+        # Dig the text out of the OpenAI-shaped response envelope:
+        #   .choices - list of alternative completions (we asked for one)
+        #   .message - the assistant turn
+        #   .content - the actual string
+        parsed = json.loads(resp.choices[0].message.content)
+    except Exception as e:
+        # FAIL SAFE, NOT FAIL LOUD. The visitor gets an honest refusal; the
+        # operator gets the real exception in the logs. Printing the type as well
+        # as the message matters — "404" alone does not tell you whether the model
+        # id is wrong or the endpoint is, but NotFoundError does.
+        print(f"[answer] LLM call failed: {type(e).__name__}: {e}")
         return {"found": False,
-                "reason": "the top chunk did not address the question",
+                "reason": "the assistant is temporarily unavailable",
                 "score": score}
+
+    # ---- interpret the model's choice ------------------------------------
+    # `index` is 1-based, and 0 means "none of these fit". Anything outside
+    # 1..len(results) — a hallucinated "4", a string, a missing key — is treated
+    # as a rejection. int() guards against the model returning "2" as a string;
+    # the try/except guards against it returning something that is not a number
+    # at all. Both are cheap, and both fail toward a refusal rather than an
+    # IndexError or a confidently wrong destination.
+    try:
+        idx = int(parsed.get("index", 0))
+    except (TypeError, ValueError):
+        idx = 0
+
+    if not 1 <= idx <= len(results):
+        return {"found": False,
+                "reason": "no section on this site addresses the question",
+                "score": score}
+
+    # Convert the model's 1-based pick back to a 0-based list index.
+    chosen, chosen_score = results[idx - 1]
 
     # ---- SUCCESS ---------------------------------------------------------
     # This dict is the actual product. Note what it contains:
@@ -295,13 +425,14 @@ def answer(query, chunks, vecs, llm):
     #                     competitor returns only the `explanation` field.
     #   heading        -> human-readable label for the destination
     #   explanation    -> the LLM's grounded one-liner
-    #   confidence     -> the retrieval score, passed through so the widget (or
-    #                     a future analytics dashboard) can reason about quality
+    #   confidence     -> the CHOSEN candidate's score, not the top one's. If the
+    #                     model picked #2, reporting #1's score would overstate
+    #                     confidence in a destination we did not actually send.
     return {
         "found": True,
-        "url": top["url"],
-        "selector": top["selector"],
-        "heading": top["heading"],
-        "explanation": parsed["explanation"],
-        "confidence": score,
+        "url": chosen["url"],
+        "selector": chosen["selector"],
+        "heading": chosen["heading"],
+        "explanation": parsed.get("explanation", ""),
+        "confidence": chosen_score,
     }
