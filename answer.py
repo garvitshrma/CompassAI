@@ -257,7 +257,7 @@ def _build_candidates(results):
     )
 
 
-def answer(query, chunks, vecs, llm):
+def answer(query, chunks, vecs, llm, floor=CONFIDENCE_FLOOR):
     """
     Full query -> response pipeline for ONE site.
 
@@ -309,10 +309,12 @@ def answer(query, chunks, vecs, llm):
     # immediately whether the problem is retrieval (score way below the floor →
     # the chunk is bad or missing) or the threshold (score 0.34 → just tune it).
     # Good failure messages are an engineering feature, not a nicety.
-    if score < CONFIDENCE_FLOOR:
+    # `floor` defaults to CONFIDENCE_FLOOR. page_query.py passes a lower one: a
+    # single page's sections are short, so their scores run lower than a crawl's.
+    if score < floor:
         return {
             "found": False,
-            "reason": f"no confident match (top score {score:.3f} below floor {CONFIDENCE_FLOOR})",
+            "reason": f"no confident match (top score {score:.3f} below floor {floor})",
             "score": score,
         }
 

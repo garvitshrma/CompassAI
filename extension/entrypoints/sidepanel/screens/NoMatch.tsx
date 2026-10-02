@@ -38,6 +38,11 @@ export function NoMatchScreen({
           <div>
             <h2>Nothing on this page mentions “{result.topic}”</h2>
             <p>{result.detail}</p>
+            {result.offline && (
+              <p className="hint" style={{ padding: 0, marginTop: 6 }}>
+                Couldn’t reach the Compass server, so only keywords were checked. Try again in a minute.
+              </p>
+            )}
           </div>
         </div>
 

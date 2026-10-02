@@ -6,11 +6,12 @@
 //                   └──(ask, nothing found)──► nomatch
 //   restricted page (chrome://…) ──► can't read
 //
-// Page data comes from ./data.ts. Reading the page and scrolling to sections are real;
-// answers are still local keyword matching until the backend is connected.
+// Page data comes from ./data.ts: reading the page, answering (via the backend) and
+// scrolling to sections are all real.
 
 import { useEffect, useRef, useState } from 'react';
 import { Header, type Status } from './components';
+import { wakeServer } from './config';
 import {
   addRecent,
   analyzePage,
@@ -83,6 +84,9 @@ export default function App() {
       browser.tabs.onUpdated.removeListener(onUpdated);
     };
   }, []);
+
+  // ---- wake the backend early (Render's free plan sleeps when idle) ----
+  useEffect(wakeServer, []);
 
   // ---- recent questions live in chrome.storage, and stay in sync ----
   useEffect(() => {

@@ -24,3 +24,6 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Local settings (e.g. WXT_API_URL=http://localhost:8000)
+.env.local

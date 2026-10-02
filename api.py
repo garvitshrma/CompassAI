@@ -77,12 +77,14 @@ from pathlib import Path
 
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 from groq import Groq
 
 from retrieval import load_all_sites, embed_site, site_dir, SITES_DIR, model
 from answer import answer
 from indexer import index_site
+from page_query import query_page   # the Chrome extension's endpoint (/page-query)
 
 # Upper bound on the HTML a browser may POST to /ingest.
 # WHY: without a cap, one visitor (or one attacker) posting a 500MB page would
@@ -487,6 +489,52 @@ def query(body: QueryIn):
     if result.get("reason") != "the assistant is temporarily unavailable":
         _cache_put(sid, body.query, result)
     return result
+
+
+# ---------- Chrome extension ----------
+# The extension works on ANY website, so instead of a site_id it sends the
+# sections of the page the visitor is looking at (read in their browser).
+# See page_query.py for how they are ranked. Nothing is stored.
+
+class PageSection(BaseModel):
+    id: str                 # the extension's own id for the heading, e.g. "h5"
+    tag: str = "H2"         # H1 / H2 / H3
+    heading: str
+    summary: str = ""       # a little text from under the heading
+
+
+class PageQueryIn(BaseModel):
+    question: str
+    url: str = ""
+    title: str = ""
+    sections: list[PageSection]
+
+
+class PageQueryOut(BaseModel):
+    found: bool
+    id: str | None = None             # which section answers the question
+    heading: str | None = None
+    explanation: str | None = None
+    confidence: float | None = None
+    reason: str | None = None
+    matches: list[dict] = []          # top sections by score: [{"id", "score"}]
+
+
+@app.post("/page-query", response_model=PageQueryOut)
+def page_query(body: PageQueryIn):
+    """Answer a question about one page the extension sent. Stateless."""
+    if not body.question.strip():
+        raise HTTPException(status_code=400, detail="question required")
+    if len(body.sections) > 400:
+        raise HTTPException(status_code=413, detail="too many sections")
+    return query_page(body.question, body.url, body.title,
+                      [s.model_dump() for s in body.sections], STATE["llm"])
+
+
+@app.get("/privacy", response_class=HTMLResponse)
+def privacy():
+    """The extension's privacy policy. The Chrome Web Store needs a public URL for it."""
+    return (Path(__file__).parent / "privacy.html").read_text(encoding="utf-8")
 
 
 @app.post("/register", response_model=RegisterOut)

@@ -1,17 +1,20 @@
 // Everything the side panel knows about "the page" and "the answer" comes through this file.
 //
 //   - analyzePage  REAL: asks the content script in the active tab for its headings (see tab.ts)
-//   - askCompass   still local keyword matching -> later: POST the question to the backend's /query
+//   - askCompass   REAL: sends the question + this page's headings to the backend's /page-query,
+//                  falls back to local keyword matching if the server can't be reached
 //   - navigateTo   REAL: tells the content script to scroll to the heading and highlight it
 // The screens only depend on the types below, so they shouldn't need to change.
 
 import type { SuggestionIcon } from './icons';
 import { activeTabUrl, readActiveTab, type TabRead } from './tab';
+import { ANSWER_TIMEOUT_MS, API_URL } from './config';
 
 export type Confidence = 'high' | 'medium' | 'low';
 
 export interface Section {
   id: string;
+  level: string;         // "H1" | "H2" | "H3"
   number: string;        // "§7"
   group: string;         // "Billing"
   title: string;         // "Refunds and Cancellations"
@@ -38,6 +41,7 @@ export interface Suggestion {
 export interface PageInfo {
   tabId: number | null;  // the browser tab this page is in (null for restricted pages)
   url: string;
+  title: string;         // the page's <title>
   domain: string;
   path: string;
   badge: string;         // two letters shown in the favicon box
@@ -55,8 +59,23 @@ export interface Match {
 }
 
 export type QueryResult =
-  | { kind: 'found'; headline: string; best: Match; others: Match[] }
-  | { kind: 'none'; topic: string; detail: string; link?: PageLink; closest?: Match; alternatives: string[] };
+  | {
+      kind: 'found';
+      headline: string;
+      best: Match;
+      others: Match[];
+      explanation?: string; // why this section answers it (from the server's AI)
+      offline?: boolean;    // true = the server couldn't be reached; this is keyword matching
+    }
+  | {
+      kind: 'none';
+      topic: string;
+      detail: string;
+      link?: PageLink;
+      closest?: Match;
+      alternatives: string[];
+      offline?: boolean;
+    };
 
 /* ------------------------------------------------------------------ */
 /* Turning what the content script read into a PageInfo               */
@@ -78,6 +97,7 @@ function shell(url: string, restricted = false): PageInfo {
   return {
     tabId: null,
     url,
+    title: '',
     domain,
     path,
     badge: restricted ? '' : domain.slice(0, 2).toLowerCase(),
@@ -93,6 +113,7 @@ function shell(url: string, restricted = false): PageInfo {
 function toPageInfo(read: Extract<TabRead, { ok: true }>): PageInfo {
   const page = shell(read.url);
   page.tabId = read.tabId;
+  page.title = read.title;
   const rank = (tag: string) => Number(tag[1]); // "H2" -> 2
 
   page.screens = Math.max(read.screens, 1);
@@ -102,6 +123,7 @@ function toPageInfo(read: Extract<TabRead, { ok: true }>): PageInfo {
     const parent = read.headings.slice(0, i).reverse().find((p) => rank(p.tag) < rank(h.tag));
     return {
       id: `h${i}`,
+      level: h.tag,
       number: '', // real pages have no "§7" numbering
       group: parent?.text ?? read.title,
       title: h.text,
@@ -195,9 +217,8 @@ export async function analyzePage(onStep: (step: number, shell: PageInfo) => voi
   return toPageInfo(read);
 }
 
-/** Answers a question about the page. Later: POST /query on the backend. */
-export async function askCompass(page: PageInfo, question: string): Promise<QueryResult> {
-  await wait(300);
+/** Matches the question against heading words, on this computer. Used when the server can't be reached. */
+function askLocally(page: PageInfo, question: string): QueryResult {
   const words = keywords(question);
   const ranked = page.sections
     .map((section) => ({ section, score: scoreSection(section, words) }))
@@ -225,6 +246,103 @@ export async function askCompass(page: PageInfo, question: string): Promise<Quer
     closest: closestSection ? { section: closestSection, confidence: 'low' } : undefined,
     alternatives: link?.alternatives ?? [],
   };
+}
+
+/* ------------------------------------------------------------------ */
+/* Asking the backend                                                  */
+/* ------------------------------------------------------------------ */
+
+/** What the backend's /page-query sends back (see page_query.py). */
+interface ServerAnswer {
+  found: boolean;
+  id: string | null;
+  explanation: string | null;
+  reason: string | null;
+  matches: { id: string; score: number }[];
+}
+
+/** Only scheme://host/path leaves the browser: query strings can hold session ids or personal data. */
+function shareableUrl(url: string) {
+  try {
+    const u = new URL(url);
+    return u.origin + u.pathname;
+  } catch {
+    return '';
+  }
+}
+
+const scoreToConfidence = (score: number): Confidence => (score >= 0.4 ? 'high' : score >= 0.28 ? 'medium' : 'low');
+
+async function askServer(page: PageInfo, question: string): Promise<ServerAnswer> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), ANSWER_TIMEOUT_MS);
+  try {
+    const res = await fetch(`${API_URL}/page-query`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: ctrl.signal,
+      body: JSON.stringify({
+        question,
+        url: shareableUrl(page.url),
+        title: page.title,
+        // Only the headings and the short text under them, never the whole page.
+        sections: page.sections.map((s) => ({ id: s.id, tag: s.level, heading: s.title, summary: s.summary })),
+      }),
+    });
+    if (!res.ok) throw new Error(`server answered ${res.status}`);
+    const data = (await res.json()) as ServerAnswer;
+    if (data.reason === 'the assistant is temporarily unavailable') throw new Error(data.reason);
+    return data;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** Turns the server's answer into the shape the screens use. */
+function fromServer(page: PageInfo, question: string, data: ServerAnswer): QueryResult {
+  const byId = (id: string | null) => page.sections.find((s) => s.id === id);
+  const scoreOf = (id: string) => data.matches.find((m) => m.id === id)?.score ?? 0;
+  const best = data.found ? byId(data.id) : undefined;
+
+  if (best) {
+    const others = data.matches
+      .filter((m) => m.id !== best.id && m.score >= 0.2)
+      .slice(0, 3)
+      .map((m) => byId(m.id))
+      .filter((s): s is Section => !!s)
+      .map((section) => ({ section, confidence: scoreToConfidence(scoreOf(section.id)) }));
+    return {
+      kind: 'found',
+      headline: `I found ${best.noun}.`,
+      best: { section: best, confidence: scoreToConfidence(scoreOf(best.id)) },
+      others,
+      explanation: data.explanation ?? undefined,
+    };
+  }
+
+  const top = data.matches[0];
+  const closest = top && top.score >= 0.15 ? byId(top.id) : undefined;
+  return {
+    kind: 'none',
+    topic: keywords(question).join(' ') || question.trim(),
+    detail: `Compass checked all ${page.sections.length} sections on this page.`,
+    closest: closest ? { section: closest, confidence: 'low' } : undefined,
+    alternatives: [],
+  };
+}
+
+/**
+ * Answers a question about the page: asks the backend, and if it can't be reached
+ * (offline, asleep for too long, or an error), falls back to keyword matching.
+ */
+export async function askCompass(page: PageInfo, question: string): Promise<QueryResult> {
+  if (page.sections.length === 0) return askLocally(page, question);
+  try {
+    return fromServer(page, question, await askServer(page, question));
+  } catch (err) {
+    console.warn('[Compass] server unavailable, using keyword matching:', err);
+    return { ...askLocally(page, question), offline: true };
+  }
 }
 
 export type NavResult = 'arrived' | 'stopped' | 'lost';

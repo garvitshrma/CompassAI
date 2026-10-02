@@ -270,7 +270,7 @@ mark {
 .sub-head { padding: 6px 8px 2px; font-size: 12px; font-weight: 500; color: var(--ink-3); }
 
 /* confidence bars */
-.conf { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; }
+.conf { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 500; white-space: nowrap; flex-shrink: 0; }
 .conf .bars { display: flex; gap: 2px; align-items: flex-end; }
 .conf .bars i { width: 3px; border-radius: 1px; background: var(--line-strong); }
 .conf .bars i:nth-child(1) { height: 5px; }

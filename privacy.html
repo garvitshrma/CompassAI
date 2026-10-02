@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compass — Privacy Policy</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; background: #f6f3eb; color: #17160f; }
+  main { max-width: 720px; margin: 0 auto; padding: 40px 20px 64px; }
+  h1 { font-size: 30px; margin: 0 0 4px; }
+  h2 { font-size: 20px; margin: 32px 0 8px; }
+  p, li { color: #3d3a33; }
+  .muted { color: #6b6559; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #ddd6c6; vertical-align: top; }
+  th { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: #6b6559; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #15140f; color: #f2efe6; }
+    p, li { color: #d6d1c4; }
+    .muted, th { color: #a39d8f; }
+    th, td { border-color: #34312a; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Compass — Privacy Policy</h1>
+  <p class="muted">Effective 2 October 2026 · Applies to the Compass Chrome extension</p>
+
+  <p>Compass helps you find things on the web page you are viewing: you ask a question in the side panel, and Compass scrolls the page to the section that answers it. This policy explains what data that involves.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Compass only reads the tab you are looking at, and only while its side panel is open.</li>
+    <li>Nothing leaves your browser until you ask a question.</li>
+    <li>When you ask, Compass sends your question and that page's headings to our server to find the best match. It is not stored.</li>
+    <li>No accounts, no ads, no analytics, no selling of data.</li>
+  </ul>
+
+  <h2>What Compass reads on your computer</h2>
+  <p>When the side panel is open, Compass reads the page in the active tab: its address, its title, its headings (h1–h3), where each heading sits on the page, and up to about 200 characters of text under each heading. This happens inside your browser and is used to show the page's sections and to scroll to them.</p>
+  <p>Compass cannot read Chrome's own pages (such as Settings or the Chrome Web Store).</p>
+
+  <h2>What is sent to our server, and when</h2>
+  <p>Only when you ask a question, Compass sends the following to the Compass server so it can work out which section answers it:</p>
+  <table>
+    <thead><tr><th>Data</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Your question</td><td>To find the matching section</td></tr>
+      <tr><td>The page address, without query strings or <code>#</code> fragments</td><td>Words in the path help matching</td></tr>
+      <tr><td>The page title, its headings, and the short text under each heading</td><td>These are what Compass searches</td></tr>
+    </tbody>
+  </table>
+  <p>The server turns these into numeric embeddings, picks a few candidate sections, and asks an AI model to choose the best one. To do that, your question and up to three candidate sections are sent to <a href="https://groq.com/privacy-policy/">Groq</a>, our AI model provider.</p>
+  <p>Compass does <strong>not</strong> send the full page, form contents, passwords, cookies, or your browsing history.</p>
+
+  <h2>What is stored</h2>
+  <ul>
+    <li><strong>On our server:</strong> nothing from your request is written to disk. A short-lived in-memory cache keeps the numeric embeddings of recently asked-about pages (not the text) so follow-up questions are faster. It is cleared whenever the server restarts. Our hosting provider (Render) keeps standard request logs, such as IP address, time and the endpoint called, for operating the service.</li>
+    <li><strong>In your browser:</strong> your last few questions and the site they were asked on, shown under "Recent". They are stored with Chrome's extension storage on your device only. You can clear them with the Clear button, or by removing the extension.</li>
+  </ul>
+
+  <h2>What we don't do</h2>
+  <ul>
+    <li>We don't sell or rent your data, or use it for advertising.</li>
+    <li>We don't use it to determine creditworthiness or for lending purposes.</li>
+    <li>We don't build profiles of you or track you across sites.</li>
+    <li>Compass does not run any code downloaded from our server. Server replies are treated as data only.</li>
+  </ul>
+  <p>The use of information received by Compass adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/policies">Chrome Web Store User Data Policy</a>, including the Limited Use requirements.</p>
+
+  <h2>Permissions Compass asks for</h2>
+  <table>
+    <thead><tr><th>Permission</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td>Read and change data on websites you visit</td><td>Reading the headings of the active tab, scrolling it, and drawing the highlight around the section you asked for. Compass never submits forms or clicks anything on the page.</td></tr>
+      <tr><td>Side panel</td><td>Showing Compass next to the page.</td></tr>
+      <tr><td>Storage</td><td>Remembering your recent questions on your device.</td></tr>
+      <tr><td>Scripting</td><td>Adding Compass to tabs that were already open before it was installed.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be posted at this address with a new effective date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about privacy: <strong>[YOUR CONTACT EMAIL]</strong></p>
+</main>
+</body>
+</html>

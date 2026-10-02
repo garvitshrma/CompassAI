@@ -63,7 +63,7 @@ export function ResultScreen({
             <ConfidenceBadge level={confidence} />
           </div>
           <h2>{section.title}</h2>
-          {section.summary && <p>{section.summary}</p>}
+          {result.explanation ? <p>{result.explanation}</p> : section.summary && <p>{section.summary}</p>}
           {summary && (
             <ul className="bullets">
               {section.points.map((p) => (
@@ -83,6 +83,12 @@ export function ResultScreen({
             </div>
           </div>
 
+          {result.offline && (
+            <p className="hint" style={{ padding: 0 }}>
+              Couldn’t reach the Compass server, so this match is based on keywords only.
+            </p>
+          )}
+
           {notice && (
             <p role="alert" style={{ color: 'var(--alert)', fontSize: 12.5 }}>
               {notice}
@@ -98,14 +104,20 @@ export function ResultScreen({
           </button>
 
           <div className="pair">
-            <button className="btn" onClick={() => copy(sectionLink(page, section))}>
+            <button
+              className="btn"
+              onClick={() => copy(sectionLink(page, section))}
+              style={section.points.length === 0 ? { gridColumn: '1 / -1' } : undefined}
+            >
               {copied ? <Check size={14} /> : <LinkIcon size={14} />}
               {copied ? 'Copied' : 'Copy link'}
             </button>
-            <button className="btn" onClick={() => setSummary(!summary)} aria-pressed={summary} disabled={section.points.length === 0}>
-              <Lines size={14} />
-              {summary ? 'Hide summary' : 'Summarize'}
-            </button>
+            {section.points.length > 0 && (
+              <button className="btn" onClick={() => setSummary(!summary)} aria-pressed={summary}>
+                <Lines size={14} />
+                {summary ? 'Hide summary' : 'Summarize'}
+              </button>
+            )}
           </div>
         </section>
 
