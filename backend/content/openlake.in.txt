@@ -4,22 +4,31 @@ title: OpenLake
  EVERYTHING BELOW IS THE BOT'S ENTIRE KNOWLEDGE FOR openlake.in.
  If a fact is not written here, the bot refuses rather than guesses.
 
- Sourced from openlake.in (home, /philosophy, /programs, /newevents) on
- 28 October 2026. Text above the first heading is ignored by the parser.
+ Sourced from openlake.in (home, /philosophy, /programs, /newevents) and from
+ the GitHub organisation listing at github.com/orgs/OpenLake/repositories,
+ read on 28 October 2026. Text above the first heading is ignored by the parser.
 
  HEADINGS ARE WRITTEN AS QUESTIONS ON PURPOSE. Retrieval fuzzy-matches the
  query against heading text, so "# Is there a fee to join?" beats "# Fees".
  They are search keys, not a table of contents. Keep them SHORT: a long
  heading carries extra words that dilute the lexical score.
 
+ WHY THERE IS ONE CHUNK PER PROJECT. The grouped chunks ("# What campus tools
+ does OpenLake build") answer browsing questions well and direct ones badly:
+ someone asking "what is Sampoorna" was matching a chunk about five other
+ apps. A named project needs a chunk whose heading is its name. Both kinds are
+ kept — retrieval picks whichever scores higher.
+
+ STAR COUNTS are as of 28 October 2026 and will drift. They appear only where
+ popularity is the actual question.
+
  GAPS — not written because they could not be verified:
    * The team: names and roles. /team was not read.
-   * Meeting times and where the club meets.
-   * Whether FOSS Overflow or DevLabs is running now, and how to apply.
-   * The full project list runs to about 60 repositories. Only the ones with
-     a real description are here, grouped. The rest are on GitHub.
-   * openlake.in lists the 10 Oct 2026 Hacktoberfest day under "Upcoming",
-     but that date has passed. It is written below as a past event.
+   * Meeting times and where the club meets week to week.
+   * How to apply to FOSS Overflow or DevLabs, and whether either is open now.
+   * Projectory, GetWelPlus, iitbh-oneStop, GitStartedWithUs and Knowledge
+     carry no description on GitHub, so only their names are known.
+   * Of 62 repositories, the ones below are those with a real description.
 -------------------------------------------------------------------------------
 
 # What is OpenLake
@@ -194,3 +203,296 @@ IIT Bhilai students.
 url: https://openlake.in
 FOSS United is described by OpenLake as India's largest open-source ecosystem.
 OpenLake promotes it from its home page.
+
+# What events are coming up
+url: https://openlake.in/newevents
+OpenLake x Meraz 7.0 on 1 November 2026, at IIT Bhilai. Two events that day:
+Agents War from 10:00 AM to 1:30 PM in L102, and the Gandhi Hackathon from
+2:00 PM to 5:00 PM in L101. Both take registrations through forms linked on
+the events page.
+
+# What is Agents War
+url: https://openlake.in/newevents
+A hands-on hackathon on 1 November 2026, 10:00 AM to 1:30 PM in L102, run as
+part of OpenLake x Meraz 7.0. Participants build autonomous AI agents and test
+them against simulated challenges, with prizes for the most capable agents.
+Register through the form linked on the events page.
+
+# What is the Gandhi Hackathon
+url: https://openlake.in/newevents
+A creative coding hackathon on 1 November 2026, 2:00 PM to 5:00 PM in L101,
+part of OpenLake x Meraz 7.0. The theme is technology for social impact, with
+prizes for the highest-impact projects. Register through the form linked on
+the events page.
+
+# How do I register for the Meraz events
+url: https://openlake.in/newevents
+Both Agents War and the Gandhi Hackathon take registrations through Google
+Forms linked next to each event on the events page at openlake.in/newevents.
+
+# When did OpenLake start
+url: https://openlake.in/philosophy
+OpenLake has been building since 2020. Its workshop programme has run since
+June 2022.
+
+# What are the most popular OpenLake projects
+url: https://github.com/OpenLake
+By GitHub stars as of October 2026: Sampoorna (35), iitbh-calendar (31),
+Leaderboard-Pro (30), iitbh-cgpa (28), Photo-Sharing-App (26), WatchParty (23),
+Activity-Tracker (23), PixOss (21) and Knowledge-Sharing-Platform (20).
+
+# What programming languages does OpenLake use
+url: https://github.com/OpenLake
+Across the 62 repositories: JavaScript and TypeScript most often, then Dart
+for the Flutter mobile apps, Python for the machine-learning and tooling
+projects, and C++ for Bit and the Linux memory-imaging work. Also Kotlin
+(Sampoorna), PHP (Bhilaipedia), Svelte (iitbh-calendar), GDScript (SDAC
+Venture) and Jupyter Notebook (Speech-Analyser).
+
+# What is Sampoorna
+url: https://github.com/OpenLake/Sampoorna
+Sampoorna is an app for women covering safety, health and more. It is written
+in Kotlin and is OpenLake's most-starred repository.
+
+# What is iitbh-calendar
+url: https://github.com/OpenLake/iitbh-calendar
+iitbh-calendar generates a calendar of IIT Bhilai courses. It is written in
+Svelte.
+
+# What is Leaderboard-Pro
+url: https://github.com/OpenLake/Leaderboard-Pro
+Leaderboard-Pro is a leaderboard that scrapes competitive-programming
+platforms and aggregates the rankings. It is written in JavaScript. A related
+repository, leaderboardpro, is in Python.
+
+# What is iitbh-cgpa
+url: https://github.com/OpenLake/iitbh-cgpa
+iitbh-cgpa is a browser extension that calculates CGPA from the AIMS portal.
+It is written in JavaScript.
+
+# What is the Photo-Sharing-App
+url: https://github.com/OpenLake/Photo-Sharing-App
+A group photo-sharing app that arranges uploads by the faces in them, using
+machine learning.
+
+# What is WatchParty
+url: https://github.com/OpenLake/WatchParty
+WatchParty lets people watch films together remotely with a shared group chat.
+It is written in JavaScript.
+
+# What is Activity-Tracker
+url: https://github.com/OpenLake/Activity-Tracker
+A cross-platform tool that shows how you spend your digital time. Written in
+JavaScript.
+
+# What is PixOss
+url: https://github.com/OpenLake/PixOss
+PixOss is a deployment of a community canvas, where many people draw on one
+shared grid. Written in TypeScript.
+
+# What is the Knowledge-Sharing-Platform
+url: https://github.com/OpenLake/Knowledge-Sharing-Platform
+A platform for sharing study notes and reviews of professors and courses.
+Written in TypeScript.
+
+# What is Student_Database_COSA
+url: https://github.com/OpenLake/Student_Database_COSA
+A platform for student data and Positions of Responsibility, used by the
+Council of Student Affairs. Written in JavaScript.
+
+# What is RateMyCourse
+url: https://github.com/OpenLake/RateMyCourse
+RateMyCourse collects community ratings and reviews of IIT Bhilai courses and
+instructors. Written in TypeScript.
+
+# What is the Campus-Marketplace
+url: https://github.com/OpenLake/Campus-Marketplace
+A marketplace for students to buy, sell and exchange items on campus. Written
+in JavaScript.
+
+# What is Not-a-Mess
+url: https://github.com/OpenLake/Not-a-Mess
+Not-a-Mess is an app for raising and resolving mess-related issues. Written in
+Dart.
+
+# What is Insti-Pay
+url: https://github.com/OpenLake/Insti-Pay
+Payment infrastructure for transactions inside IIT Bhilai, intended to work
+across institutes. Written in Dart.
+
+# What is the Smart-Insti-App
+url: https://github.com/OpenLake/Smart-Insti-App
+An app for institute information and updates. Written in Dart.
+
+# What is the File-Sharing-App
+url: https://github.com/OpenLake/File-Sharing-App
+Peer-to-peer file sharing between devices. Written in Dart.
+
+# What is Find-your-Cluster
+url: https://github.com/OpenLake/Find-your-Cluster
+Finds common interests among peers so people can build a community around
+them. Written in Dart.
+
+# What is the Live-Score-App
+url: https://github.com/OpenLake/Live-Score-App
+Real-time scores for sports and tournaments. Written in Dart.
+
+# What is the Quiz-App
+url: https://github.com/OpenLake/Quiz-App
+A real-time quizzing, polling and survey platform. Written in Dart.
+
+# What is Bit
+url: https://github.com/OpenLake/Bit
+Bit is a git implementation and git server built from scratch for IIT Bhilai,
+written in C++.
+
+# What is the Online-Judge
+url: https://github.com/OpenLake/Online-Judge
+An online judge for programming competitions and assignments. Written in
+Python.
+
+# What is SmartTriage
+url: https://github.com/OpenLake/SmartTriage
+A machine-learning bot that flags duplicate issues using semantic search and
+assigns reviewers.
+
+# What is Smart-Cams
+url: https://github.com/OpenLake/Smart-Cams
+Computer vision for CCTV and mobile cameras. Written in Python.
+
+# What is the AI-Voice-Agent
+url: https://github.com/OpenLake/AI-Voice-Agent
+An adaptive, personalised AI voice agent. Written in Python.
+
+# What is the Speech-Analyser
+url: https://github.com/OpenLake/Speech-Analyser
+An app to help improve English fluency. Built in Jupyter Notebook.
+
+# What is RideShare
+url: https://github.com/OpenLake/RideShare
+A ridesharing platform for IIT Bhilai students and staff, covering trips
+between campus, Raipur and nearby cities, aimed at making travel cheaper and
+safer.
+
+# What is Virtual-IIT-Bhilai
+url: https://github.com/OpenLake/Virtual-IIT-Bhilai
+A virtual campus game world for IIT Bhilai, built with Godot and Node.js.
+
+# What is SDAC Venture
+url: https://github.com/OpenLake/SDAC_Venture
+A first-person shooter game set on the IIT Bhilai campus, built with the Godot
+engine in GDScript.
+
+# What is Bhilaipedia
+url: https://github.com/OpenLake/Bhilaipedia
+A collaborative wiki for IIT Bhilai, built on MediaWiki and MySQL in PHP.
+
+# What is Remote-Voting-Blockchain
+url: https://github.com/OpenLake/Remote-Voting-Blockchain
+An electronic voting system implemented on Hyperledger Fabric.
+
+# What is Memory-Imaging-for-Linux-Family
+url: https://github.com/OpenLake/Memory-Imaging-for-Linux-Family
+Tools for Linux binary analysis and for making changes to binaries on the fly.
+Written in C++.
+
+# What is the Active-OSS-Community-Finder
+url: https://github.com/OpenLake/Active-OSS-Community-Finder
+A tool for discovering open-source projects where you can become a regular
+contributor. Written in Python.
+
+# What is Interview-Preparation
+url: https://github.com/OpenLake/Interview-Preparation
+A repository of interview preparation material. Written in TypeScript.
+
+# What is the career-scraper
+url: https://github.com/OpenLake/career-scraper
+Scrapes data to show what career trajectories different people have taken.
+
+# What is the Homework-Scheduler
+url: https://github.com/OpenLake/Homework-Scheduler
+Helps teachers set homework deadlines around students' other commitments.
+Written in JavaScript.
+
+# What is bhilaee-labs
+url: https://github.com/OpenLake/bhilaee-labs
+A virtual lab platform for Electrical and Electronics Engineering students.
+Written in JavaScript.
+
+# What is the bhilaee-simulator
+url: https://github.com/OpenLake/bhilaee-simulator
+A browser-based circuit simulator. Written in JavaScript.
+
+# What is Hub
+url: https://github.com/OpenLake/Hub
+Hub is the integration and sync layer for the OpenLake ecosystem, written in
+TypeScript.
+
+# What is auth-kit
+url: https://github.com/OpenLake/auth-kit
+auth-kit provides centralised authentication and single sign-on across the
+OpenLake ecosystem.
+
+# What is Infra
+url: https://github.com/OpenLake/Infra
+Infra holds the automation tools, bots, scripts and configuration that keep
+OpenLake running. Written in JavaScript.
+
+# What is FOSSI
+url: https://github.com/OpenLake/FOSSI
+FOSSI is a learning group for open-source silicon, covering EDA tools and
+chip-design projects.
+
+# Does OpenLake have a blog
+url: https://github.com/OpenLake/blog
+Yes. The blog has its own repository at github.com/OpenLake/blog, written in
+JavaScript.
+
+# What is the Sci-Tech Council website
+url: https://github.com/OpenLake/SciTech_council_website
+OpenLake maintains the website of the Sci-Tech Council of IIT Bhilai, written
+in JavaScript.
+
+# What is studious-learners
+url: https://github.com/OpenLake/studious-learners
+A repository of study material for events OpenLake has run.
+
+# What is GSoC_Proposals
+url: https://github.com/OpenLake/GSoC_Proposals
+An archive of Google Summer of Code and other open-source programme proposals
+written by IIT Bhilai students.
+
+# What is DevLabs 2025
+url: https://github.com/OpenLake/DevLabs-2025
+The repository for the 2025 edition of DevLabs, OpenLake's month-long mentored
+programme.
+
+# Where are the OpenLake branding assets
+url: https://github.com/OpenLake/Branding
+All branding assets for OpenLake and FOSS Overflow are in the Branding
+repository on GitHub.
+
+# What is Hacktoberfest at OpenLake
+url: https://openlake.in/newevents
+OpenLake ran an official MLH Hacktoberfest Hack Day with Durg on 10 October
+2026 in L101, together with Major League Hacking and DEV and with DigitalOcean,
+focused on AI projects and open-source contributions.
+
+# What beginner workshops has OpenLake run
+url: https://openlake.in/newevents
+A Linux installation workshop in October 2025, a Git and GitHub workshop for
+beginners in August 2025, Intro to Software Development in January 2025, A
+Quick Start to Software Development in October 2024, How to Open-Source in
+June 2023, OpenlySourced with Anand Panchbai in August 2022, Object Oriented
+Programming and Flask in August 2022, and an HTML and CSS tutorial with a mini
+hackathon in June 2022.
+
+# Who has spoken at an OpenLake event
+url: https://openlake.in/newevents
+The events page names Anand Panchbai, who ran the OpenlySourced introductory
+open-source workshop in August 2022. Other events are listed without a speaker.
+
+# Has OpenLake run introductory programming courses
+url: https://openlake.in/programs
+Yes. Introduction_CPP and Introduction_Python were introductory open-source
+events, both marked completed.

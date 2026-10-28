@@ -298,5 +298,585 @@
     "level": "h1",
     "page_title": "OpenLake",
     "source": "manual"
+  },
+  {
+    "id": 30,
+    "url": "https://openlake.in/newevents",
+    "heading": "What events are coming up",
+    "selector": null,
+    "content": "OpenLake x Meraz 7.0 on 1 November 2026, at IIT Bhilai. Two events that day:\nAgents War from 10:00 AM to 1:30 PM in L102, and the Gandhi Hackathon from\n2:00 PM to 5:00 PM in L101. Both take registrations through forms linked on\nthe events page.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 31,
+    "url": "https://openlake.in/newevents",
+    "heading": "What is Agents War",
+    "selector": null,
+    "content": "A hands-on hackathon on 1 November 2026, 10:00 AM to 1:30 PM in L102, run as\npart of OpenLake x Meraz 7.0. Participants build autonomous AI agents and test\nthem against simulated challenges, with prizes for the most capable agents.\nRegister through the form linked on the events page.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 32,
+    "url": "https://openlake.in/newevents",
+    "heading": "What is the Gandhi Hackathon",
+    "selector": null,
+    "content": "A creative coding hackathon on 1 November 2026, 2:00 PM to 5:00 PM in L101,\npart of OpenLake x Meraz 7.0. The theme is technology for social impact, with\nprizes for the highest-impact projects. Register through the form linked on\nthe events page.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 33,
+    "url": "https://openlake.in/newevents",
+    "heading": "How do I register for the Meraz events",
+    "selector": null,
+    "content": "Both Agents War and the Gandhi Hackathon take registrations through Google\nForms linked next to each event on the events page at openlake.in/newevents.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 34,
+    "url": "https://openlake.in/philosophy",
+    "heading": "When did OpenLake start",
+    "selector": null,
+    "content": "OpenLake has been building since 2020. Its workshop programme has run since\nJune 2022.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 35,
+    "url": "https://github.com/OpenLake",
+    "heading": "What are the most popular OpenLake projects",
+    "selector": null,
+    "content": "By GitHub stars as of October 2026: Sampoorna (35), iitbh-calendar (31),\nLeaderboard-Pro (30), iitbh-cgpa (28), Photo-Sharing-App (26), WatchParty (23),\nActivity-Tracker (23), PixOss (21) and Knowledge-Sharing-Platform (20).",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 36,
+    "url": "https://github.com/OpenLake",
+    "heading": "What programming languages does OpenLake use",
+    "selector": null,
+    "content": "Across the 62 repositories: JavaScript and TypeScript most often, then Dart\nfor the Flutter mobile apps, Python for the machine-learning and tooling\nprojects, and C++ for Bit and the Linux memory-imaging work. Also Kotlin\n(Sampoorna), PHP (Bhilaipedia), Svelte (iitbh-calendar), GDScript (SDAC\nVenture) and Jupyter Notebook (Speech-Analyser).",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 37,
+    "url": "https://github.com/OpenLake/Sampoorna",
+    "heading": "What is Sampoorna",
+    "selector": null,
+    "content": "Sampoorna is an app for women covering safety, health and more. It is written\nin Kotlin and is OpenLake's most-starred repository.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 38,
+    "url": "https://github.com/OpenLake/iitbh-calendar",
+    "heading": "What is iitbh-calendar",
+    "selector": null,
+    "content": "iitbh-calendar generates a calendar of IIT Bhilai courses. It is written in\nSvelte.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 39,
+    "url": "https://github.com/OpenLake/Leaderboard-Pro",
+    "heading": "What is Leaderboard-Pro",
+    "selector": null,
+    "content": "Leaderboard-Pro is a leaderboard that scrapes competitive-programming\nplatforms and aggregates the rankings. It is written in JavaScript. A related\nrepository, leaderboardpro, is in Python.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 40,
+    "url": "https://github.com/OpenLake/iitbh-cgpa",
+    "heading": "What is iitbh-cgpa",
+    "selector": null,
+    "content": "iitbh-cgpa is a browser extension that calculates CGPA from the AIMS portal.\nIt is written in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 41,
+    "url": "https://github.com/OpenLake/Photo-Sharing-App",
+    "heading": "What is the Photo-Sharing-App",
+    "selector": null,
+    "content": "A group photo-sharing app that arranges uploads by the faces in them, using\nmachine learning.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 42,
+    "url": "https://github.com/OpenLake/WatchParty",
+    "heading": "What is WatchParty",
+    "selector": null,
+    "content": "WatchParty lets people watch films together remotely with a shared group chat.\nIt is written in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 43,
+    "url": "https://github.com/OpenLake/Activity-Tracker",
+    "heading": "What is Activity-Tracker",
+    "selector": null,
+    "content": "A cross-platform tool that shows how you spend your digital time. Written in\nJavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 44,
+    "url": "https://github.com/OpenLake/PixOss",
+    "heading": "What is PixOss",
+    "selector": null,
+    "content": "PixOss is a deployment of a community canvas, where many people draw on one\nshared grid. Written in TypeScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 45,
+    "url": "https://github.com/OpenLake/Knowledge-Sharing-Platform",
+    "heading": "What is the Knowledge-Sharing-Platform",
+    "selector": null,
+    "content": "A platform for sharing study notes and reviews of professors and courses.\nWritten in TypeScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 46,
+    "url": "https://github.com/OpenLake/Student_Database_COSA",
+    "heading": "What is Student_Database_COSA",
+    "selector": null,
+    "content": "A platform for student data and Positions of Responsibility, used by the\nCouncil of Student Affairs. Written in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 47,
+    "url": "https://github.com/OpenLake/RateMyCourse",
+    "heading": "What is RateMyCourse",
+    "selector": null,
+    "content": "RateMyCourse collects community ratings and reviews of IIT Bhilai courses and\ninstructors. Written in TypeScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 48,
+    "url": "https://github.com/OpenLake/Campus-Marketplace",
+    "heading": "What is the Campus-Marketplace",
+    "selector": null,
+    "content": "A marketplace for students to buy, sell and exchange items on campus. Written\nin JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 49,
+    "url": "https://github.com/OpenLake/Not-a-Mess",
+    "heading": "What is Not-a-Mess",
+    "selector": null,
+    "content": "Not-a-Mess is an app for raising and resolving mess-related issues. Written in\nDart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 50,
+    "url": "https://github.com/OpenLake/Insti-Pay",
+    "heading": "What is Insti-Pay",
+    "selector": null,
+    "content": "Payment infrastructure for transactions inside IIT Bhilai, intended to work\nacross institutes. Written in Dart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 51,
+    "url": "https://github.com/OpenLake/Smart-Insti-App",
+    "heading": "What is the Smart-Insti-App",
+    "selector": null,
+    "content": "An app for institute information and updates. Written in Dart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 52,
+    "url": "https://github.com/OpenLake/File-Sharing-App",
+    "heading": "What is the File-Sharing-App",
+    "selector": null,
+    "content": "Peer-to-peer file sharing between devices. Written in Dart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 53,
+    "url": "https://github.com/OpenLake/Find-your-Cluster",
+    "heading": "What is Find-your-Cluster",
+    "selector": null,
+    "content": "Finds common interests among peers so people can build a community around\nthem. Written in Dart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 54,
+    "url": "https://github.com/OpenLake/Live-Score-App",
+    "heading": "What is the Live-Score-App",
+    "selector": null,
+    "content": "Real-time scores for sports and tournaments. Written in Dart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 55,
+    "url": "https://github.com/OpenLake/Quiz-App",
+    "heading": "What is the Quiz-App",
+    "selector": null,
+    "content": "A real-time quizzing, polling and survey platform. Written in Dart.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 56,
+    "url": "https://github.com/OpenLake/Bit",
+    "heading": "What is Bit",
+    "selector": null,
+    "content": "Bit is a git implementation and git server built from scratch for IIT Bhilai,\nwritten in C++.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 57,
+    "url": "https://github.com/OpenLake/Online-Judge",
+    "heading": "What is the Online-Judge",
+    "selector": null,
+    "content": "An online judge for programming competitions and assignments. Written in\nPython.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 58,
+    "url": "https://github.com/OpenLake/SmartTriage",
+    "heading": "What is SmartTriage",
+    "selector": null,
+    "content": "A machine-learning bot that flags duplicate issues using semantic search and\nassigns reviewers.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 59,
+    "url": "https://github.com/OpenLake/Smart-Cams",
+    "heading": "What is Smart-Cams",
+    "selector": null,
+    "content": "Computer vision for CCTV and mobile cameras. Written in Python.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 60,
+    "url": "https://github.com/OpenLake/AI-Voice-Agent",
+    "heading": "What is the AI-Voice-Agent",
+    "selector": null,
+    "content": "An adaptive, personalised AI voice agent. Written in Python.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 61,
+    "url": "https://github.com/OpenLake/Speech-Analyser",
+    "heading": "What is the Speech-Analyser",
+    "selector": null,
+    "content": "An app to help improve English fluency. Built in Jupyter Notebook.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 62,
+    "url": "https://github.com/OpenLake/RideShare",
+    "heading": "What is RideShare",
+    "selector": null,
+    "content": "A ridesharing platform for IIT Bhilai students and staff, covering trips\nbetween campus, Raipur and nearby cities, aimed at making travel cheaper and\nsafer.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 63,
+    "url": "https://github.com/OpenLake/Virtual-IIT-Bhilai",
+    "heading": "What is Virtual-IIT-Bhilai",
+    "selector": null,
+    "content": "A virtual campus game world for IIT Bhilai, built with Godot and Node.js.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 64,
+    "url": "https://github.com/OpenLake/SDAC_Venture",
+    "heading": "What is SDAC Venture",
+    "selector": null,
+    "content": "A first-person shooter game set on the IIT Bhilai campus, built with the Godot\nengine in GDScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 65,
+    "url": "https://github.com/OpenLake/Bhilaipedia",
+    "heading": "What is Bhilaipedia",
+    "selector": null,
+    "content": "A collaborative wiki for IIT Bhilai, built on MediaWiki and MySQL in PHP.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 66,
+    "url": "https://github.com/OpenLake/Remote-Voting-Blockchain",
+    "heading": "What is Remote-Voting-Blockchain",
+    "selector": null,
+    "content": "An electronic voting system implemented on Hyperledger Fabric.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 67,
+    "url": "https://github.com/OpenLake/Memory-Imaging-for-Linux-Family",
+    "heading": "What is Memory-Imaging-for-Linux-Family",
+    "selector": null,
+    "content": "Tools for Linux binary analysis and for making changes to binaries on the fly.\nWritten in C++.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 68,
+    "url": "https://github.com/OpenLake/Active-OSS-Community-Finder",
+    "heading": "What is the Active-OSS-Community-Finder",
+    "selector": null,
+    "content": "A tool for discovering open-source projects where you can become a regular\ncontributor. Written in Python.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 69,
+    "url": "https://github.com/OpenLake/Interview-Preparation",
+    "heading": "What is Interview-Preparation",
+    "selector": null,
+    "content": "A repository of interview preparation material. Written in TypeScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 70,
+    "url": "https://github.com/OpenLake/career-scraper",
+    "heading": "What is the career-scraper",
+    "selector": null,
+    "content": "Scrapes data to show what career trajectories different people have taken.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 71,
+    "url": "https://github.com/OpenLake/Homework-Scheduler",
+    "heading": "What is the Homework-Scheduler",
+    "selector": null,
+    "content": "Helps teachers set homework deadlines around students' other commitments.\nWritten in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 72,
+    "url": "https://github.com/OpenLake/bhilaee-labs",
+    "heading": "What is bhilaee-labs",
+    "selector": null,
+    "content": "A virtual lab platform for Electrical and Electronics Engineering students.\nWritten in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 73,
+    "url": "https://github.com/OpenLake/bhilaee-simulator",
+    "heading": "What is the bhilaee-simulator",
+    "selector": null,
+    "content": "A browser-based circuit simulator. Written in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 74,
+    "url": "https://github.com/OpenLake/Hub",
+    "heading": "What is Hub",
+    "selector": null,
+    "content": "Hub is the integration and sync layer for the OpenLake ecosystem, written in\nTypeScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 75,
+    "url": "https://github.com/OpenLake/auth-kit",
+    "heading": "What is auth-kit",
+    "selector": null,
+    "content": "auth-kit provides centralised authentication and single sign-on across the\nOpenLake ecosystem.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 76,
+    "url": "https://github.com/OpenLake/Infra",
+    "heading": "What is Infra",
+    "selector": null,
+    "content": "Infra holds the automation tools, bots, scripts and configuration that keep\nOpenLake running. Written in JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 77,
+    "url": "https://github.com/OpenLake/FOSSI",
+    "heading": "What is FOSSI",
+    "selector": null,
+    "content": "FOSSI is a learning group for open-source silicon, covering EDA tools and\nchip-design projects.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 78,
+    "url": "https://github.com/OpenLake/blog",
+    "heading": "Does OpenLake have a blog",
+    "selector": null,
+    "content": "Yes. The blog has its own repository at github.com/OpenLake/blog, written in\nJavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 79,
+    "url": "https://github.com/OpenLake/SciTech_council_website",
+    "heading": "What is the Sci-Tech Council website",
+    "selector": null,
+    "content": "OpenLake maintains the website of the Sci-Tech Council of IIT Bhilai, written\nin JavaScript.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 80,
+    "url": "https://github.com/OpenLake/studious-learners",
+    "heading": "What is studious-learners",
+    "selector": null,
+    "content": "A repository of study material for events OpenLake has run.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 81,
+    "url": "https://github.com/OpenLake/GSoC_Proposals",
+    "heading": "What is GSoC_Proposals",
+    "selector": null,
+    "content": "An archive of Google Summer of Code and other open-source programme proposals\nwritten by IIT Bhilai students.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 82,
+    "url": "https://github.com/OpenLake/DevLabs-2025",
+    "heading": "What is DevLabs 2025",
+    "selector": null,
+    "content": "The repository for the 2025 edition of DevLabs, OpenLake's month-long mentored\nprogramme.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 83,
+    "url": "https://github.com/OpenLake/Branding",
+    "heading": "Where are the OpenLake branding assets",
+    "selector": null,
+    "content": "All branding assets for OpenLake and FOSS Overflow are in the Branding\nrepository on GitHub.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 84,
+    "url": "https://openlake.in/newevents",
+    "heading": "What is Hacktoberfest at OpenLake",
+    "selector": null,
+    "content": "OpenLake ran an official MLH Hacktoberfest Hack Day with Durg on 10 October\n2026 in L101, together with Major League Hacking and DEV and with DigitalOcean,\nfocused on AI projects and open-source contributions.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 85,
+    "url": "https://openlake.in/newevents",
+    "heading": "What beginner workshops has OpenLake run",
+    "selector": null,
+    "content": "A Linux installation workshop in October 2025, a Git and GitHub workshop for\nbeginners in August 2025, Intro to Software Development in January 2025, A\nQuick Start to Software Development in October 2024, How to Open-Source in\nJune 2023, OpenlySourced with Anand Panchbai in August 2022, Object Oriented\nProgramming and Flask in August 2022, and an HTML and CSS tutorial with a mini\nhackathon in June 2022.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 86,
+    "url": "https://openlake.in/newevents",
+    "heading": "Who has spoken at an OpenLake event",
+    "selector": null,
+    "content": "The events page names Anand Panchbai, who ran the OpenlySourced introductory\nopen-source workshop in August 2022. Other events are listed without a speaker.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
+  },
+  {
+    "id": 87,
+    "url": "https://openlake.in/programs",
+    "heading": "Has OpenLake run introductory programming courses",
+    "selector": null,
+    "content": "Yes. Introduction_CPP and Introduction_Python were introductory open-source\nevents, both marked completed.",
+    "level": "h1",
+    "page_title": "OpenLake",
+    "source": "manual"
   }
 ]
