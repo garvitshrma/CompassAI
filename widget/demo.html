@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  demo.html — a local page to test the widget against a running backend.
+  Was: index.html at the repo root.
+
+  HOW TO RUN (two terminals, both from the repo root):
+
+    1)  cd backend
+        ..\.venv\Scripts\activate          (or wherever your venv lives)
+        python manage.py runserver          -> backend on :8000
+
+    2)  cd widget
+        python -m http.server 5500          -> this page on :5500
+
+  Then open  http://localhost:5500/demo.html
+
+  DO NOT open this file by double-clicking it. On a file:// URL
+  location.hostname is an empty string, so the widget would derive an empty
+  site id and every answer would come back "not registered" — a confusing
+  failure with a boring cause. Always go through http://localhost:5500.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compass widget — local demo</title>
+  <style>
+    body { font: 16px/1.6 system-ui, sans-serif; max-width: 42rem;
+           margin: 4rem auto; padding: 0 1rem; color: #111; }
+    code { background: #f4f4f4; padding: .15em .4em; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Compass widget — local demo</h1>
+  <p>The widget should appear in the corner. Ask it something that exists on
+     the site named in <code>data-site</code> below.</p>
+
+  <!--
+    data-api   where the backend lives. Defaults to the deployed Render URL,
+               so it MUST be set here to test against localhost.
+    data-site  which index to query. Defaults to location.hostname, which on
+               this page is "localhost" — not a registered site. So point it at
+               a real index you have in backend/sites/.
+  -->
+  <!-- CHANGE data-site TO WHICHEVER INDEX YOU WANT TO QUERY.
+       It must be a site_id your server actually holds — check with:
+           Invoke-RestMethod http://127.0.0.1:8000/health
+       If you point it at a site_id the server does not have, the widget
+       correctly reports "Compass isn't set up for this site yet". That is the
+       server being honest, not a bug. -->
+  <script src="compass-widget.js"
+          data-api="http://localhost:8000"
+          data-site="openlake-facts"></script>
+</body>
+</html>

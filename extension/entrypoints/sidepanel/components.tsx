@@ -1,7 +1,7 @@
 // Small building blocks shared by several screens.
 
 import { useEffect, useRef, type ReactNode } from 'react';
-import type { Confidence, PageInfo } from './data';
+import type { Confidence, PageInfo, SiteInfo } from './data';
 import { ArrowUp, Check, ChevronDown, Clock, MarkTile, Mic, Refresh, Sliders, Spinner } from './icons';
 
 export type Status = 'ready' | 'analyzing' | 'navigating' | 'unavailable';
@@ -49,7 +49,30 @@ function Url({ page }: { page: PageInfo }) {
 }
 
 /** The big page card at the top of Home, Query and Loading. */
-export function PageCard({ page, analyzing, onReanalyze }: { page: PageInfo; analyzing: boolean; onReanalyze?: () => void }) {
+/** "· 12 sections · Learning the site…" / "· 12 sections · 9 pages" */
+function SiteState({ site }: { site?: SiteInfo | null }) {
+  if (!site) return null;
+  if (site.state === 'loading' || site.state === 'indexing')
+    return (
+      <span className="muted" style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+        · <Spinner size={10} width={3} /> Learning the site{site.pages > 1 ? ` (${site.pages} pages)` : '…'}
+      </span>
+    );
+  if (site.state === 'ready' && site.pages > 1) return <span className="muted">· {site.pages} pages</span>;
+  return null;
+}
+
+export function PageCard({
+  page,
+  analyzing,
+  onReanalyze,
+  site,
+}: {
+  page: PageInfo;
+  analyzing: boolean;
+  onReanalyze?: () => void;
+  site?: SiteInfo | null;
+}) {
   return (
     <div className="page-card">
       <div className={`page-card-row ${analyzing ? 'no-action' : ''}`}>
@@ -67,6 +90,7 @@ export function PageCard({ page, analyzing, onReanalyze }: { page: PageInfo; ana
             <div className="page-state">
               <Check size={13} />
               Page analyzed<span className="muted">· {page.sections.length} sections</span>
+              <SiteState site={site} />
             </div>
           )}
         </div>
@@ -114,7 +138,9 @@ export function AskBox({
   canSubmit,
   busy,
   active,
+  scope = 'This page',
 }: {
+  scope?: string;
   value: string;
   onChange: (v: string) => void;
   onSubmit: () => void;
@@ -141,8 +167,8 @@ export function AskBox({
         onKeyDown={onKeyDown}
       />
       <div className="ask-tools">
-        <button className="scope" title="Search scope (only this page for now)">
-          This page
+        <button className="scope" title={scope === 'This site' ? 'Compass searches every page of this website' : 'Compass searches this page'}>
+          {scope}
           <ChevronDown size={13} />
         </button>
         <span className="grow" />
@@ -224,4 +250,73 @@ export function Highlight({ text, word }: { text: string; word: string }) {
       {parts.map((part, i) => (i % 2 === 1 ? <mark key={i}>{part}</mark> : part))}
     </>
   );
+}
+
+/* ------------------------------------------------------------------ */
+/* Answers written by the server's AI                                  */
+/* ------------------------------------------------------------------ */
+
+// The answer comes as simple markdown: paragraphs, "- " or "1. " lists, **bold**, `code`
+// and citations like [2]. We turn it into React elements ourselves (never innerHTML),
+// so nothing in an answer can run as code in the panel.
+
+const INLINE = /(\*\*[^*]+\*\*|`[^`]+`|\[\d+(?:\s*,\s*\d+)*\])/g;
+
+function Inline({ text, sources, onCite }: { text: string; sources: number; onCite: (n: number) => void }) {
+  return (
+    <>
+      {text.split(INLINE).map((part, i) => {
+        if (i % 2 === 0) return part;
+        if (part.startsWith('**')) return <strong key={i}>{part.slice(2, -2)}</strong>;
+        if (part.startsWith('`')) return <code key={i}>{part.slice(1, -1)}</code>;
+        const nums = part.slice(1, -1).split(',').map((n) => Number(n.trim())).filter((n) => n >= 1 && n <= sources);
+        return nums.map((n) => (
+          <button key={`${i}-${n}`} className="cite" title={`Source ${n}`} onClick={() => onCite(n)}>
+            {n}
+          </button>
+        ));
+      })}
+    </>
+  );
+}
+
+export function RichText({ text, sources = 0, onCite = () => {} }: { text: string; sources?: number; onCite?: (n: number) => void }) {
+  const blocks: ReactNode[] = [];
+  let list: { ordered: boolean; items: string[] } | null = null;
+  const flush = () => {
+    if (!list) return;
+    const items = list.items.map((item, i) => (
+      <li key={i}>
+        <span>
+          <Inline text={item} sources={sources} onCite={onCite} />
+        </span>
+      </li>
+    ));
+    blocks.push(list.ordered ? <ol key={blocks.length}>{items}</ol> : <ul key={blocks.length} className="bullets">{items}</ul>);
+    list = null;
+  };
+
+  for (const raw of text.split('\n')) {
+    const line = raw.trim();
+    const bullet = line.match(/^[-*•]\s+(.*)/);
+    const numbered = line.match(/^\d+[.)]\s+(.*)/);
+    if (bullet || numbered) {
+      const ordered = !bullet;
+      if (list && list.ordered !== ordered) flush();
+      list ??= { ordered, items: [] };
+      list.items.push((bullet ?? numbered)?.[1] ?? '');
+    } else if (!line) {
+      flush();
+    } else {
+      flush();
+      const heading = line.match(/^#{1,6}\s+(.*)/);
+      blocks.push(
+        <p key={blocks.length} className={heading ? 'strong' : undefined}>
+          <Inline text={heading?.[1] ?? line} sources={sources} onCite={onCite} />
+        </p>,
+      );
+    }
+  }
+  flush();
+  return <div className="rich">{blocks}</div>;
 }

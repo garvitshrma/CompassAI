@@ -1,9 +1,10 @@
-// 07 · Result — the best match, where it is on the page, and one big "Go to section" button.
+// 07 · Result — Compass's explanation, the best place to go (on this page or another page
+// of the site), one big "Go" button, and the sources the explanation was written from.
 
 import { useState } from 'react';
-import { Composer, ConfidenceBadge, PageBar } from '../components';
-import { label, distance, sectionLink, type PageInfo, type QueryResult, type Section } from '../data';
-import { ArrowRight, Check, Hash, LinkIcon, Lines, Mark } from '../icons';
+import { Composer, ConfidenceBadge, PageBar, RichText } from '../components';
+import { label, distance, onThisPage, pageLabel, pageName, pathOf, sectionLink, type PageInfo, type QueryResult, type Section } from '../data';
+import { ArrowRight, Check, External, Hash, LinkIcon, Lines, Mark } from '../icons';
 
 type Found = Extract<QueryResult, { kind: 'found' }>;
 
@@ -18,6 +19,15 @@ export function useCopy() {
   return { copied, copy };
 }
 
+/** Clicking a citation like [2] points at that source in the list below. */
+function flashSource(n: number) {
+  const row = document.getElementById(`src-${n}`);
+  if (!row) return;
+  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  row.classList.add('flash');
+  setTimeout(() => row.classList.remove('flash'), 1200);
+}
+
 export function ResultScreen({
   page,
   question,
@@ -25,6 +35,7 @@ export function ResultScreen({
   onGo,
   onAsk,
   notice,
+  busy,
 }: {
   page: PageInfo;
   question: string;
@@ -32,11 +43,9 @@ export function ResultScreen({
   onGo: (section: Section) => void;
   onAsk: (q: string) => void;
   notice?: string;
+  busy?: boolean;
 }) {
-  const { section, confidence } = result.best;
-  const [summary, setSummary] = useState(false);
-  const { copied, copy } = useCopy();
-  const viewSize = 1 / page.screens; // how much of the page fits on one screen
+  const sources = result.sources ?? [];
 
   return (
     <>
@@ -48,78 +57,45 @@ export function ResultScreen({
           <p>{question}</p>
         </div>
 
-        <div className="turn answer">
-          <span className="who">
+        <div className="turn answer" style={result.answer ? { alignItems: 'flex-start' } : undefined}>
+          <span className="who" style={result.answer ? { paddingTop: 3 } : undefined}>
             <Mark />
           </span>
-          <p>{result.headline}</p>
+          {result.answer ? (
+            <RichText text={result.answer} sources={sources.length} onCite={flashSource} />
+          ) : (
+            <p>{result.headline}</p>
+          )}
         </div>
 
-        <section className="card">
-          <div className="card-top">
-            <span className="crumb">
-              {[section.group, section.number].filter(Boolean).join(' › ')}
-            </span>
-            <ConfidenceBadge level={confidence} />
-          </div>
-          <h2>{section.title}</h2>
-          {result.explanation ? <p>{result.explanation}</p> : section.summary && <p>{section.summary}</p>}
-          {summary && (
-            <ul className="bullets">
-              {section.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          )}
-
-          <div className="where" aria-label={`Section position: ${distance(page, page.viewTop, section.position)}`}>
-            <div className="where-track">
-              <span className="where-view" style={{ left: `${page.viewTop * 100}%`, width: `${Math.max(viewSize * 100, 2)}%` }} />
-              <span className="where-dot" style={{ left: `${section.position * 100}%` }} />
-            </div>
-            <div className="where-labels">
-              <span>Your view</span>
-              <span>{distance(page, page.viewTop, section.position)}</span>
-            </div>
-          </div>
-
-          {result.offline && (
-            <p className="hint" style={{ padding: 0 }}>
-              Couldn’t reach the Compass server, so this match is based on keywords only.
-            </p>
-          )}
-
-          {notice && (
-            <p role="alert" style={{ color: 'var(--alert)', fontSize: 12.5 }}>
+        {result.best ? (
+          <PlaceCard page={page} result={result} best={result.best} notice={notice} onGo={onGo} />
+        ) : (
+          notice && (
+            <p role="alert" style={{ color: 'var(--alert)', fontSize: 12.5, padding: '0 4px' }}>
               {notice}
             </p>
-          )}
+          )
+        )}
 
-          <button className="go" onClick={() => onGo(section)}>
-            <span>
-              <ArrowRight size={17} stroke={2} />
-              Go to section
-            </span>
-            <span className="go-key">↵</span>
-          </button>
-
-          <div className="pair">
-            <button
-              className="btn"
-              onClick={() => copy(sectionLink(page, section))}
-              style={section.points.length === 0 ? { gridColumn: '1 / -1' } : undefined}
-            >
-              {copied ? <Check size={14} /> : <LinkIcon size={14} />}
-              {copied ? 'Copied' : 'Copy link'}
-            </button>
-            {section.points.length > 0 && (
-              <button className="btn" onClick={() => setSummary(!summary)} aria-pressed={summary}>
-                <Lines size={14} />
-                {summary ? 'Hide summary' : 'Summarize'}
+        {sources.length > 0 && (
+          <div className="list">
+            <div className="list-head" style={{ paddingTop: 2 }}>
+              <span>Sources</span>
+              <span className="count">{sources.length}</span>
+            </div>
+            {sources.map((src, i) => (
+              <button key={i} id={`src-${i + 1}`} className="row" onClick={() => onGo(src)}>
+                <span className="src-num">{i + 1}</span>
+                <span className="row-text">
+                  <span>{src.title}</span>
+                  <span className="row-meta">{onThisPage(page, src) ? label('This page', src.group) : pageLabel(src)}</span>
+                </span>
+                <ArrowRight size={15} color="#6B6559" />
               </button>
-            )}
+            ))}
           </div>
-        </section>
+        )}
 
         {result.others.length > 0 && (
           <div className="list">
@@ -132,9 +108,7 @@ export function ResultScreen({
                 <Hash size={15} color="#6B6559" />
                 <span className="row-text">
                   <span>{m.section.title}</span>
-                  <span className="row-meta">
-                    {label(m.section.number, m.section.group)}
-                  </span>
+                  <span className="row-meta">{label(m.section.number, m.section.group)}</span>
                 </span>
                 <span className="row-end" style={{ color: m.confidence === 'low' ? undefined : '#4A463D' }}>
                   {{ high: 'High', medium: 'Medium', low: 'Low' }[m.confidence]}
@@ -145,7 +119,106 @@ export function ResultScreen({
         )}
       </main>
 
-      <Composer label="Ask a follow-up" onSubmit={onAsk} />
+      <Composer label="Ask a follow-up" placeholder={busy ? 'Thinking…' : undefined} disabled={busy} onSubmit={onAsk} />
     </>
+  );
+}
+
+/** Where to go: the section, where it is, and the big "Go" button. */
+function PlaceCard({
+  page,
+  result,
+  best,
+  notice,
+  onGo,
+}: {
+  page: PageInfo;
+  result: Found;
+  best: NonNullable<Found['best']>;
+  notice?: string;
+  onGo: (section: Section) => void;
+}) {
+  const { section, confidence } = best;
+  const here = onThisPage(page, section);
+  const [summary, setSummary] = useState(false);
+  const { copied, copy } = useCopy();
+  const viewSize = 1 / page.screens; // how much of the page fits on one screen
+
+  return (
+    <section className="card">
+      <div className="card-top">
+        <span className="crumb">
+          {here ? [section.group, section.number].filter(Boolean).join(' › ') : label(section.menu && `${section.menu} menu`, pageName(section))}
+        </span>
+        <ConfidenceBadge level={confidence} />
+      </div>
+      <h2>{section.title}</h2>
+      {!result.answer && (result.explanation ? <p>{result.explanation}</p> : section.summary && <p>{section.summary}</p>)}
+      {summary && (
+        <ul className="bullets">
+          {section.points.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
+        </ul>
+      )}
+
+      {here ? (
+        <div className="where" aria-label={`Section position: ${distance(page, page.viewTop, section.position)}`}>
+          <div className="where-track">
+            <span className="where-view" style={{ left: `${page.viewTop * 100}%`, width: `${Math.max(viewSize * 100, 2)}%` }} />
+            <span className="where-dot" style={{ left: `${section.position * 100}%` }} />
+          </div>
+          <div className="where-labels">
+            <span>Your view</span>
+            <span>{distance(page, page.viewTop, section.position)}</span>
+          </div>
+        </div>
+      ) : (
+        <div className="where-labels" style={{ justifyContent: 'flex-start', gap: 6, alignItems: 'center' }}>
+          <External size={13} />
+          <span>
+            On another page: <span style={{ fontFamily: 'var(--mono)' }}>{pathOf(section.url)}</span>
+            {section.menu && <> · in the “{section.menu}” menu</>}
+          </span>
+        </div>
+      )}
+
+      {result.offline && (
+        <p className="hint" style={{ padding: 0 }}>
+          Couldn’t reach the Compass server, so this match is based on keywords only.
+        </p>
+      )}
+
+      {notice && (
+        <p role="alert" style={{ color: 'var(--alert)', fontSize: 12.5 }}>
+          {notice}
+        </p>
+      )}
+
+      <button className="go" onClick={() => onGo(section)}>
+        <span>
+          <ArrowRight size={17} stroke={2} />
+          {here ? 'Go to section' : section.level === 'page' ? 'Open this page' : 'Open page and go to section'}
+        </span>
+        <span className="go-key">↵</span>
+      </button>
+
+      <div className="pair">
+        <button
+          className="btn"
+          onClick={() => copy(sectionLink(page, section))}
+          style={section.points.length === 0 ? { gridColumn: '1 / -1' } : undefined}
+        >
+          {copied ? <Check size={14} /> : <LinkIcon size={14} />}
+          {copied ? 'Copied' : 'Copy link'}
+        </button>
+        {section.points.length > 0 && (
+          <button className="btn" onClick={() => setSummary(!summary)} aria-pressed={summary}>
+            <Lines size={14} />
+            {summary ? 'Hide summary' : 'Summarize'}
+          </button>
+        )}
+      </div>
+    </section>
   );
 }

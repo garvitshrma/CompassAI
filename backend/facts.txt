@@ -1,0 +1,25 @@
+title: OpenLake
+These notes are hand-written facts for the Compass bot.
+Anything above the first heading is ignored.
+
+# What is OpenLake
+url: https://openlake.in
+OpenLake is the open-source club of IIT Bhilai. It runs projects,
+mentorship programmes and events around free and open-source software.
+
+# Membership and fees
+OpenLake is free to join. There is no membership fee of any kind.
+
+## Who can join
+url: https://openlake.in/join
+Any current IIT Bhilai student can join, regardless of year or branch.
+No prior open-source experience is needed.
+
+## How to join
+Come to any weekly meeting, or message the club on the community Discord.
+There is no application form.
+
+# Section divider with no body
+
+# Contact
+For anything not covered here, email openlake@iitbhilai.ac.in.

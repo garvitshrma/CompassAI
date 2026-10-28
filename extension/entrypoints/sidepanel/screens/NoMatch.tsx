@@ -1,7 +1,7 @@
 // 11 · No match — say so plainly, then offer the closest things Compass did find.
 
-import { Composer, PageBar } from '../components';
-import { label, openPage, type PageInfo, type QueryResult, type Section } from '../data';
+import { Composer, PageBar, RichText } from '../components';
+import { label, onThisPage, openPage, pageName, type PageInfo, type QueryResult, type Section } from '../data';
 import { ArrowRight, Hash, SearchOff, Tag } from '../icons';
 
 type None = Extract<QueryResult, { kind: 'none' }>;
@@ -36,8 +36,11 @@ export function NoMatchScreen({
             <SearchOff size={19} />
           </span>
           <div>
-            <h2>Nothing on this page mentions “{result.topic}”</h2>
-            <p>{result.detail}</p>
+            <h2>
+              Compass couldn’t find that {result.offline ? 'on this page' : 'on this website'}
+            </h2>
+            {result.answer ? <RichText text={result.answer} /> : <p>{result.detail}</p>}
+            {result.answer && <p className="hint" style={{ padding: 0, marginTop: 6 }}>{result.detail}</p>}
             {result.offline && (
               <p className="hint" style={{ padding: 0, marginTop: 6 }}>
                 Couldn’t reach the Compass server, so only keywords were checked. Try again in a minute.
@@ -66,7 +69,7 @@ export function NoMatchScreen({
             {link && closest && <div className="divider" />}
             {closest && (
               <>
-                <div className="sub-head">Closest on this page</div>
+                <div className="sub-head">{onThisPage(page, closest.section) ? 'Closest on this page' : `Closest on ${pageName(closest.section)}`}</div>
                 <button className="row" onClick={() => onGo(closest.section)}>
                   <span style={{ margin: '0 6px', display: 'flex' }}>
                     <Hash size={15} color="#6B6559" />

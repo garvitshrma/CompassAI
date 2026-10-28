@@ -1,20 +1,82 @@
+# render.yaml — deployment config. Lives at the REPO ROOT because that is where
+# Render looks for it, but every command below runs inside backend/.
+
 services:
   - type: web
     name: compass-api
     runtime: python
+
+    # THE ONE LINE THE REORGANISATION MADE NECESSARY.
+    # Render clones the repo and, without this, would run the build and start
+    # commands from the repo root — where there is no manage.py, no
+    # requirements.txt and no importable `core` package. rootDir tells it to cd
+    # into backend/ first, which also makes the sys.path root backend/, exactly
+    # as it is when you run manage.py locally.
+    rootDir: backend
+
     # Download the embedding model AT BUILD TIME, into a repo-relative folder.
-    # Build output is baked into the image; /tmp is not. Without this line every
-    # cold boot re-downloaded ~90MB from HuggingFace before serving a request,
-    # which is where most of the 30-60s cold-start latency came from.
+    # Build output is baked into the image; /tmp is not. Without this, every
+    # cold boot re-downloaded ~90MB from HuggingFace before serving a single
+    # request, which is where most of the 30-60s cold-start latency came from.
+    #
+    # The import path changed with the move: `from retrieval import model`
+    # became `from core.retrieval import model`.
     buildCommand: |
       pip install -r requirements.txt
-      python -c "from retrieval import model; model(); print('embedder cached')"
-    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+      python -c "from core.retrieval import model; model(); print('embedder cached')"
+
+    # ---- was: uvicorn api:app --host 0.0.0.0 --port $PORT ------------------
+    # gunicorn is the WSGI server; "compass.wsgi:application" means "import
+    # compass/wsgi.py, find the object named application".
+    #
+    # --workers 1 IS LOAD-BEARING, NOT A COST SAVING.
+    #   The site indexes, the answer cache and the per-site indexing locks all
+    #   live in ONE process's memory (see navigator/state.py). A second worker
+    #   would get its own copy of all three: a site indexed by worker A would
+    #   look unregistered to worker B, the cache would be split in half, and the
+    #   locks would stop excluding anything. Raising this is safe only after the
+    #   move to Postgres + pgvector.
+    #
+    # --threads 8 is how concurrent requests are still handled. Threads share
+    #   the process's memory, which is what the state above requires, and the
+    #   workload is I/O-bound (waiting on Groq and on customer sites) so the GIL
+    #   is released during the waits. This is the WSGI equivalent of what
+    #   uvicorn's event loop was doing.
+    #
+    # --timeout 180 IS ALSO LOAD-BEARING. gunicorn's default is 30 seconds,
+    #   after which it kills the worker. /auto-register can crawl for 30+
+    #   seconds and waits up to 120 on its lock, so the default would kill
+    #   legitimate crawls mid-flight — the client sees a connection reset and
+    #   the log shows "WORKER TIMEOUT" with no traceback. uvicorn had no such
+    #   default, so this is a failure mode introduced by the Django port.
+    startCommand: >
+      gunicorn compass.wsgi:application
+      --bind 0.0.0.0:$PORT
+      --workers 1
+      --threads 8
+      --timeout 180
+
     healthCheckPath: /health
+
     envVars:
       - key: GROQ_API_KEY
         sync: false
       - key: ADMIN_TOKEN
         sync: false
-      - key: FASTEMBED_CACHE
-        value: .model_cache
+
+      # ---- required by Django ------------------------------------------
+      # Django will not start without a SECRET_KEY. generateValue makes Render
+      # create a strong random value once and keep it across deploys.
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+
+      # DEBUG must be off in production: with it on, Django returns full stack
+      # traces (including settings values) in HTTP error responses.
+      - key: DJANGO_DEBUG
+        value: "false"
+
+      # Render terminates TLS and proxies to the app, so the Host header is the
+      # onrender.com domain (or a custom domain added later). "*" accepts any
+      # Host; acceptable for a public read-mostly API with no cookie sessions.
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "*"

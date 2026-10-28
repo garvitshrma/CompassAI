@@ -1,0 +1,14 @@
+# ---- web framework (was: fastapi + uvicorn) --------------------------------
+Django
+djangorestframework
+django-cors-headers
+gunicorn
+
+# ---- the core pipeline, unchanged by the port ------------------------------
+groq
+rapidfuzz
+numpy
+python-dotenv
+fastembed
+beautifulsoup4
+requests

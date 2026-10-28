@@ -64,7 +64,7 @@ Usage:
 import os
 import json
 
-from retrieval import search
+from core.retrieval import search
 
 # The model we call, hosted by Groq. Two reasons for this choice:
 #   * Groq runs models on custom LPU hardware and is dramatically faster than
@@ -129,6 +129,53 @@ Rules:
 - Keep the explanation under 25 words.
 - Write the explanation for the visitor, describing the destination itself. Never mention candidates, numbers, scores, or that you were given a choice.
 - Do not hedge. If the section is the right destination, describe what is there plainly — no "likely", "probably", "may contain".
+
+Respond with ONLY a JSON object:
+{"index": <candidate number, or 0 to reject all>, "explanation": "..."}"""
+
+
+# =============================================================================
+#  THE SECOND SYSTEM PROMPT — for chunks that are not places.
+#
+#  WHY A SECOND PROMPT RATHER THAN ONE CLEVERER PROMPT
+#  ---------------------------------------------------
+#  The prompt above is built on an assumption that was true for every chunk
+#  this project had when it was written: a chunk is a LOCATION on a page, so the
+#  right output is "here is what is there, I am taking you now". Two of its
+#  rules say so outright — "Your job is NOT to answer the question" and "Write
+#  the explanation ... describing the destination itself".
+#
+#  Owner-authored facts (tools/ingest_text.py) broke that assumption. They have
+#  selector=None because they were typed by a person, not scraped from a DOM.
+#  There is nowhere to send the visitor, so the explanation IS the whole
+#  product — and a prompt forbidden from answering produces exactly what it was
+#  told to: "It explains OpenLake has no membership fee, confirming membership
+#  is free." Accurate, grounded, and nothing like how a person answers.
+#
+#  Trying to serve both jobs from one prompt means asking the model to work out
+#  which mode it is in from the data, every single call. Two prompts, chosen in
+#  code from a fact we already know, is cheaper and far more predictable — and
+#  it means the navigation path is byte-identical to before, so this change
+#  cannot regress the crawled sites.
+#
+#  NOTE THE EXPLICIT BANNED PHRASINGS. "Never write 'it states', 'it explains'"
+#  is not padding — those are the exact phrases the old prompt produced, copied
+#  from real output. Naming the specific failure works far better than a general
+#  instruction to "be direct", because the model has no way to know which
+#  phrasings you consider meta.
+# =============================================================================
+SYSTEM_ANSWER = """You are a website assistant. You are given a visitor's question and NUMBERED candidate sections of information about one website.
+
+Your job is to ANSWER the visitor's question, using only the single best candidate.
+
+Rules:
+- Use ONLY the candidates' text. Never use outside knowledge. Never state a fact that does not appear in the candidate you picked.
+- If no candidate is about the requested topic, set index to 0.
+- Answer the visitor directly. Lead with the answer: if the question is yes/no, begin with "Yes" or "No".
+- Never describe the section, the page or the website's structure. Never write "this section", "it states", "it explains", "the page says", "according to", or "confirming".
+- Never mention candidates, numbers, scores, or that you were given a choice.
+- Keep the explanation under 30 words, one or two sentences.
+- Do not hedge. No "likely", "probably", "may".
 
 Respond with ONLY a JSON object:
 {"index": <candidate number, or 0 to reject all>, "explanation": "..."}"""
@@ -335,6 +382,22 @@ def answer(query, chunks, vecs, llm, floor=CONFIDENCE_FLOOR):
     # handler, and reached the visitor as an HTTP 500 with no useful message.
     # A navigation widget should degrade to "I couldn't find that" — never to a
     # broken response the front-end cannot parse.
+    # ---- pick navigation mode or answer mode -----------------------------
+    # A chunk with a truthy `selector` is a place on a page we can scroll to; a
+    # chunk with selector None is a fact someone typed. The decision is made
+    # here, in code, from data we already have — not delegated to the model.
+    #
+    # `any(...)` rather than `all(...)` is deliberate and conservative: if even
+    # one candidate is navigable, we stay in navigation mode, because sending a
+    # visitor somewhere is the more valuable outcome and it keeps the behaviour
+    # of every existing crawled site exactly as it was. Answer mode engages only
+    # when there is genuinely nowhere to go.
+    #
+    # When indexes later hold crawled chunks and owner facts side by side, this
+    # one line is where that policy lives — which is the point of keeping it a
+    # single named expression rather than inlining it.
+    system_prompt = SYSTEM if any(c.get("selector") for c, _ in results) else SYSTEM_ANSWER
+
     try:
         resp = llm.chat.completions.create(
             model=LLM_MODEL,
@@ -343,7 +406,7 @@ def answer(query, chunks, vecs, llm, floor=CONFIDENCE_FLOOR):
                 # trained to weight system instructions above anything appearing in
                 # the user turn, which also makes it modestly harder for text
                 # scraped off a website to override our instructions.
-                {"role": "system", "content": SYSTEM},
+                {"role": "system", "content": system_prompt},
 
                 # The "user" role carries the DATA. Keeping instructions and data in
                 # separate roles is basic prompt hygiene and the first line of

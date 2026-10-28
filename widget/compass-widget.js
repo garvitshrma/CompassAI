@@ -435,6 +435,22 @@
         !data.url || data.url.replace(/\/$/, "") === location.href.replace(/\/$/, "").split("#")[0];
 
       if (samePage) {
+        // ---- ANSWER-ONLY CHUNKS -------------------------------------------
+        // A chunk with no selector is an owner-authored fact (see
+        // tools/ingest_text.py): it was typed by a human, not scraped from a
+        // DOM, so there is no element to scroll to. There is nothing wrong
+        // here, so say nothing about locating anything.
+        //
+        // WITHOUT THIS BRANCH the code still "works": querySelector(null)
+        // coerces null to the string "null", matches nothing, and highlight()
+        // returns false — so the visitor would get a correct answer followed by
+        // "(couldn't locate it on this page)". Technically fine, and actively
+        // misleading. A correct answer should not apologise.
+        if (!data.selector) {
+          body.innerHTML = escapeHtml(data.explanation);
+          return;
+        }
+
         // THE GOOD PATH: scroll and highlight, right now.
         const ok = highlight(data.selector);
 
@@ -463,7 +479,14 @@
         // sitting in localStorage could make a random future visit scroll
         // somewhere unexpected days later.
         // read more: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API
-        sessionStorage.setItem("compass_target", data.selector);
+        // Only stash a scroll target if there IS one. An owner-authored fact
+        // may still carry a `url:` — enough to land the visitor on the right
+        // PAGE even though there is no paragraph to highlight. Storing null
+        // here would leave the string "null" in sessionStorage for the next
+        // page load to trip over.
+        if (data.selector) {
+          sessionStorage.setItem("compass_target", data.selector);
+        }
         body.innerHTML = `${escapeHtml(data.explanation)} <br><a href="${data.url}">Take me there →</a>`;
       }
     } catch (e) {

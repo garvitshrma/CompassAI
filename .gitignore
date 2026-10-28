@@ -1,11 +1,38 @@
-pages/
-chunks.json
-embeddings.npy
+# ---- Python ----------------------------------------------------------------
 __pycache__/
 *.pyc
 .venv/
 venv/
+
+# ---- secrets ---------------------------------------------------------------
 .env
+
+# ---- editors ---------------------------------------------------------------
 .vscode/
 .idea/
-.model_cache/
+
+# ---- node (the dashboard, once it exists) ----------------------------------
+node_modules/
+dist/
+.vite/
+
+# ---- derived data ----------------------------------------------------------
+# NOTE, because this was previously happening BY ACCIDENT and is worth
+# understanding: the old .gitignore listed bare `chunks.json` and
+# `embeddings.npy`. A pattern with no slash matches at ANY depth, so those two
+# lines were silently excluding every sites/<domain>/chunks.json as well — which
+# is why all 14 site indexes exist only on your laptop and have never been in a
+# commit.
+#
+# Keeping them out of git is the right call (they are large, derived, and
+# regenerable from a crawl), but it should be a DECISION rather than a
+# side-effect. So the rule is now explicit and scoped to the folder:
+backend/sites/
+
+# The embedding model cache: ~90MB of ONNX weights, re-downloaded by
+# render.yaml's buildCommand on deploy.
+backend/.model_cache/
+
+# Raw crawled HTML, written by the crawler as a local cache.
+backend/pages/
+pages/

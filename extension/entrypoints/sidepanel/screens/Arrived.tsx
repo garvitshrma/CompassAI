@@ -1,14 +1,15 @@
 // 09 · You're here — the section is highlighted on the page.
 
 import { Composer, PageBar } from '../components';
-import { label, distance, sectionLink, type PageInfo, type Section } from '../data';
+import { label, onThisPage, pageName, sectionLink, whereIs, type PageInfo, type Section } from '../data';
 import { ArrowRight, Check, Hash, LinkIcon, Undo } from '../icons';
 import { useCopy } from './Result';
 
 export function ArrivedScreen({
   page,
-  section,
+  section: target,
   related,
+  notice,
   onBack,
   onGo,
   onAsk,
@@ -16,11 +17,16 @@ export function ArrivedScreen({
   page: PageInfo;
   section: Section;
   related: Section[];
+  notice?: string;
   onBack: () => void;
   onGo: (section: Section) => void;
   onAsk: (q: string) => void;
 }) {
   const { copied, copy } = useCopy();
+  // After Compass opened another page, the section is on the page we're on now:
+  // use the live copy, which has the text under the heading.
+  const section = page.sections.find((s) => s.title === target.title && onThisPage(page, target)) ?? target;
+  const pageOnly = target.level === 'page';
 
   return (
     <>
@@ -33,15 +39,13 @@ export function ArrivedScreen({
           </span>
           <div>
             <h2>You’re here</h2>
-            <p>The section is highlighted on the page.</p>
+            <p>{notice ?? (pageOnly ? `Compass opened ${pageName(target)}.` : 'The section is highlighted on the page.')}</p>
           </div>
         </div>
 
         <section className="card">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <span className="crumb">
-              {label(section.number, section.group)}
-            </span>
+            <span className="crumb">{label(section.number, section.group || pageName(section))}</span>
             <h3>{section.title}</h3>
           </div>
           {section.points.length > 0 ? (
@@ -73,15 +77,15 @@ export function ArrivedScreen({
         {related.length > 0 && (
           <div className="list">
             <div className="list-head" style={{ paddingTop: 2 }}>
-              Related on this page
+              Related
             </div>
             {related.map((r) => (
-              <button key={r.id} className="row" onClick={() => onGo(r)}>
+              <button key={r.url + r.title} className="row" onClick={() => onGo(r)}>
                 <Hash size={15} color="#6B6559" />
                 <span className="row-text">
                   <span>{r.title}</span>
                   <span className="row-meta">
-                    {label(r.number, distance(page, section.position, r.position))}
+                    {whereIs(page, r, section.position)}
                   </span>
                 </span>
                 <ArrowRight size={15} color="#6B6559" />

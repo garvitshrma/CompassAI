@@ -76,7 +76,22 @@ from rapidfuzz import fuzz
 # read more: https://qdrant.github.io/fastembed/
 from fastembed import TextEmbedding
 
-SITES_DIR = Path("sites")
+# WAS: SITES_DIR = Path("sites")
+#
+# A BARE RELATIVE PATH IS RESOLVED AGAINST THE CURRENT WORKING DIRECTORY, not
+# against this file. That was harmless while everything lived in one folder and
+# you always ran `uvicorn api:app` from it. After the move into backend/core/ it
+# is a trap: run `python manage.py runserver` from the repo root instead of from
+# backend/ and Python would happily create a SECOND, EMPTY sites/ folder — every
+# site would report "not registered" and nothing would look broken.
+#
+# Anchoring to __file__ makes the location a fact about the code rather than a
+# fact about your shell. core/retrieval.py -> .parent is core/, -> .parent again
+# is backend/, so this is backend/sites/ no matter where you invoke it from.
+#
+# (This whole constant disappears when the indexes move to Postgres. Until then
+#  it has to be correct, because "silently empty" is the worst failure mode.)
+SITES_DIR = Path(__file__).resolve().parent.parent / "sites"
 
 # THE EMBEDDING MODEL — and why this exact one.
 #   all-MiniLM-L6-v2 is the standard "small and good enough" sentence embedding
@@ -104,7 +119,11 @@ EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"   # 384-dim, ONNX
 # Pointing the cache at a repo-relative folder lets render.yaml's buildCommand
 # download the model ONCE at build time. Build output IS baked into the image, so
 # the running container finds the weights already on disk and just mmaps them.
-MODEL_CACHE = Path(os.environ.get("FASTEMBED_CACHE", ".model_cache"))
+# Same reasoning as SITES_DIR above: the default is anchored to this file so a
+# cold boot finds the weights baked in at build time regardless of the working
+# directory. An absolute path in FASTEMBED_CACHE still overrides it.
+MODEL_CACHE = Path(os.environ.get("FASTEMBED_CACHE")
+                   or Path(__file__).resolve().parent.parent / ".model_cache")
 
 # ---- the blend weights ------------------------------------------------------
 # These sum to 1.0, so the combined score stays roughly on a 0..1 scale, which

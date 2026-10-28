@@ -26,8 +26,8 @@ import json
 from collections import OrderedDict
 from urllib.parse import urlsplit
 
-from answer import answer
-from retrieval import _encode, build_text, search
+from core.answer import answer
+from core.retrieval import _encode, build_text, search
 
 # Limits, so one request can't make the server do unbounded work.
 MAX_SECTIONS = 150

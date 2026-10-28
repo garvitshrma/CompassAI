@@ -139,7 +139,7 @@ a { color: var(--ink); }
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .page-url .path { color: var(--ink-3); font-weight: 400; }
-.page-state { display: flex; align-items: center; gap: 5px; font-size: 12px; margin-top: 2px; }
+.page-state { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 12px; margin-top: 2px; }
 .page-state.alert { color: var(--alert); }
 
 .indet-track { height: 2px; background: var(--pill); overflow: hidden; }
@@ -468,3 +468,29 @@ mark {
 @media (prefers-reduced-motion: reduce) {
   .pulse, .spin, .sk, .indet-bar, .pop { animation: none; }
 }
+
+/* ---- answers written by the AI (RichText) ---- */
+.rich { display: flex; flex-direction: column; gap: 9px; color: var(--ink-2); font-size: 14px; line-height: 1.55; }
+.rich p { margin: 0; color: var(--ink-2); }
+.rich p.strong { color: var(--ink); font-weight: 600; }
+.rich strong { color: var(--ink); font-weight: 600; }
+.rich code { font-family: var(--mono); font-size: 12px; background: var(--sunken); border-radius: 4px; padding: 1px 4px; }
+.rich ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.rich .bullets { gap: 6px; }
+.rich .bullets li::before { margin-top: 9px; }
+.cite {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 17px; height: 17px; margin: 0 1px; padding: 0 4px; vertical-align: 1px;
+  border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface);
+  font: 500 10.5px/1 var(--mono); color: var(--ink-2);
+}
+.cite:hover { border-color: var(--ink); color: var(--ink); }
+.answer-card { gap: 12px; }
+.src-num {
+  display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; flex-shrink: 0;
+  border-radius: 6px; background: var(--sunken); font: 500 11px/1 var(--mono); color: var(--ink-2);
+}
+.row.flash { background: var(--sunken); }
+.turn.answer .rich p { font-size: 14px; font-weight: 400; letter-spacing: 0; color: var(--ink-2); }
+.turn.answer .rich p.strong, .turn.answer .rich strong { color: var(--ink); font-weight: 600; }
+.turn.answer .rich { flex: 1; min-width: 0; }
