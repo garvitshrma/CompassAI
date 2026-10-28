@@ -1,0 +1,196 @@
+title: OpenLake
+
+-------------------------------------------------------------------------------
+ EVERYTHING BELOW IS THE BOT'S ENTIRE KNOWLEDGE FOR openlake.in.
+ If a fact is not written here, the bot refuses rather than guesses.
+
+ Sourced from openlake.in (home, /philosophy, /programs, /newevents) on
+ 28 October 2026. Text above the first heading is ignored by the parser.
+
+ HEADINGS ARE WRITTEN AS QUESTIONS ON PURPOSE. Retrieval fuzzy-matches the
+ query against heading text, so "# Is there a fee to join?" beats "# Fees".
+ They are search keys, not a table of contents. Keep them SHORT: a long
+ heading carries extra words that dilute the lexical score.
+
+ GAPS — not written because they could not be verified:
+   * The team: names and roles. /team was not read.
+   * Meeting times and where the club meets.
+   * Whether FOSS Overflow or DevLabs is running now, and how to apply.
+   * The full project list runs to about 60 repositories. Only the ones with
+     a real description are here, grouped. The rest are on GitHub.
+   * openlake.in lists the 10 Oct 2026 Hacktoberfest day under "Upcoming",
+     but that date has passed. It is written below as a past event.
+-------------------------------------------------------------------------------
+
+# What is OpenLake
+url: https://openlake.in/philosophy
+OpenLake is the open-source society of IIT Bhilai. It builds software the
+campus actually uses, teaches students to make their first contribution, and
+helps them contribute to open source elsewhere. Its tagline is
+"Build. Learn. Contribute."
+
+# Who can join OpenLake
+url: https://openlake.in/philosophy
+Anyone, from any batch or branch. Activities are public and free to join, and
+no prior knowledge is needed to start.
+
+# Do I need experience to join
+url: https://openlake.in/philosophy
+No. The workshops are aimed at people who have never opened a pull request,
+and there are no prerequisites.
+
+# Is there a fee to join
+url: https://openlake.in/philosophy
+No. There is no fee and no application. Join the Discord, come to a workshop,
+or open an issue on any of the repositories.
+
+# How do I join OpenLake
+url: https://openlake.in/philosophy
+There is no application process. Join the community Discord, attend a
+workshop, or open an issue on any OpenLake repository.
+
+# How do I make my first contribution
+url: https://openlake.in/philosophy
+Four steps: attend a workshop, pick a beginner-friendly issue in an OpenLake
+repository and get a maintainer's review on your pull request, join a mentored
+programme like FOSS Overflow or DevLabs, then contribute to outside programmes.
+
+# What does OpenLake actually do
+url: https://openlake.in/philosophy
+Three stages, in order. Build: maintain campus software that has real users
+and code review. Learn: free hands-on workshops on Git, Linux, web and app
+development. Contribute: help members land contributions in the wider
+open-source world.
+
+# Why does OpenLake review pull requests
+url: https://openlake.in/philosophy
+Because a maintainer's review is the point of the beginner route. OpenLake
+also says members should not stay confined to its own repositories, and that
+the software should be real and used rather than practice exercises.
+
+# How many projects does OpenLake have
+url: https://openlake.in/programs
+62 public repositories, 50 or more workshops and programmes run, and 9 GSoC
+contributors whose proposals were accepted.
+
+# How many people got into GSoC
+url: https://openlake.in/philosophy
+Nine contributors have had GSoC proposals accepted, five of them in 2023.
+Members have also contributed to the Zowe Client Java SDK through an Open
+Mainframe Project mentorship.
+
+# What is FOSS Overflow
+url: https://openlake.in/programs
+FOSS Overflow is IIT Bhilai's annual open-source programme, a month-long
+mentored hackathon. The January 2026 edition was described as India's largest
+open-source hackathon.
+
+# What is DevLabs
+url: https://openlake.in/philosophy
+DevLabs is a month-long mentored programme, listed alongside FOSS Overflow as
+the step after your first reviewed pull request.
+
+# What outside programmes does OpenLake point to
+url: https://openlake.in/philosophy
+Google Summer of Code, LFX Mentorship, Outreachy and C4GT.
+
+# Where can I see the code
+url: https://github.com/OpenLake
+All OpenLake projects are on GitHub at github.com/OpenLake.
+
+# How do I contact OpenLake
+url: https://openlake.in
+Email openlake@iitbhilai.ac.in, or join the community Discord.
+
+# Where is the OpenLake Discord
+url: https://discord.gg/A2J9z92qzd
+The community Discord is at discord.gg/A2J9z92qzd. It is the main place to
+ask questions and get started.
+
+# Where is OpenLake on social media
+url: https://openlake.in
+GitHub: github.com/OpenLake. Instagram: @openlake_iitbhilai. LinkedIn:
+linkedin.com/company/openlake. X: @OpenLakeClub. YouTube: @openlakeiitbhilai1724.
+
+# What campus tools does OpenLake build
+url: https://openlake.in/programs
+Student_Database_COSA manages student data and Positions of Responsibility.
+Campus-Marketplace lets students buy and sell on campus. RateMyCourse collects
+course and instructor reviews. Smart-Insti-App gathers institute information
+and updates. RideShare handles ridesharing for students and staff.
+
+# What tools are there for coursework
+url: https://openlake.in/programs
+iitbh-cgpa is a browser extension that calculates CGPA from the AIMS Portal.
+iitbh-calendar generates a calendar for IIT Bhilai courses. Homework-Scheduler
+helps teachers set deadlines around student commitments. Bhilaipedia is a wiki
+for IIT Bhilai.
+
+# What projects are there for electronics students
+url: https://openlake.in/programs
+bhilaee-labs is a virtual lab platform for Electrical and Electronics
+Engineering experiments. bhilaee-simulator is a browser-based circuit
+simulator with DC, AC and transient analysis. FOSSI covers free open-source
+silicon, EDA tools and chip design.
+
+# What projects involve machine learning
+url: https://openlake.in/programs
+SmartTriage finds duplicate issues by semantic search and auto-assigns
+reviewers from commit history. Photo-Sharing-App groups photos by face.
+Smart-Cams adds computer vision to CCTV and mobile cameras. AI-Voice-Agent is
+a voice agent that adapts to its user. Speech-Analyser helps improve English
+fluency.
+
+# What projects help with placements and careers
+url: https://openlake.in/programs
+The Centre-for-Career-Planning-and-Services-Portal links students with the
+placement cell. career-scraper analyses career trajectories. Knowledge holds
+career-planning resources. Interview-Preparation and GSoC_Proposals archive
+preparation material and past proposals.
+
+# What is canonforces
+url: https://openlake.in/programs
+canonforces is a Codeforces companion with a built-in IDE, real-time 1v1 DSA
+battles and stat syncing.
+
+# What infrastructure does OpenLake run
+url: https://openlake.in/programs
+Hub connects OpenLake apps and provides unified APIs. auth-kit provides single
+sign-on, JWT access control and role management across the ecosystem. Infra
+holds the automation, bots and configuration that keep things running. Bit is
+a git server built from scratch for IIT Bhilai.
+
+# What fun projects are there
+url: https://openlake.in/programs
+Virtual-IIT-Bhilai is a virtual campus game world built with Godot and
+Node.js. WatchParty allows remote movie watching with shared chat. Quiz-App
+runs real-time quizzes and polls with live leaderboards. Live-Score-App does
+real-time sports scoring. Find-your-Cluster finds shared interests among peers.
+
+# What was the most recent event
+url: https://openlake.in/newevents
+A Hacktoberfest Hack Day, Durg x OpenLake, held on 10 October 2026 in L101 at
+IIT Bhilai. It was an official MLH Hack Day run with Major League Hacking and
+DEV, with DigitalOcean, and included a morning workshop, an afternoon build
+session with mentors, and evening demos and judging.
+
+# What workshops has OpenLake run
+url: https://openlake.in/newevents
+Recent ones include an intro session in August 2026, FOSS Overflow in January
+2026, a Linux installation workshop in October 2025, a Git and GitHub workshop
+in August 2025, and a GSoC introduction in January 2025.
+
+# Where is OpenLake based
+url: https://openlake.in
+OpenLake is the open-source society of IIT Bhilai, in Chhattisgarh. Workshops
+and events are usually held on campus, often in L101.
+
+# Can I get OpenLake stickers
+url: https://openlake.in
+Yes. The site offers free stickers, open to programmers anywhere, not only
+IIT Bhilai students.
+
+# What is FOSS United
+url: https://openlake.in
+FOSS United is described by OpenLake as India's largest open-source ecosystem.
+OpenLake promotes it from its home page.
