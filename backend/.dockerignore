@@ -1,0 +1,7 @@
+.model_cache/
+backups/
+sites/
+__pycache__/
+*.pyc
+.env
+*.md
