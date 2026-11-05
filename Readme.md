@@ -85,6 +85,51 @@ python answer.py
 
 ---
 
+## Run with Docker
+
+The whole backend runs in one container. You need Docker Desktop and a Groq API key.
+
+```bash
+git clone https://github.com/garvitshrma/CompassAI.git
+cd CompassAI
+cp .env.example .env     # then fill in GROQ_API_KEY and DJANGO_SECRET_KEY
+docker compose up
+```
+
+That's it. First build takes a few minutes (it installs dependencies and bakes
+the ~90MB embedding model into the image); later starts take about 20 seconds,
+spent warming the embedder and loading site indexes.
+
+Check it is alive:
+
+```bash
+curl http://localhost:8000/health
+# {"status":"ok","sites":{"openlake.in": ...}}
+```
+
+Ask it something:
+
+```bash
+curl -X POST http://localhost:8000/query \
+  -H "Content-Type: application/json" \
+  -d '{"site_id":"openlake.in","query":"what is openlake"}'
+```
+
+`Ctrl+C` stops it; `docker compose down` removes the container; `docker compose
+up --build` rebuilds after a code change.
+
+### Where things live
+
+| What | Where | Why |
+|---|---|---|
+| Code | baked into the image | immutable, identical on every machine |
+| Secrets | `.env` on the host, read at startup | never copied into the image |
+| Site indexes | `backend/sites/`, mounted as a volume | state, must survive restarts |
+| Embedding model | `/app/.model_cache` in the image | downloaded at build time, not on first request |
+
+Nothing secret is in the image: `.env` is in `.dockerignore` and injected only
+at container start. The app runs as a non-root user (`appuser`).
+
 ## How retrieval works
 
 Compass combines two signals, because neither alone is enough:

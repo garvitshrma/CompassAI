@@ -1,14 +1,14 @@
 # ---- web framework (was: fastapi + uvicorn) --------------------------------
-Django
-djangorestframework
-django-cors-headers
-gunicorn
+Django==5.2.19
+djangorestframework==3.18.3
+django-cors-headers==4.9.0
+gunicorn==26.2.0
 
 # ---- the core pipeline, unchanged by the port ------------------------------
-groq
-rapidfuzz
-numpy
-python-dotenv
-fastembed
-beautifulsoup4
-requests
+groq==1.7.0
+rapidfuzz==3.14.6
+numpy==2.4.6
+python-dotenv==1.2.4
+fastembed==0.9.1
+beautifulsoup4==4.15.0
+requests==2.34.2

@@ -10,6 +10,10 @@ COPY . .
 
 RUN python -c "from core.retrieval import model; model(); print('embedder cached')"
 
+RUN useradd --create-home --uid 1000 appuser && chown -R appuser:appuser /app
+
+USER appuser
+
 EXPOSE 8000
 
 CMD ["gunicorn", "compass.wsgi:application", \
