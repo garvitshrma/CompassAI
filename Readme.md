@@ -46,42 +46,14 @@ The CSS selector stored alongside each chunk is what makes navigation possible. 
 
 | Script | What it does | Output |
 |--------|-------------|--------|
-| `crawler.py` | Crawls a server-rendered site, saves raw HTML | `pages/<domain>/*.html` + `index.json` |
-| `crawler_js.py` | Same, but runs a real browser for JS-rendered sites and hover menus | `pages/<domain>/*.html` + `index.json` |
-| `chunker.py` | Splits pages at headings, generates a CSS selector per chunk | `chunks.json` |
-| `retrieval.py` | Hybrid search — semantic embeddings + fuzzy lexical matching | (imported by `answer.py`) |
-| `answer.py` | Retrieves top chunk, grounds an LLM, returns answer or refusal | interactive query loop |
-| `search.py` | Standalone semantic-only search (superseded by `retrieval.py`) | `embeddings.npy` + query loop |
-
----
-
-## Quick start
-
-```bash
-git clone https://github.com/garvitshrma/compass
-cd compass
-
-python -m venv .venv
-.venv\Scripts\activate       # Windows
-# source .venv/bin/activate  # Mac/Linux
-
-pip install -r requirements.txt
-
-# For JS-rendered sites, install the browser once:
-playwright install chromium
-
-# 1. Crawl a site  (use crawler_js.py for React/Next/Vue sites)
-python crawler_js.py https://openlake.in/
-#    then copy the per-domain folder up so the chunker finds it:
-#    (Windows)  Copy-Item pages\openlake.in\* pages\ -Force
-
-# 2. Chunk it
-python chunker.py
-
-# 3. Answer questions  (needs a free Groq API key)
-setx GROQ_API_KEY "gsk_..."   # then reopen the terminal
-python answer.py
-```
+| `core/crawler.py` | Crawls a server-rendered site, saves raw HTML | `pages/<domain>/*.html` + `index.json` |
+| `tools/crawler_js.py` | Same, but runs a real browser for JS-rendered sites and hover menus | `pages/<domain>/*.html` + `index.json` |
+| `core/chunker.py` | Splits pages at headings, generates a CSS selector per chunk | `chunks.json` |
+| `core/indexer.py` | Embeds chunks and writes a per-site index | `sites/<id>/chunks.json` + `embeddings.npy` |
+| `core/retrieval.py` | Hybrid search — semantic embeddings + fuzzy lexical matching | (imported by `answer.py`) |
+| `core/answer.py` | Retrieves top chunk, grounds an LLM, returns answer or refusal | grounded JSON answer |
+| `navigator/views.py` | Django views behind `/query`, `/register`, `/auto-register`, `/health` | HTTP JSON API |
+| `tools/register_site.py` | Crawls a site locally and uploads it to a running backend | a registered site |
 
 ---
 
@@ -130,6 +102,40 @@ up --build` rebuilds after a code change.
 Nothing secret is in the image: `.env` is in `.dockerignore` and injected only
 at container start. The app runs as a non-root user (`appuser`).
 
+## Local development (without Docker)
+
+```bash
+git clone https://github.com/garvitshrma/CompassAI.git
+cd CompassAI
+
+cp .env.example .env          # fill in GROQ_API_KEY and DJANGO_SECRET_KEY
+
+cd backend
+python -m venv .venv
+.venv\Scripts\activate       # Windows
+# source .venv/bin/activate   # Mac/Linux
+
+pip install -r requirements.txt
+
+python manage.py runserver     # http://localhost:8000
+```
+
+### Adding a site to the index
+
+```bash
+# crawl a site and upload it to a running backend
+python tools/register_site.py https://example.com --api http://localhost:8000
+
+# JS-rendered sites (React/Next/Vue) need a real browser first
+playwright install chromium
+python tools/crawler_js.py https://example.com/
+```
+
+Or skip all of it: point the widget at a site that is not yet registered and
+`/auto-register` crawls and indexes it on demand.
+
+---
+
 ## How retrieval works
 
 Compass combines two signals, because neither alone is enough:
@@ -146,16 +152,18 @@ On top of that:
 
 ## Stack
 
-- **Python** — crawler, chunker, retrieval, answer pipeline
-- **BeautifulSoup** — HTML parsing and CSS-selector generation
-- **Playwright** — headless browser for JS-rendered sites
-- **sentence-transformers** — local embeddings (`all-MiniLM-L6-v2`)
+- **Django + DRF** — HTTP API layer (`/query`, `/register`, `/auto-register`, `/health`)
+- **gunicorn** — WSGI server; one worker, eight threads (site indexes, cache and locks live in one process's memory)
+- **fastembed** — local ONNX embeddings (`all-MiniLM-L6-v2`, 384-dim); no torch, no GPU, no API key
 - **rapidfuzz** — fuzzy lexical matching
 - **numpy** — vector similarity
-- **Groq** — free-tier LLM for the grounded answer layer
-- **FastAPI** — API layer *(coming)*
+- **BeautifulSoup** — HTML parsing and CSS-selector generation
+- **Playwright** — headless browser for JS-rendered sites (`tools/crawler_js.py`)
+- **Groq** — LLM for the grounded answer layer
+- **Docker + docker-compose** — one-command start, model baked in at build time
+- **Vanilla JS + Shadow DOM** — embeddable widget, one script tag
+- **Render + Vercel** — backend and widget hosting
 - **Supabase + pgvector** — production vector store *(coming)*
-- **Vanilla JS + Shadow DOM** — embeddable widget *(coming)*
 
 ---
 
@@ -174,16 +182,19 @@ Screen awareness, works in any app on any computer. Cross-platform from day one.
 
 ## Status
 
-> Prototype — updated 7 August 2026 · validated end-to-end on openlake.in (136 chunks across 10 pages)
+> Prototype — updated 6 November 2026 · live on openlake.in and gdg-iitbh.vercel.app (88 chunks indexed for openlake.in)
 
 - [x] Crawler — static sites, respects robots.txt
 - [x] Crawler — JS-rendered sites and hover menus (Playwright)
 - [x] Chunker — heading-scoped chunks with generated CSS selectors
 - [x] Hybrid retrieval — semantic + lexical, filler-stripping, heading-level bonus
 - [x] Answer layer — grounded LLM with two-stage refusal
-- [ ] FastAPI backend
+- [x] HTTP backend — Django + DRF on gunicorn (ported from FastAPI)
+- [x] Embeddable widget (Shadow DOM) — scroll-to and highlight working on live sites
+- [x] Multi-site — per-site indexes, routed by hostname
+- [x] Zero-config onboarding — one script tag triggers an auto-crawl and self-registration
+- [x] Containerised — `docker compose up`, non-root, pinned dependencies
 - [ ] Supabase pgvector integration
-- [ ] Embeddable widget (Shadow DOM)
 - [ ] First paying customer
 
 **Known issues:** thin-content pages can over-match generic queries; individual person names on team pages aren't retrievable yet.
